@@ -1,0 +1,3043 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.3.1 #8804 (Aug  6 2013) (Linux)
+                                      4 ; This file was generated Sat Nov  3 15:44:36 2018
+                                      5 ;--------------------------------------------------------
+                                      6 	.module viztool
+                                      7 	.optsdcc -mmcs51 --model-huge
+                                      8 	
+                                      9 ;--------------------------------------------------------
+                                     10 ; Public variables in this module
+                                     11 ;--------------------------------------------------------
+                                     12 	.globl _uip_ds6_nbr_get_ipaddr
+                                     13 	.globl _uip_ds6_nbr_get_ll
+                                     14 	.globl _nbr_table_next
+                                     15 	.globl _nbr_table_head
+                                     16 	.globl _uip_ds6_route_next
+                                     17 	.globl _uip_ds6_route_head
+                                     18 	.globl _uip_ds6_route_num_routes
+                                     19 	.globl _uip_ds6_defrt_choose
+                                     20 	.globl _uip_ds6_defrt_lookup
+                                     21 	.globl _uip_udp_packet_send
+                                     22 	.globl _udp_new
+                                     23 	.globl _uip_htonl
+                                     24 	.globl _memset
+                                     25 	.globl _memcpy
+                                     26 	.globl _ACTIVE
+                                     27 	.globl _TX_BYTE
+                                     28 	.globl _RX_BYTE
+                                     29 	.globl _ERR
+                                     30 	.globl _FE
+                                     31 	.globl _SLAVE
+                                     32 	.globl _RE
+                                     33 	.globl _MODE
+                                     34 	.globl _T3OVFIF
+                                     35 	.globl _T3CH0IF
+                                     36 	.globl _T3CH1IF
+                                     37 	.globl _T4OVFIF
+                                     38 	.globl _T4CH0IF
+                                     39 	.globl _T4CH1IF
+                                     40 	.globl _OVFIM
+                                     41 	.globl _B_0
+                                     42 	.globl _B_1
+                                     43 	.globl _B_2
+                                     44 	.globl _B_3
+                                     45 	.globl _B_4
+                                     46 	.globl _B_5
+                                     47 	.globl _B_6
+                                     48 	.globl _B_7
+                                     49 	.globl _P2IF
+                                     50 	.globl _UTX0IF
+                                     51 	.globl _UTX1IF
+                                     52 	.globl _P1IF
+                                     53 	.globl _WDTIF
+                                     54 	.globl _ACC_0
+                                     55 	.globl _ACC_1
+                                     56 	.globl _ACC_2
+                                     57 	.globl _ACC_3
+                                     58 	.globl _ACC_4
+                                     59 	.globl _ACC_5
+                                     60 	.globl _ACC_6
+                                     61 	.globl _ACC_7
+                                     62 	.globl _P
+                                     63 	.globl _F1
+                                     64 	.globl _OV
+                                     65 	.globl _RS0
+                                     66 	.globl _RS1
+                                     67 	.globl _F0
+                                     68 	.globl _AC
+                                     69 	.globl _CY
+                                     70 	.globl _DMAIF
+                                     71 	.globl _T1IF
+                                     72 	.globl _T2IF
+                                     73 	.globl _T3IF
+                                     74 	.globl _T4IF
+                                     75 	.globl _P0IF
+                                     76 	.globl _STIF
+                                     77 	.globl _DMAIE
+                                     78 	.globl _T1IE
+                                     79 	.globl _T2IE
+                                     80 	.globl _T3IE
+                                     81 	.globl _T4IE
+                                     82 	.globl _P0IE
+                                     83 	.globl _RFERRIE
+                                     84 	.globl _ADCIE
+                                     85 	.globl _URX0IE
+                                     86 	.globl _URX1IE
+                                     87 	.globl _ENCIE
+                                     88 	.globl _STIE
+                                     89 	.globl _EA
+                                     90 	.globl _P2_0
+                                     91 	.globl _P2_1
+                                     92 	.globl _P2_2
+                                     93 	.globl _P2_3
+                                     94 	.globl _P2_4
+                                     95 	.globl _P2_5
+                                     96 	.globl _P2_6
+                                     97 	.globl _P2_7
+                                     98 	.globl _ENCIF_0
+                                     99 	.globl _ENCIF_1
+                                    100 	.globl _P1_0
+                                    101 	.globl _P1_1
+                                    102 	.globl _P1_2
+                                    103 	.globl _P1_3
+                                    104 	.globl _P1_4
+                                    105 	.globl _P1_5
+                                    106 	.globl _P1_6
+                                    107 	.globl _P1_7
+                                    108 	.globl _IT0
+                                    109 	.globl _RFERRIF
+                                    110 	.globl _IT1
+                                    111 	.globl _URX0IF
+                                    112 	.globl _ADCIF
+                                    113 	.globl _URX1IF
+                                    114 	.globl _P0_0
+                                    115 	.globl _P0_1
+                                    116 	.globl _P0_2
+                                    117 	.globl _P0_3
+                                    118 	.globl _P0_4
+                                    119 	.globl _P0_5
+                                    120 	.globl _P0_6
+                                    121 	.globl _P0_7
+                                    122 	.globl _WDCTL
+                                    123 	.globl _U1GCR
+                                    124 	.globl _U1UCR
+                                    125 	.globl _U1BAUD
+                                    126 	.globl _U1DBUF
+                                    127 	.globl _U1CSR
+                                    128 	.globl _U0GCR
+                                    129 	.globl _U0UCR
+                                    130 	.globl _U0BAUD
+                                    131 	.globl _U0DBUF
+                                    132 	.globl _U0CSR
+                                    133 	.globl _TIMIF
+                                    134 	.globl _T4CC1
+                                    135 	.globl _T4CCTL1
+                                    136 	.globl _T4CC0
+                                    137 	.globl _T4CCTL0
+                                    138 	.globl _T4CTL
+                                    139 	.globl _T4CNT
+                                    140 	.globl _T3CC1
+                                    141 	.globl _T3CCTL1
+                                    142 	.globl _T3CC0
+                                    143 	.globl _T3CCTL0
+                                    144 	.globl _T3CTL
+                                    145 	.globl _T3CNT
+                                    146 	.globl _T2MSEL
+                                    147 	.globl _T2IRQM
+                                    148 	.globl _T2MOVF2
+                                    149 	.globl _T2MOVF1
+                                    150 	.globl _T2MOVF0
+                                    151 	.globl _T2M1
+                                    152 	.globl _T2M0
+                                    153 	.globl _T2IRQF
+                                    154 	.globl _T2EVTCFG
+                                    155 	.globl _T2CTRL
+                                    156 	.globl _T1STAT
+                                    157 	.globl _T1CCTL2
+                                    158 	.globl _T1CCTL1
+                                    159 	.globl _T1CCTL0
+                                    160 	.globl _T1CTL
+                                    161 	.globl _T1CNTH
+                                    162 	.globl _T1CNTL
+                                    163 	.globl _T1CC2H
+                                    164 	.globl _T1CC2L
+                                    165 	.globl _T1CC1H
+                                    166 	.globl _T1CC1L
+                                    167 	.globl _T1CC0H
+                                    168 	.globl _T1CC0L
+                                    169 	.globl _CLKCONSTA
+                                    170 	.globl _CLKCONCMD
+                                    171 	.globl _SLEEPSTA
+                                    172 	.globl _SLEEPCMD
+                                    173 	.globl _STLOAD
+                                    174 	.globl _ST2
+                                    175 	.globl _ST1
+                                    176 	.globl _ST0
+                                    177 	.globl _RFERRF
+                                    178 	.globl _RFIRQF0
+                                    179 	.globl _RFST
+                                    180 	.globl _RFD
+                                    181 	.globl _RFIRQF1
+                                    182 	.globl _PSBANK
+                                    183 	.globl _FMAP
+                                    184 	.globl _MEMCTR
+                                    185 	.globl __XPAGE
+                                    186 	.globl _MPAGE
+                                    187 	.globl _PMUX
+                                    188 	.globl _P2DIR
+                                    189 	.globl _P1DIR
+                                    190 	.globl _P0DIR
+                                    191 	.globl _P2INP
+                                    192 	.globl _P1INP
+                                    193 	.globl _P2SEL
+                                    194 	.globl _P1SEL
+                                    195 	.globl _P0SEL
+                                    196 	.globl _APCFG
+                                    197 	.globl _PERCFG
+                                    198 	.globl _P0INP
+                                    199 	.globl _P2IEN
+                                    200 	.globl _P1IEN
+                                    201 	.globl _P0IEN
+                                    202 	.globl _PICTL
+                                    203 	.globl _P2IFG
+                                    204 	.globl _P1IFG
+                                    205 	.globl _P0IFG
+                                    206 	.globl _DMAREQ
+                                    207 	.globl _DMAARM
+                                    208 	.globl _DMA0CFGH
+                                    209 	.globl _DMA0CFGL
+                                    210 	.globl _DMA1CFGH
+                                    211 	.globl _DMA1CFGL
+                                    212 	.globl _DMAIRQ
+                                    213 	.globl _ENCCS
+                                    214 	.globl _ENCDO
+                                    215 	.globl _ENCDI
+                                    216 	.globl _RNDH
+                                    217 	.globl _RNDL
+                                    218 	.globl _ADCH
+                                    219 	.globl _ADCL
+                                    220 	.globl _ADCCON3
+                                    221 	.globl _ADCCON2
+                                    222 	.globl _ADCCON1
+                                    223 	.globl _B
+                                    224 	.globl _IRCON2
+                                    225 	.globl _ACC
+                                    226 	.globl _PSW
+                                    227 	.globl _IRCON
+                                    228 	.globl _IP1
+                                    229 	.globl _IEN1
+                                    230 	.globl _IP0
+                                    231 	.globl _IEN0
+                                    232 	.globl _P2
+                                    233 	.globl _S1CON
+                                    234 	.globl _IEN2
+                                    235 	.globl _S0CON
+                                    236 	.globl _DPS
+                                    237 	.globl _P1
+                                    238 	.globl _TCON
+                                    239 	.globl _PCON
+                                    240 	.globl _DPH1
+                                    241 	.globl _DPL1
+                                    242 	.globl _DPH0
+                                    243 	.globl _DPL0
+                                    244 	.globl _SP
+                                    245 	.globl _P0
+                                    246 	.globl _viztool_process
+                                    247 	.globl _X_IEEE_ADDR
+                                    248 	.globl _X_INFOPAGE
+                                    249 	.globl _X_P2DIR
+                                    250 	.globl _X_P1DIR
+                                    251 	.globl _X_P0DIR
+                                    252 	.globl _X_U1GCR
+                                    253 	.globl _X_U1UCR
+                                    254 	.globl _X_U1BAUD
+                                    255 	.globl _X_U1DBUF
+                                    256 	.globl _X_U1CSR
+                                    257 	.globl _X_P2INP
+                                    258 	.globl _X_P1INP
+                                    259 	.globl _X_P2SEL
+                                    260 	.globl _X_P1SEL
+                                    261 	.globl _X_P0SEL
+                                    262 	.globl _X_APCFG
+                                    263 	.globl _X_PERCFG
+                                    264 	.globl _X_T4CC1
+                                    265 	.globl _X_T4CCTL1
+                                    266 	.globl _X_T4CC0
+                                    267 	.globl _X_T4CCTL0
+                                    268 	.globl _X_T4CTL
+                                    269 	.globl _X_T4CNT
+                                    270 	.globl _X_RFIRQF0
+                                    271 	.globl _X_T1CCTL2
+                                    272 	.globl _X_T1CCTL1
+                                    273 	.globl _X_T1CCTL0
+                                    274 	.globl _X_T1CTL
+                                    275 	.globl _X_T1CNTH
+                                    276 	.globl _X_T1CNTL
+                                    277 	.globl _X_RFST
+                                    278 	.globl _X_T1CC2H
+                                    279 	.globl _X_T1CC2L
+                                    280 	.globl _X_T1CC1H
+                                    281 	.globl _X_T1CC1L
+                                    282 	.globl _X_T1CC0H
+                                    283 	.globl _X_T1CC0L
+                                    284 	.globl _X_RFD
+                                    285 	.globl _X_TIMIF
+                                    286 	.globl _X_DMAREQ
+                                    287 	.globl _X_DMAARM
+                                    288 	.globl _X_DMA0CFGH
+                                    289 	.globl _X_DMA0CFGL
+                                    290 	.globl _X_DMA1CFGH
+                                    291 	.globl _X_DMA1CFGL
+                                    292 	.globl _X_DMAIRQ
+                                    293 	.globl _X_T3CC1
+                                    294 	.globl _X_T3CCTL1
+                                    295 	.globl _X_T3CC0
+                                    296 	.globl _X_T3CCTL0
+                                    297 	.globl _X_T3CTL
+                                    298 	.globl _X_T3CNT
+                                    299 	.globl _X_WDCTL
+                                    300 	.globl _X_MEMCTR
+                                    301 	.globl _X_CLKCONCMD
+                                    302 	.globl _X_U0GCR
+                                    303 	.globl _X_U0UCR
+                                    304 	.globl _X_T2MSEL
+                                    305 	.globl _X_U0BAUD
+                                    306 	.globl _X_U0DBUF
+                                    307 	.globl _X_RFERRF
+                                    308 	.globl _X_SLEEPCMD
+                                    309 	.globl _X_RNDH
+                                    310 	.globl _X_RNDL
+                                    311 	.globl _X_ADCH
+                                    312 	.globl _X_ADCL
+                                    313 	.globl _X_ADCCON3
+                                    314 	.globl _X_ADCCON2
+                                    315 	.globl _X_ADCCON1
+                                    316 	.globl _X_ENCCS
+                                    317 	.globl _X_ENCDO
+                                    318 	.globl _X_ENCDI
+                                    319 	.globl _X_T1STAT
+                                    320 	.globl _X_PMUX
+                                    321 	.globl _X_STLOAD
+                                    322 	.globl _X_P2IEN
+                                    323 	.globl _X_P0IEN
+                                    324 	.globl _X_T2IRQM
+                                    325 	.globl _X_T2MOVF2
+                                    326 	.globl _X_T2MOVF1
+                                    327 	.globl _X_T2MOVF0
+                                    328 	.globl _X_T2M1
+                                    329 	.globl _X_T2M0
+                                    330 	.globl _X_T2IRQF
+                                    331 	.globl _X_P2
+                                    332 	.globl _X_PSBANK
+                                    333 	.globl _X_FMAP
+                                    334 	.globl _X_CLKCONSTA
+                                    335 	.globl _X_SLEEPSTA
+                                    336 	.globl _X_T2EVTCFG
+                                    337 	.globl _X_ST2
+                                    338 	.globl _X_ST1
+                                    339 	.globl _X_ST0
+                                    340 	.globl _X_T2CTRL
+                                    341 	.globl _X__XPAGE
+                                    342 	.globl _X_MPAGE
+                                    343 	.globl _X_RFIRQF1
+                                    344 	.globl _X_P1
+                                    345 	.globl _X_P0INP
+                                    346 	.globl _X_P1IEN
+                                    347 	.globl _X_PICTL
+                                    348 	.globl _X_P2IFG
+                                    349 	.globl _X_P1IFG
+                                    350 	.globl _X_P0IFG
+                                    351 	.globl _X_U0CSR
+                                    352 	.globl _X_P0
+                                    353 	.globl _USBF5
+                                    354 	.globl _USBF4
+                                    355 	.globl _USBF3
+                                    356 	.globl _USBF2
+                                    357 	.globl _USBF1
+                                    358 	.globl _USBF0
+                                    359 	.globl _USBCNTH
+                                    360 	.globl _USBCNTL
+                                    361 	.globl _USBCNT0
+                                    362 	.globl _USBCSOH
+                                    363 	.globl _USBCSOL
+                                    364 	.globl _USBMAXO
+                                    365 	.globl _USBCSIH
+                                    366 	.globl _USBCSIL
+                                    367 	.globl _USBCS0
+                                    368 	.globl _USBMAXI
+                                    369 	.globl _USBCTRL
+                                    370 	.globl _USBINDEX
+                                    371 	.globl _USBFRMH
+                                    372 	.globl _USBFRML
+                                    373 	.globl _USBCIE
+                                    374 	.globl _USBOIE
+                                    375 	.globl _USBIIE
+                                    376 	.globl _USBCIF
+                                    377 	.globl _USBOIF
+                                    378 	.globl _USBIIF
+                                    379 	.globl _USBPOW
+                                    380 	.globl _USBADDR
+                                    381 	.globl _CSPT
+                                    382 	.globl _CSPZ
+                                    383 	.globl _CSPY
+                                    384 	.globl _CSPX
+                                    385 	.globl _CSPSTAT
+                                    386 	.globl _CSPCTRL
+                                    387 	.globl _CSPPROG23
+                                    388 	.globl _CSPPROG22
+                                    389 	.globl _CSPPROG21
+                                    390 	.globl _CSPPROG20
+                                    391 	.globl _CSPPROG19
+                                    392 	.globl _CSPPROG18
+                                    393 	.globl _CSPPROG17
+                                    394 	.globl _CSPPROG16
+                                    395 	.globl _CSPPROG15
+                                    396 	.globl _CSPPROG14
+                                    397 	.globl _CSPPROG13
+                                    398 	.globl _CSPPROG12
+                                    399 	.globl _CSPPROG11
+                                    400 	.globl _CSPPROG10
+                                    401 	.globl _CSPPROG9
+                                    402 	.globl _CSPPROG8
+                                    403 	.globl _CSPPROG7
+                                    404 	.globl _CSPPROG6
+                                    405 	.globl _CSPPROG5
+                                    406 	.globl _CSPPROG4
+                                    407 	.globl _CSPPROG3
+                                    408 	.globl _CSPPROG2
+                                    409 	.globl _CSPPROG1
+                                    410 	.globl _CSPPROG0
+                                    411 	.globl _RFC_OBS_CTRL2
+                                    412 	.globl _RFC_OBS_CTRL1
+                                    413 	.globl _RFC_OBS_CTRL0
+                                    414 	.globl _TXFILTCFG
+                                    415 	.globl _PTEST1
+                                    416 	.globl _PTEST0
+                                    417 	.globl _ATEST
+                                    418 	.globl _DACTEST2
+                                    419 	.globl _DACTEST1
+                                    420 	.globl _DACTEST0
+                                    421 	.globl _MDMTEST1
+                                    422 	.globl _MDMTEST0
+                                    423 	.globl _ADCTEST2
+                                    424 	.globl _ADCTEST1
+                                    425 	.globl _ADCTEST0
+                                    426 	.globl _AGCCTRL3
+                                    427 	.globl _AGCCTRL2
+                                    428 	.globl _AGCCTRL1
+                                    429 	.globl _AGCCTRL0
+                                    430 	.globl _FSCAL3
+                                    431 	.globl _FSCAL2
+                                    432 	.globl _FSCAL1
+                                    433 	.globl _FSCAL0
+                                    434 	.globl _FSCTRL
+                                    435 	.globl _RXCTRL
+                                    436 	.globl _FREQEST
+                                    437 	.globl _MDMCTRL1
+                                    438 	.globl _MDMCTRL0
+                                    439 	.globl _RFRND
+                                    440 	.globl _RFERRM
+                                    441 	.globl _RFIRQM1
+                                    442 	.globl _RFIRQM0
+                                    443 	.globl _TXLAST_PTR
+                                    444 	.globl _TXFIRST_PTR
+                                    445 	.globl _RXP1_PTR
+                                    446 	.globl _RXLAST_PTR
+                                    447 	.globl _RXFIRST_PTR
+                                    448 	.globl _TXFIFOCNT
+                                    449 	.globl _RXFIFOCNT
+                                    450 	.globl _RXFIRST
+                                    451 	.globl _RSSISTAT
+                                    452 	.globl _RSSI
+                                    453 	.globl _CCACTRL1
+                                    454 	.globl _CCACTRL0
+                                    455 	.globl _FSMCTRL
+                                    456 	.globl _FIFOPCTRL
+                                    457 	.globl _FSMSTAT1
+                                    458 	.globl _FSMSTAT0
+                                    459 	.globl _TXCTRL
+                                    460 	.globl _TXPOWER
+                                    461 	.globl _FREQCTRL
+                                    462 	.globl _FREQTUNE
+                                    463 	.globl _RXMASKCLR
+                                    464 	.globl _RXMASKSET
+                                    465 	.globl _RXENABLE
+                                    466 	.globl _FRMCTRL1
+                                    467 	.globl _FRMCTRL0
+                                    468 	.globl _SRCEXTEN2
+                                    469 	.globl _SRCEXTEN1
+                                    470 	.globl _SRCEXTEN0
+                                    471 	.globl _SRCSHORTEN2
+                                    472 	.globl _SRCSHORTEN1
+                                    473 	.globl _SRCSHORTEN0
+                                    474 	.globl _SRCMATCH
+                                    475 	.globl _FRMFILT1
+                                    476 	.globl _FRMFILT0
+                                    477 	.globl _SHORT_ADDR1
+                                    478 	.globl _SHORT_ADDR0
+                                    479 	.globl _PAN_ID1
+                                    480 	.globl _PAN_ID0
+                                    481 	.globl _EXT_ADDR7
+                                    482 	.globl _EXT_ADDR6
+                                    483 	.globl _EXT_ADDR5
+                                    484 	.globl _EXT_ADDR4
+                                    485 	.globl _EXT_ADDR3
+                                    486 	.globl _EXT_ADDR2
+                                    487 	.globl _EXT_ADDR1
+                                    488 	.globl _EXT_ADDR0
+                                    489 	.globl _SRCSHORTPENDEN2
+                                    490 	.globl _SRCSHORTPENDEN1
+                                    491 	.globl _SRCSHORTPENDEN0
+                                    492 	.globl _SRCEXTPENDEN2
+                                    493 	.globl _SRCEXTPENDEN1
+                                    494 	.globl _SRCEXTPENDEN0
+                                    495 	.globl _SRCRESINDEX
+                                    496 	.globl _SRCRESMASK2
+                                    497 	.globl _SRCRESMASK1
+                                    498 	.globl _SRCRESMASK0
+                                    499 	.globl _SRC_ADDR_TABLE
+                                    500 	.globl _TXFIFO
+                                    501 	.globl _RXFIFO
+                                    502 	.globl _RFCORE_RAM
+                                    503 	.globl _CMPCTL
+                                    504 	.globl _OPAMPS
+                                    505 	.globl _OPAMPC
+                                    506 	.globl _STCV2
+                                    507 	.globl _STCV1
+                                    508 	.globl _STCV0
+                                    509 	.globl _STCS
+                                    510 	.globl _STCC
+                                    511 	.globl _T1CC4H
+                                    512 	.globl _T1CC4L
+                                    513 	.globl _T1CC3H
+                                    514 	.globl _T1CC3L
+                                    515 	.globl _XX_T1CC2H
+                                    516 	.globl _XX_T1CC2L
+                                    517 	.globl _XX_T1CC1H
+                                    518 	.globl _XX_T1CC1L
+                                    519 	.globl _XX_T1CC0H
+                                    520 	.globl _XX_T1CC0L
+                                    521 	.globl _T1CCTL4
+                                    522 	.globl _T1CCTL3
+                                    523 	.globl _XX_T1CCTL2
+                                    524 	.globl _XX_T1CCTL1
+                                    525 	.globl _XX_T1CCTL0
+                                    526 	.globl _CLD
+                                    527 	.globl _IRCTL
+                                    528 	.globl _CHIPINFO1
+                                    529 	.globl _CHIPINFO0
+                                    530 	.globl _FWDATA
+                                    531 	.globl _FADDRH
+                                    532 	.globl _FADDRL
+                                    533 	.globl _FCTL
+                                    534 	.globl _IVCTRL
+                                    535 	.globl _BATTMON
+                                    536 	.globl _SRCRC
+                                    537 	.globl _DBGDATA
+                                    538 	.globl _TESTREG0
+                                    539 	.globl _CHIPID
+                                    540 	.globl _CHVER
+                                    541 	.globl _OBSSEL5
+                                    542 	.globl _OBSSEL4
+                                    543 	.globl _OBSSEL3
+                                    544 	.globl _OBSSEL2
+                                    545 	.globl _OBSSEL1
+                                    546 	.globl _OBSSEL0
+                                    547 	.globl _I2CIO
+                                    548 	.globl _I2CWC
+                                    549 	.globl _I2CADDR
+                                    550 	.globl _I2CDATA
+                                    551 	.globl _I2CSTAT
+                                    552 	.globl _I2CCFG
+                                    553 	.globl _OPAMPMC
+                                    554 	.globl _MONMUX
+                                    555 ;--------------------------------------------------------
+                                    556 ; special function registers
+                                    557 ;--------------------------------------------------------
+                                    558 	.area RSEG    (ABS,DATA)
+      000000                        559 	.org 0x0000
+                           000080   560 _P0	=	0x0080
+                           000081   561 _SP	=	0x0081
+                           000082   562 _DPL0	=	0x0082
+                           000083   563 _DPH0	=	0x0083
+                           000084   564 _DPL1	=	0x0084
+                           000085   565 _DPH1	=	0x0085
+                           000087   566 _PCON	=	0x0087
+                           000088   567 _TCON	=	0x0088
+                           000090   568 _P1	=	0x0090
+                           000092   569 _DPS	=	0x0092
+                           000098   570 _S0CON	=	0x0098
+                           00009A   571 _IEN2	=	0x009a
+                           00009B   572 _S1CON	=	0x009b
+                           0000A0   573 _P2	=	0x00a0
+                           0000A8   574 _IEN0	=	0x00a8
+                           0000A9   575 _IP0	=	0x00a9
+                           0000B8   576 _IEN1	=	0x00b8
+                           0000B9   577 _IP1	=	0x00b9
+                           0000C0   578 _IRCON	=	0x00c0
+                           0000D0   579 _PSW	=	0x00d0
+                           0000E0   580 _ACC	=	0x00e0
+                           0000E8   581 _IRCON2	=	0x00e8
+                           0000F0   582 _B	=	0x00f0
+                           0000B4   583 _ADCCON1	=	0x00b4
+                           0000B5   584 _ADCCON2	=	0x00b5
+                           0000B6   585 _ADCCON3	=	0x00b6
+                           0000BA   586 _ADCL	=	0x00ba
+                           0000BB   587 _ADCH	=	0x00bb
+                           0000BC   588 _RNDL	=	0x00bc
+                           0000BD   589 _RNDH	=	0x00bd
+                           0000B1   590 _ENCDI	=	0x00b1
+                           0000B2   591 _ENCDO	=	0x00b2
+                           0000B3   592 _ENCCS	=	0x00b3
+                           0000D1   593 _DMAIRQ	=	0x00d1
+                           0000D2   594 _DMA1CFGL	=	0x00d2
+                           0000D3   595 _DMA1CFGH	=	0x00d3
+                           0000D4   596 _DMA0CFGL	=	0x00d4
+                           0000D5   597 _DMA0CFGH	=	0x00d5
+                           0000D6   598 _DMAARM	=	0x00d6
+                           0000D7   599 _DMAREQ	=	0x00d7
+                           000089   600 _P0IFG	=	0x0089
+                           00008A   601 _P1IFG	=	0x008a
+                           00008B   602 _P2IFG	=	0x008b
+                           00008C   603 _PICTL	=	0x008c
+                           0000AB   604 _P0IEN	=	0x00ab
+                           00008D   605 _P1IEN	=	0x008d
+                           0000AC   606 _P2IEN	=	0x00ac
+                           00008F   607 _P0INP	=	0x008f
+                           0000F1   608 _PERCFG	=	0x00f1
+                           0000F2   609 _APCFG	=	0x00f2
+                           0000F3   610 _P0SEL	=	0x00f3
+                           0000F4   611 _P1SEL	=	0x00f4
+                           0000F5   612 _P2SEL	=	0x00f5
+                           0000F6   613 _P1INP	=	0x00f6
+                           0000F7   614 _P2INP	=	0x00f7
+                           0000FD   615 _P0DIR	=	0x00fd
+                           0000FE   616 _P1DIR	=	0x00fe
+                           0000FF   617 _P2DIR	=	0x00ff
+                           0000AE   618 _PMUX	=	0x00ae
+                           000093   619 _MPAGE	=	0x0093
+                           000093   620 __XPAGE	=	0x0093
+                           0000C7   621 _MEMCTR	=	0x00c7
+                           00009F   622 _FMAP	=	0x009f
+                           00009F   623 _PSBANK	=	0x009f
+                           000091   624 _RFIRQF1	=	0x0091
+                           0000D9   625 _RFD	=	0x00d9
+                           0000E1   626 _RFST	=	0x00e1
+                           0000E9   627 _RFIRQF0	=	0x00e9
+                           0000BF   628 _RFERRF	=	0x00bf
+                           000095   629 _ST0	=	0x0095
+                           000096   630 _ST1	=	0x0096
+                           000097   631 _ST2	=	0x0097
+                           0000AD   632 _STLOAD	=	0x00ad
+                           0000BE   633 _SLEEPCMD	=	0x00be
+                           00009D   634 _SLEEPSTA	=	0x009d
+                           0000C6   635 _CLKCONCMD	=	0x00c6
+                           00009E   636 _CLKCONSTA	=	0x009e
+                           0000DA   637 _T1CC0L	=	0x00da
+                           0000DB   638 _T1CC0H	=	0x00db
+                           0000DC   639 _T1CC1L	=	0x00dc
+                           0000DD   640 _T1CC1H	=	0x00dd
+                           0000DE   641 _T1CC2L	=	0x00de
+                           0000DF   642 _T1CC2H	=	0x00df
+                           0000E2   643 _T1CNTL	=	0x00e2
+                           0000E3   644 _T1CNTH	=	0x00e3
+                           0000E4   645 _T1CTL	=	0x00e4
+                           0000E5   646 _T1CCTL0	=	0x00e5
+                           0000E6   647 _T1CCTL1	=	0x00e6
+                           0000E7   648 _T1CCTL2	=	0x00e7
+                           0000AF   649 _T1STAT	=	0x00af
+                           000094   650 _T2CTRL	=	0x0094
+                           00009C   651 _T2EVTCFG	=	0x009c
+                           0000A1   652 _T2IRQF	=	0x00a1
+                           0000A2   653 _T2M0	=	0x00a2
+                           0000A3   654 _T2M1	=	0x00a3
+                           0000A4   655 _T2MOVF0	=	0x00a4
+                           0000A5   656 _T2MOVF1	=	0x00a5
+                           0000A6   657 _T2MOVF2	=	0x00a6
+                           0000A7   658 _T2IRQM	=	0x00a7
+                           0000C3   659 _T2MSEL	=	0x00c3
+                           0000CA   660 _T3CNT	=	0x00ca
+                           0000CB   661 _T3CTL	=	0x00cb
+                           0000CC   662 _T3CCTL0	=	0x00cc
+                           0000CD   663 _T3CC0	=	0x00cd
+                           0000CE   664 _T3CCTL1	=	0x00ce
+                           0000CF   665 _T3CC1	=	0x00cf
+                           0000EA   666 _T4CNT	=	0x00ea
+                           0000EB   667 _T4CTL	=	0x00eb
+                           0000EC   668 _T4CCTL0	=	0x00ec
+                           0000ED   669 _T4CC0	=	0x00ed
+                           0000EE   670 _T4CCTL1	=	0x00ee
+                           0000EF   671 _T4CC1	=	0x00ef
+                           0000D8   672 _TIMIF	=	0x00d8
+                           000086   673 _U0CSR	=	0x0086
+                           0000C1   674 _U0DBUF	=	0x00c1
+                           0000C2   675 _U0BAUD	=	0x00c2
+                           0000C4   676 _U0UCR	=	0x00c4
+                           0000C5   677 _U0GCR	=	0x00c5
+                           0000F8   678 _U1CSR	=	0x00f8
+                           0000F9   679 _U1DBUF	=	0x00f9
+                           0000FA   680 _U1BAUD	=	0x00fa
+                           0000FB   681 _U1UCR	=	0x00fb
+                           0000FC   682 _U1GCR	=	0x00fc
+                           0000C9   683 _WDCTL	=	0x00c9
+                                    684 ;--------------------------------------------------------
+                                    685 ; special function bits
+                                    686 ;--------------------------------------------------------
+                                    687 	.area RSEG    (ABS,DATA)
+      000000                        688 	.org 0x0000
+                           000087   689 _P0_7	=	0x0087
+                           000086   690 _P0_6	=	0x0086
+                           000085   691 _P0_5	=	0x0085
+                           000084   692 _P0_4	=	0x0084
+                           000083   693 _P0_3	=	0x0083
+                           000082   694 _P0_2	=	0x0082
+                           000081   695 _P0_1	=	0x0081
+                           000080   696 _P0_0	=	0x0080
+                           00008F   697 _URX1IF	=	0x008f
+                           00008D   698 _ADCIF	=	0x008d
+                           00008B   699 _URX0IF	=	0x008b
+                           00008A   700 _IT1	=	0x008a
+                           000089   701 _RFERRIF	=	0x0089
+                           000088   702 _IT0	=	0x0088
+                           000097   703 _P1_7	=	0x0097
+                           000096   704 _P1_6	=	0x0096
+                           000095   705 _P1_5	=	0x0095
+                           000094   706 _P1_4	=	0x0094
+                           000093   707 _P1_3	=	0x0093
+                           000092   708 _P1_2	=	0x0092
+                           000091   709 _P1_1	=	0x0091
+                           000090   710 _P1_0	=	0x0090
+                           000099   711 _ENCIF_1	=	0x0099
+                           000098   712 _ENCIF_0	=	0x0098
+                           0000A7   713 _P2_7	=	0x00a7
+                           0000A6   714 _P2_6	=	0x00a6
+                           0000A5   715 _P2_5	=	0x00a5
+                           0000A4   716 _P2_4	=	0x00a4
+                           0000A3   717 _P2_3	=	0x00a3
+                           0000A2   718 _P2_2	=	0x00a2
+                           0000A1   719 _P2_1	=	0x00a1
+                           0000A0   720 _P2_0	=	0x00a0
+                           0000AF   721 _EA	=	0x00af
+                           0000AD   722 _STIE	=	0x00ad
+                           0000AC   723 _ENCIE	=	0x00ac
+                           0000AB   724 _URX1IE	=	0x00ab
+                           0000AA   725 _URX0IE	=	0x00aa
+                           0000A9   726 _ADCIE	=	0x00a9
+                           0000A8   727 _RFERRIE	=	0x00a8
+                           0000BD   728 _P0IE	=	0x00bd
+                           0000BC   729 _T4IE	=	0x00bc
+                           0000BB   730 _T3IE	=	0x00bb
+                           0000BA   731 _T2IE	=	0x00ba
+                           0000B9   732 _T1IE	=	0x00b9
+                           0000B8   733 _DMAIE	=	0x00b8
+                           0000C7   734 _STIF	=	0x00c7
+                           0000C5   735 _P0IF	=	0x00c5
+                           0000C4   736 _T4IF	=	0x00c4
+                           0000C3   737 _T3IF	=	0x00c3
+                           0000C2   738 _T2IF	=	0x00c2
+                           0000C1   739 _T1IF	=	0x00c1
+                           0000C0   740 _DMAIF	=	0x00c0
+                           0000D7   741 _CY	=	0x00d7
+                           0000D6   742 _AC	=	0x00d6
+                           0000D5   743 _F0	=	0x00d5
+                           0000D4   744 _RS1	=	0x00d4
+                           0000D3   745 _RS0	=	0x00d3
+                           0000D2   746 _OV	=	0x00d2
+                           0000D1   747 _F1	=	0x00d1
+                           0000D0   748 _P	=	0x00d0
+                           0000E7   749 _ACC_7	=	0x00e7
+                           0000E6   750 _ACC_6	=	0x00e6
+                           0000E5   751 _ACC_5	=	0x00e5
+                           0000E4   752 _ACC_4	=	0x00e4
+                           0000E3   753 _ACC_3	=	0x00e3
+                           0000E2   754 _ACC_2	=	0x00e2
+                           0000E1   755 _ACC_1	=	0x00e1
+                           0000E0   756 _ACC_0	=	0x00e0
+                           0000EC   757 _WDTIF	=	0x00ec
+                           0000EB   758 _P1IF	=	0x00eb
+                           0000EA   759 _UTX1IF	=	0x00ea
+                           0000E9   760 _UTX0IF	=	0x00e9
+                           0000E8   761 _P2IF	=	0x00e8
+                           0000F7   762 _B_7	=	0x00f7
+                           0000F6   763 _B_6	=	0x00f6
+                           0000F5   764 _B_5	=	0x00f5
+                           0000F4   765 _B_4	=	0x00f4
+                           0000F3   766 _B_3	=	0x00f3
+                           0000F2   767 _B_2	=	0x00f2
+                           0000F1   768 _B_1	=	0x00f1
+                           0000F0   769 _B_0	=	0x00f0
+                           0000DE   770 _OVFIM	=	0x00de
+                           0000DD   771 _T4CH1IF	=	0x00dd
+                           0000DC   772 _T4CH0IF	=	0x00dc
+                           0000DB   773 _T4OVFIF	=	0x00db
+                           0000DA   774 _T3CH1IF	=	0x00da
+                           0000D9   775 _T3CH0IF	=	0x00d9
+                           0000D8   776 _T3OVFIF	=	0x00d8
+                           0000FF   777 _MODE	=	0x00ff
+                           0000FE   778 _RE	=	0x00fe
+                           0000FD   779 _SLAVE	=	0x00fd
+                           0000FC   780 _FE	=	0x00fc
+                           0000FB   781 _ERR	=	0x00fb
+                           0000FA   782 _RX_BYTE	=	0x00fa
+                           0000F9   783 _TX_BYTE	=	0x00f9
+                           0000F8   784 _ACTIVE	=	0x00f8
+                                    785 ;--------------------------------------------------------
+                                    786 ; overlayable register banks
+                                    787 ;--------------------------------------------------------
+                                    788 	.area REG_BANK_0	(REL,OVR,DATA)
+      000000                        789 	.ds 8
+                                    790 ;--------------------------------------------------------
+                                    791 ; internal ram data
+                                    792 ;--------------------------------------------------------
+                                    793 	.area DSEG    (DATA)
+                                    794 ;--------------------------------------------------------
+                                    795 ; overlayable items in internal ram 
+                                    796 ;--------------------------------------------------------
+                                    797 ;--------------------------------------------------------
+                                    798 ; indirectly addressable internal ram data
+                                    799 ;--------------------------------------------------------
+                                    800 	.area ISEG    (DATA)
+                                    801 ;--------------------------------------------------------
+                                    802 ; absolute internal ram data
+                                    803 ;--------------------------------------------------------
+                                    804 	.area IABS    (ABS,DATA)
+                                    805 	.area IABS    (ABS,DATA)
+                                    806 ;--------------------------------------------------------
+                                    807 ; bit data
+                                    808 ;--------------------------------------------------------
+                                    809 	.area BSEG    (BIT)
+                                    810 ;--------------------------------------------------------
+                                    811 ; paged external ram data
+                                    812 ;--------------------------------------------------------
+                                    813 	.area PSEG    (PAG,XDATA)
+                                    814 ;--------------------------------------------------------
+                                    815 ; external ram data
+                                    816 ;--------------------------------------------------------
+                                    817 	.area XSEG    (XDATA)
+                           0061A6   818 _MONMUX	=	0x61a6
+                           0061A6   819 _OPAMPMC	=	0x61a6
+                           006230   820 _I2CCFG	=	0x6230
+                           006231   821 _I2CSTAT	=	0x6231
+                           006232   822 _I2CDATA	=	0x6232
+                           006233   823 _I2CADDR	=	0x6233
+                           006234   824 _I2CWC	=	0x6234
+                           006235   825 _I2CIO	=	0x6235
+                           006243   826 _OBSSEL0	=	0x6243
+                           006244   827 _OBSSEL1	=	0x6244
+                           006245   828 _OBSSEL2	=	0x6245
+                           006246   829 _OBSSEL3	=	0x6246
+                           006247   830 _OBSSEL4	=	0x6247
+                           006248   831 _OBSSEL5	=	0x6248
+                           006249   832 _CHVER	=	0x6249
+                           00624A   833 _CHIPID	=	0x624a
+                           00624B   834 _TESTREG0	=	0x624b
+                           006260   835 _DBGDATA	=	0x6260
+                           006262   836 _SRCRC	=	0x6262
+                           006264   837 _BATTMON	=	0x6264
+                           006265   838 _IVCTRL	=	0x6265
+                           006270   839 _FCTL	=	0x6270
+                           006271   840 _FADDRL	=	0x6271
+                           006272   841 _FADDRH	=	0x6272
+                           006273   842 _FWDATA	=	0x6273
+                           006276   843 _CHIPINFO0	=	0x6276
+                           006277   844 _CHIPINFO1	=	0x6277
+                           006281   845 _IRCTL	=	0x6281
+                           006290   846 _CLD	=	0x6290
+                           0062A0   847 _XX_T1CCTL0	=	0x62a0
+                           0062A1   848 _XX_T1CCTL1	=	0x62a1
+                           0062A2   849 _XX_T1CCTL2	=	0x62a2
+                           0062A3   850 _T1CCTL3	=	0x62a3
+                           0062A4   851 _T1CCTL4	=	0x62a4
+                           0062A6   852 _XX_T1CC0L	=	0x62a6
+                           0062A7   853 _XX_T1CC0H	=	0x62a7
+                           0062A8   854 _XX_T1CC1L	=	0x62a8
+                           0062A9   855 _XX_T1CC1H	=	0x62a9
+                           0062AA   856 _XX_T1CC2L	=	0x62aa
+                           0062AB   857 _XX_T1CC2H	=	0x62ab
+                           0062AC   858 _T1CC3L	=	0x62ac
+                           0062AD   859 _T1CC3H	=	0x62ad
+                           0062AE   860 _T1CC4L	=	0x62ae
+                           0062AF   861 _T1CC4H	=	0x62af
+                           0062B0   862 _STCC	=	0x62b0
+                           0062B1   863 _STCS	=	0x62b1
+                           0062B2   864 _STCV0	=	0x62b2
+                           0062B3   865 _STCV1	=	0x62b3
+                           0062B4   866 _STCV2	=	0x62b4
+                           0062C0   867 _OPAMPC	=	0x62c0
+                           0062C1   868 _OPAMPS	=	0x62c1
+                           0062D0   869 _CMPCTL	=	0x62d0
+                           006000   870 _RFCORE_RAM	=	0x6000
+                           006000   871 _RXFIFO	=	0x6000
+                           006080   872 _TXFIFO	=	0x6080
+                           006100   873 _SRC_ADDR_TABLE	=	0x6100
+                           006160   874 _SRCRESMASK0	=	0x6160
+                           006161   875 _SRCRESMASK1	=	0x6161
+                           006162   876 _SRCRESMASK2	=	0x6162
+                           006163   877 _SRCRESINDEX	=	0x6163
+                           006164   878 _SRCEXTPENDEN0	=	0x6164
+                           006165   879 _SRCEXTPENDEN1	=	0x6165
+                           006166   880 _SRCEXTPENDEN2	=	0x6166
+                           006167   881 _SRCSHORTPENDEN0	=	0x6167
+                           006168   882 _SRCSHORTPENDEN1	=	0x6168
+                           006169   883 _SRCSHORTPENDEN2	=	0x6169
+                           00616A   884 _EXT_ADDR0	=	0x616a
+                           00616B   885 _EXT_ADDR1	=	0x616b
+                           00616C   886 _EXT_ADDR2	=	0x616c
+                           00616D   887 _EXT_ADDR3	=	0x616d
+                           00616E   888 _EXT_ADDR4	=	0x616e
+                           00616F   889 _EXT_ADDR5	=	0x616f
+                           006170   890 _EXT_ADDR6	=	0x6170
+                           006171   891 _EXT_ADDR7	=	0x6171
+                           006172   892 _PAN_ID0	=	0x6172
+                           006173   893 _PAN_ID1	=	0x6173
+                           006174   894 _SHORT_ADDR0	=	0x6174
+                           006175   895 _SHORT_ADDR1	=	0x6175
+                           006180   896 _FRMFILT0	=	0x6180
+                           006181   897 _FRMFILT1	=	0x6181
+                           006182   898 _SRCMATCH	=	0x6182
+                           006183   899 _SRCSHORTEN0	=	0x6183
+                           006184   900 _SRCSHORTEN1	=	0x6184
+                           006185   901 _SRCSHORTEN2	=	0x6185
+                           006186   902 _SRCEXTEN0	=	0x6186
+                           006187   903 _SRCEXTEN1	=	0x6187
+                           006188   904 _SRCEXTEN2	=	0x6188
+                           006189   905 _FRMCTRL0	=	0x6189
+                           00618A   906 _FRMCTRL1	=	0x618a
+                           00618B   907 _RXENABLE	=	0x618b
+                           00618C   908 _RXMASKSET	=	0x618c
+                           00618D   909 _RXMASKCLR	=	0x618d
+                           00618E   910 _FREQTUNE	=	0x618e
+                           00618F   911 _FREQCTRL	=	0x618f
+                           006190   912 _TXPOWER	=	0x6190
+                           006191   913 _TXCTRL	=	0x6191
+                           006192   914 _FSMSTAT0	=	0x6192
+                           006193   915 _FSMSTAT1	=	0x6193
+                           006194   916 _FIFOPCTRL	=	0x6194
+                           006195   917 _FSMCTRL	=	0x6195
+                           006196   918 _CCACTRL0	=	0x6196
+                           006197   919 _CCACTRL1	=	0x6197
+                           006198   920 _RSSI	=	0x6198
+                           006199   921 _RSSISTAT	=	0x6199
+                           00619A   922 _RXFIRST	=	0x619a
+                           00619B   923 _RXFIFOCNT	=	0x619b
+                           00619C   924 _TXFIFOCNT	=	0x619c
+                           00619D   925 _RXFIRST_PTR	=	0x619d
+                           00619E   926 _RXLAST_PTR	=	0x619e
+                           00619F   927 _RXP1_PTR	=	0x619f
+                           0061A1   928 _TXFIRST_PTR	=	0x61a1
+                           0061A2   929 _TXLAST_PTR	=	0x61a2
+                           0061A3   930 _RFIRQM0	=	0x61a3
+                           0061A4   931 _RFIRQM1	=	0x61a4
+                           0061A5   932 _RFERRM	=	0x61a5
+                           0061A7   933 _RFRND	=	0x61a7
+                           0061A8   934 _MDMCTRL0	=	0x61a8
+                           0061A9   935 _MDMCTRL1	=	0x61a9
+                           0061AA   936 _FREQEST	=	0x61aa
+                           0061AB   937 _RXCTRL	=	0x61ab
+                           0061AC   938 _FSCTRL	=	0x61ac
+                           0061AD   939 _FSCAL0	=	0x61ad
+                           0061AE   940 _FSCAL1	=	0x61ae
+                           0061AF   941 _FSCAL2	=	0x61af
+                           0061B0   942 _FSCAL3	=	0x61b0
+                           0061B1   943 _AGCCTRL0	=	0x61b1
+                           0061B2   944 _AGCCTRL1	=	0x61b2
+                           0061B3   945 _AGCCTRL2	=	0x61b3
+                           0061B4   946 _AGCCTRL3	=	0x61b4
+                           0061B5   947 _ADCTEST0	=	0x61b5
+                           0061B6   948 _ADCTEST1	=	0x61b6
+                           0061B7   949 _ADCTEST2	=	0x61b7
+                           0061B8   950 _MDMTEST0	=	0x61b8
+                           0061B9   951 _MDMTEST1	=	0x61b9
+                           0061BA   952 _DACTEST0	=	0x61ba
+                           0061BB   953 _DACTEST1	=	0x61bb
+                           0061BC   954 _DACTEST2	=	0x61bc
+                           0061BD   955 _ATEST	=	0x61bd
+                           0061BE   956 _PTEST0	=	0x61be
+                           0061BF   957 _PTEST1	=	0x61bf
+                           0061FA   958 _TXFILTCFG	=	0x61fa
+                           0061EB   959 _RFC_OBS_CTRL0	=	0x61eb
+                           0061EC   960 _RFC_OBS_CTRL1	=	0x61ec
+                           0061ED   961 _RFC_OBS_CTRL2	=	0x61ed
+                           0061C0   962 _CSPPROG0	=	0x61c0
+                           0061C1   963 _CSPPROG1	=	0x61c1
+                           0061C2   964 _CSPPROG2	=	0x61c2
+                           0061C3   965 _CSPPROG3	=	0x61c3
+                           0061C4   966 _CSPPROG4	=	0x61c4
+                           0061C5   967 _CSPPROG5	=	0x61c5
+                           0061C6   968 _CSPPROG6	=	0x61c6
+                           0061C7   969 _CSPPROG7	=	0x61c7
+                           0061C8   970 _CSPPROG8	=	0x61c8
+                           0061C9   971 _CSPPROG9	=	0x61c9
+                           0061CA   972 _CSPPROG10	=	0x61ca
+                           0061CB   973 _CSPPROG11	=	0x61cb
+                           0061CC   974 _CSPPROG12	=	0x61cc
+                           0061CD   975 _CSPPROG13	=	0x61cd
+                           0061CE   976 _CSPPROG14	=	0x61ce
+                           0061CF   977 _CSPPROG15	=	0x61cf
+                           0061D0   978 _CSPPROG16	=	0x61d0
+                           0061D1   979 _CSPPROG17	=	0x61d1
+                           0061D2   980 _CSPPROG18	=	0x61d2
+                           0061D3   981 _CSPPROG19	=	0x61d3
+                           0061D4   982 _CSPPROG20	=	0x61d4
+                           0061D5   983 _CSPPROG21	=	0x61d5
+                           0061D6   984 _CSPPROG22	=	0x61d6
+                           0061D7   985 _CSPPROG23	=	0x61d7
+                           0061E0   986 _CSPCTRL	=	0x61e0
+                           0061E1   987 _CSPSTAT	=	0x61e1
+                           0061E2   988 _CSPX	=	0x61e2
+                           0061E3   989 _CSPY	=	0x61e3
+                           0061E4   990 _CSPZ	=	0x61e4
+                           0061E5   991 _CSPT	=	0x61e5
+                           006200   992 _USBADDR	=	0x6200
+                           006201   993 _USBPOW	=	0x6201
+                           006202   994 _USBIIF	=	0x6202
+                           006204   995 _USBOIF	=	0x6204
+                           006206   996 _USBCIF	=	0x6206
+                           006207   997 _USBIIE	=	0x6207
+                           006209   998 _USBOIE	=	0x6209
+                           00620B   999 _USBCIE	=	0x620b
+                           00620C  1000 _USBFRML	=	0x620c
+                           00620D  1001 _USBFRMH	=	0x620d
+                           00620E  1002 _USBINDEX	=	0x620e
+                           00620F  1003 _USBCTRL	=	0x620f
+                           006210  1004 _USBMAXI	=	0x6210
+                           006211  1005 _USBCS0	=	0x6211
+                           006211  1006 _USBCSIL	=	0x6211
+                           006212  1007 _USBCSIH	=	0x6212
+                           006213  1008 _USBMAXO	=	0x6213
+                           006214  1009 _USBCSOL	=	0x6214
+                           006215  1010 _USBCSOH	=	0x6215
+                           006216  1011 _USBCNT0	=	0x6216
+                           006216  1012 _USBCNTL	=	0x6216
+                           006217  1013 _USBCNTH	=	0x6217
+                           006220  1014 _USBF0	=	0x6220
+                           006222  1015 _USBF1	=	0x6222
+                           006224  1016 _USBF2	=	0x6224
+                           006226  1017 _USBF3	=	0x6226
+                           006228  1018 _USBF4	=	0x6228
+                           00622A  1019 _USBF5	=	0x622a
+                           007080  1020 _X_P0	=	0x7080
+                           007086  1021 _X_U0CSR	=	0x7086
+                           007089  1022 _X_P0IFG	=	0x7089
+                           00708A  1023 _X_P1IFG	=	0x708a
+                           00708B  1024 _X_P2IFG	=	0x708b
+                           00708C  1025 _X_PICTL	=	0x708c
+                           00708D  1026 _X_P1IEN	=	0x708d
+                           00708F  1027 _X_P0INP	=	0x708f
+                           007090  1028 _X_P1	=	0x7090
+                           007091  1029 _X_RFIRQF1	=	0x7091
+                           007093  1030 _X_MPAGE	=	0x7093
+                           007093  1031 _X__XPAGE	=	0x7093
+                           007094  1032 _X_T2CTRL	=	0x7094
+                           007095  1033 _X_ST0	=	0x7095
+                           007096  1034 _X_ST1	=	0x7096
+                           007097  1035 _X_ST2	=	0x7097
+                           00709C  1036 _X_T2EVTCFG	=	0x709c
+                           00709D  1037 _X_SLEEPSTA	=	0x709d
+                           00709E  1038 _X_CLKCONSTA	=	0x709e
+                           00709F  1039 _X_FMAP	=	0x709f
+                           00709F  1040 _X_PSBANK	=	0x709f
+                           0070A0  1041 _X_P2	=	0x70a0
+                           0070A1  1042 _X_T2IRQF	=	0x70a1
+                           0070A2  1043 _X_T2M0	=	0x70a2
+                           0070A3  1044 _X_T2M1	=	0x70a3
+                           0070A4  1045 _X_T2MOVF0	=	0x70a4
+                           0070A5  1046 _X_T2MOVF1	=	0x70a5
+                           0070A6  1047 _X_T2MOVF2	=	0x70a6
+                           0070A7  1048 _X_T2IRQM	=	0x70a7
+                           0070AB  1049 _X_P0IEN	=	0x70ab
+                           0070AC  1050 _X_P2IEN	=	0x70ac
+                           0070AD  1051 _X_STLOAD	=	0x70ad
+                           0070AE  1052 _X_PMUX	=	0x70ae
+                           0070AF  1053 _X_T1STAT	=	0x70af
+                           0070B1  1054 _X_ENCDI	=	0x70b1
+                           0070B2  1055 _X_ENCDO	=	0x70b2
+                           0070B3  1056 _X_ENCCS	=	0x70b3
+                           0070B4  1057 _X_ADCCON1	=	0x70b4
+                           0070B5  1058 _X_ADCCON2	=	0x70b5
+                           0070B6  1059 _X_ADCCON3	=	0x70b6
+                           0070BA  1060 _X_ADCL	=	0x70ba
+                           0070BB  1061 _X_ADCH	=	0x70bb
+                           0070BC  1062 _X_RNDL	=	0x70bc
+                           0070BD  1063 _X_RNDH	=	0x70bd
+                           0070BE  1064 _X_SLEEPCMD	=	0x70be
+                           0070BF  1065 _X_RFERRF	=	0x70bf
+                           0070C1  1066 _X_U0DBUF	=	0x70c1
+                           0070C2  1067 _X_U0BAUD	=	0x70c2
+                           0070C3  1068 _X_T2MSEL	=	0x70c3
+                           0070C4  1069 _X_U0UCR	=	0x70c4
+                           0070C5  1070 _X_U0GCR	=	0x70c5
+                           0070C6  1071 _X_CLKCONCMD	=	0x70c6
+                           0070C7  1072 _X_MEMCTR	=	0x70c7
+                           0070C9  1073 _X_WDCTL	=	0x70c9
+                           0070CA  1074 _X_T3CNT	=	0x70ca
+                           0070CB  1075 _X_T3CTL	=	0x70cb
+                           0070CC  1076 _X_T3CCTL0	=	0x70cc
+                           0070CD  1077 _X_T3CC0	=	0x70cd
+                           0070CE  1078 _X_T3CCTL1	=	0x70ce
+                           0070CF  1079 _X_T3CC1	=	0x70cf
+                           0070D1  1080 _X_DMAIRQ	=	0x70d1
+                           0070D2  1081 _X_DMA1CFGL	=	0x70d2
+                           0070D3  1082 _X_DMA1CFGH	=	0x70d3
+                           0070D4  1083 _X_DMA0CFGL	=	0x70d4
+                           0070D5  1084 _X_DMA0CFGH	=	0x70d5
+                           0070D6  1085 _X_DMAARM	=	0x70d6
+                           0070D7  1086 _X_DMAREQ	=	0x70d7
+                           0070D8  1087 _X_TIMIF	=	0x70d8
+                           0070D9  1088 _X_RFD	=	0x70d9
+                           0070DA  1089 _X_T1CC0L	=	0x70da
+                           0070DB  1090 _X_T1CC0H	=	0x70db
+                           0070DC  1091 _X_T1CC1L	=	0x70dc
+                           0070DD  1092 _X_T1CC1H	=	0x70dd
+                           0070DE  1093 _X_T1CC2L	=	0x70de
+                           0070DF  1094 _X_T1CC2H	=	0x70df
+                           0070E1  1095 _X_RFST	=	0x70e1
+                           0070E2  1096 _X_T1CNTL	=	0x70e2
+                           0070E3  1097 _X_T1CNTH	=	0x70e3
+                           0070E4  1098 _X_T1CTL	=	0x70e4
+                           0070E5  1099 _X_T1CCTL0	=	0x70e5
+                           0070E6  1100 _X_T1CCTL1	=	0x70e6
+                           0070E7  1101 _X_T1CCTL2	=	0x70e7
+                           0070E9  1102 _X_RFIRQF0	=	0x70e9
+                           0070EA  1103 _X_T4CNT	=	0x70ea
+                           0070EB  1104 _X_T4CTL	=	0x70eb
+                           0070EC  1105 _X_T4CCTL0	=	0x70ec
+                           0070ED  1106 _X_T4CC0	=	0x70ed
+                           0070EE  1107 _X_T4CCTL1	=	0x70ee
+                           0070EF  1108 _X_T4CC1	=	0x70ef
+                           0070F1  1109 _X_PERCFG	=	0x70f1
+                           0070F2  1110 _X_APCFG	=	0x70f2
+                           0070F3  1111 _X_P0SEL	=	0x70f3
+                           0070F4  1112 _X_P1SEL	=	0x70f4
+                           0070F5  1113 _X_P2SEL	=	0x70f5
+                           0070F6  1114 _X_P1INP	=	0x70f6
+                           0070F7  1115 _X_P2INP	=	0x70f7
+                           0070F8  1116 _X_U1CSR	=	0x70f8
+                           0070F9  1117 _X_U1DBUF	=	0x70f9
+                           0070FA  1118 _X_U1BAUD	=	0x70fa
+                           0070FB  1119 _X_U1UCR	=	0x70fb
+                           0070FC  1120 _X_U1GCR	=	0x70fc
+                           0070FD  1121 _X_P0DIR	=	0x70fd
+                           0070FE  1122 _X_P1DIR	=	0x70fe
+                           0070FF  1123 _X_P2DIR	=	0x70ff
+                           007800  1124 _X_INFOPAGE	=	0x7800
+                           00780C  1125 _X_IEEE_ADDR	=	0x780c
+      000000                       1126 _server_conn:
+      000000                       1127 	.ds 3
+      000003                       1128 _buf:
+      000003                       1129 	.ds 60
+      00003F                       1130 _len:
+      00003F                       1131 	.ds 1
+      000040                       1132 _rt:
+      000040                       1133 	.ds 3
+      000043                       1134 _defrt:
+      000043                       1135 	.ds 3
+      000046                       1136 _addr:
+      000046                       1137 	.ds 3
+                                   1138 ;--------------------------------------------------------
+                                   1139 ; absolute external ram data
+                                   1140 ;--------------------------------------------------------
+                                   1141 	.area XABS    (ABS,XDATA)
+                                   1142 ;--------------------------------------------------------
+                                   1143 ; external initialized ram data
+                                   1144 ;--------------------------------------------------------
+                                   1145 	.area XISEG   (XDATA)
+      000000                       1146 _viztool_process::
+      000000                       1147 	.ds 10
+                                   1148 	.area HOME    (CODE)
+                                   1149 	.area GSINIT0 (CODE)
+                                   1150 	.area GSINIT1 (CODE)
+                                   1151 	.area GSINIT2 (CODE)
+                                   1152 	.area GSINIT3 (CODE)
+                                   1153 	.area GSINIT4 (CODE)
+                                   1154 	.area GSINIT5 (CODE)
+                                   1155 	.area GSINIT  (CODE)
+                                   1156 	.area GSFINAL (CODE)
+                                   1157 	.area CSEG    (CODE)
+                                   1158 ;--------------------------------------------------------
+                                   1159 ; global & static initialisations
+                                   1160 ;--------------------------------------------------------
+                                   1161 	.area HOME    (CODE)
+                                   1162 	.area GSINIT  (CODE)
+                                   1163 	.area GSFINAL (CODE)
+                                   1164 	.area GSINIT  (CODE)
+                                   1165 ;--------------------------------------------------------
+                                   1166 ; Home
+                                   1167 ;--------------------------------------------------------
+                                   1168 	.area HOME    (CODE)
+                                   1169 	.area HOME    (CODE)
+                                   1170 ;--------------------------------------------------------
+                                   1171 ; code
+                                   1172 ;--------------------------------------------------------
+                                   1173 	.area BANK1   (CODE)
+                                   1174 ;------------------------------------------------------------
+                                   1175 ;Allocation info for local variables in function 'process_request'
+                                   1176 ;------------------------------------------------------------
+                                   1177 ;len                       Allocated to stack - sp -10
+                                   1178 ;count                     Allocated to stack - sp -9
+                                   1179 ;i                         Allocated to stack - sp -8
+                                   1180 ;left                      Allocated to stack - sp -7
+                                   1181 ;entry_size                Allocated to registers 
+                                   1182 ;nbr                       Allocated to stack - sp -6
+                                   1183 ;flip                      Allocated to stack - sp -3
+                                   1184 ;flip                      Allocated to registers 
+                                   1185 ;sloc0                     Allocated to stack - sp +6
+                                   1186 ;------------------------------------------------------------
+                                   1187 ;	../../platform/cc2530dk/./viztool.c:77: process_request() CC_NON_BANKED
+                                   1188 ;	-----------------------------------------
+                                   1189 ;	 function process_request
+                                   1190 ;	-----------------------------------------
+      000000                       1191 _process_request:
+                           000007  1192 	ar7 = 0x07
+                           000006  1193 	ar6 = 0x06
+                           000005  1194 	ar5 = 0x05
+                           000004  1195 	ar4 = 0x04
+                           000003  1196 	ar3 = 0x03
+                           000002  1197 	ar2 = 0x02
+                           000001  1198 	ar1 = 0x01
+                           000000  1199 	ar0 = 0x00
+      000000 E5 81            [12] 1200 	mov	a,sp
+      000002 24 0B            [12] 1201 	add	a,#0x0B
+                                   1202 ;	../../platform/cc2530dk/./viztool.c:87: len = 2; /* start filling the buffer from position [2] */
+      000004 F5 81            [12] 1203 	mov	sp,a
+      000006 24 F6            [12] 1204 	add	a,#0xf6
+      000008 F8               [12] 1205 	mov	r0,a
+      000009 76 02            [12] 1206 	mov	@r0,#0x02
+                                   1207 ;	../../platform/cc2530dk/./viztool.c:88: count = 0;
+      00000B 7E 00            [12] 1208 	mov	r6,#0x00
+                                   1209 ;	../../platform/cc2530dk/./viztool.c:89: if(buf[0] == REQUEST_TYPE_ND) {
+      00000D 90r00r03         [24] 1210 	mov	dptr,#_buf
+      000010 E0               [24] 1211 	movx	a,@dptr
+      000011 FD               [12] 1212 	mov	r5,a
+      000012 BD 01 02         [24] 1213 	cjne	r5,#0x01,00224$
+      000015 80 03            [24] 1214 	sjmp	00225$
+      000017                       1215 00224$:
+      000017 02r02r15         [24] 1216 	ljmp	00136$
+      00001A                       1217 00225$:
+                                   1218 ;	../../platform/cc2530dk/./viztool.c:92: for(nbr = nbr_table_head(ds6_neighbors);
+      00001A 90r00r00         [24] 1219 	mov	dptr,#_ds6_neighbors
+      00001D E0               [24] 1220 	movx	a,@dptr
+      00001E FA               [12] 1221 	mov	r2,a
+      00001F A3               [24] 1222 	inc	dptr
+      000020 E0               [24] 1223 	movx	a,@dptr
+      000021 FB               [12] 1224 	mov	r3,a
+      000022 A3               [24] 1225 	inc	dptr
+      000023 E0               [24] 1226 	movx	a,@dptr
+      000024 FC               [12] 1227 	mov	r4,a
+      000025 8A 82            [24] 1228 	mov	dpl,r2
+      000027 8B 83            [24] 1229 	mov	dph,r3
+      000029 8C F0            [24] 1230 	mov	b,r4
+      00002B 78r00            [12] 1231 	mov	r0,#_nbr_table_head
+      00002D 79s00            [12] 1232 	mov	r1,#(_nbr_table_head >> 8)
+      00002F 7As00            [12] 1233 	mov	r2,#(_nbr_table_head >> 16)
+      000031 12r00r00         [24] 1234 	lcall	__sdcc_banked_call
+      000034 AA 82            [24] 1235 	mov	r2,dpl
+      000036 AB 83            [24] 1236 	mov	r3,dph
+      000038 AC F0            [24] 1237 	mov	r4,b
+      00003A E5 81            [12] 1238 	mov	a,sp
+      00003C 24 FA            [12] 1239 	add	a,#0xfa
+      00003E F8               [12] 1240 	mov	r0,a
+      00003F A6 02            [24] 1241 	mov	@r0,ar2
+      000041 08               [12] 1242 	inc	r0
+      000042 A6 03            [24] 1243 	mov	@r0,ar3
+      000044 08               [12] 1244 	inc	r0
+      000045 A6 04            [24] 1245 	mov	@r0,ar4
+      000047 E5 81            [12] 1246 	mov	a,sp
+      000049 24 F7            [12] 1247 	add	a,#0xf7
+      00004B F8               [12] 1248 	mov	r0,a
+      00004C 76 00            [12] 1249 	mov	@r0,#0x00
+      00004E E5 81            [12] 1250 	mov	a,sp
+      000050 24 F9            [12] 1251 	add	a,#0xf9
+      000052 F8               [12] 1252 	mov	r0,a
+      000053 76 3B            [12] 1253 	mov	@r0,#0x3B
+      000055                       1254 00139$:
+                                   1255 ;	../../platform/cc2530dk/./viztool.c:93: nbr != NULL;
+      000055 E5 81            [12] 1256 	mov	a,sp
+      000057 24 FA            [12] 1257 	add	a,#0xfa
+      000059 F8               [12] 1258 	mov	r0,a
+      00005A E4               [12] 1259 	clr	a
+      00005B C0 E0            [24] 1260 	push	acc
+      00005D E4               [12] 1261 	clr	a
+      00005E C0 E0            [24] 1262 	push	acc
+      000060 E4               [12] 1263 	clr	a
+      000061 C0 E0            [24] 1264 	push	acc
+      000063 86 82            [24] 1265 	mov	dpl,@r0
+      000065 08               [12] 1266 	inc	r0
+      000066 86 83            [24] 1267 	mov	dph,@r0
+      000068 08               [12] 1268 	inc	r0
+      000069 86 F0            [24] 1269 	mov	b,@r0
+      00006B 12r00r00         [24] 1270 	lcall	___gptr_cmp
+      00006E 15 81            [12] 1271 	dec	sp
+      000070 15 81            [12] 1272 	dec	sp
+      000072 15 81            [12] 1273 	dec	sp
+      000074 70 03            [24] 1274 	jnz	00226$
+      000076 02r07rCE         [24] 1275 	ljmp	00176$
+      000079                       1276 00226$:
+                                   1277 ;	../../platform/cc2530dk/./viztool.c:103: memcpy(buf + len, &i, sizeof(i));
+      000079 E5 81            [12] 1278 	mov	a,sp
+      00007B 24 F8            [12] 1279 	add	a,#0xF8
+      00007D FE               [12] 1280 	mov	r6,a
+      00007E 7D 00            [12] 1281 	mov	r5,#0x00
+      000080 7A 40            [12] 1282 	mov	r2,#0x40
+      000082 E5 81            [12] 1283 	mov	a,sp
+      000084 24 F6            [12] 1284 	add	a,#0xf6
+      000086 F8               [12] 1285 	mov	r0,a
+      000087 E6               [12] 1286 	mov	a,@r0
+      000088 24r03            [12] 1287 	add	a,#_buf
+      00008A FC               [12] 1288 	mov	r4,a
+      00008B E4               [12] 1289 	clr	a
+      00008C 34s00            [12] 1290 	addc	a,#(_buf >> 8)
+      00008E FF               [12] 1291 	mov	r7,a
+      00008F 7B 00            [12] 1292 	mov	r3,#0x00
+      000091 74 01            [12] 1293 	mov	a,#0x01
+      000093 C0 E0            [24] 1294 	push	acc
+      000095 E4               [12] 1295 	clr	a
+      000096 C0 E0            [24] 1296 	push	acc
+      000098 C0 06            [24] 1297 	push	ar6
+      00009A C0 05            [24] 1298 	push	ar5
+      00009C C0 02            [24] 1299 	push	ar2
+      00009E 8C 82            [24] 1300 	mov	dpl,r4
+      0000A0 8F 83            [24] 1301 	mov	dph,r7
+      0000A2 8B F0            [24] 1302 	mov	b,r3
+      0000A4 78r00            [12] 1303 	mov	r0,#_memcpy
+      0000A6 79s00            [12] 1304 	mov	r1,#(_memcpy >> 8)
+      0000A8 7As00            [12] 1305 	mov	r2,#(_memcpy >> 16)
+      0000AA 12r00r00         [24] 1306 	lcall	__sdcc_banked_call
+      0000AD E5 81            [12] 1307 	mov	a,sp
+      0000AF 24 FB            [12] 1308 	add	a,#0xfb
+                                   1309 ;	../../platform/cc2530dk/./viztool.c:104: len += sizeof(i);
+      0000B1 F5 81            [12] 1310 	mov	sp,a
+      0000B3 24 F6            [12] 1311 	add	a,#0xf6
+      0000B5 F8               [12] 1312 	mov	r0,a
+      0000B6 06               [12] 1313 	inc	@r0
+                                   1314 ;	../../platform/cc2530dk/./viztool.c:105: memcpy(buf + len, uip_ds6_nbr_get_ipaddr(nbr), sizeof(uip_ipaddr_t));
+      0000B7 E5 81            [12] 1315 	mov	a,sp
+      0000B9 24 FA            [12] 1316 	add	a,#0xfa
+      0000BB F8               [12] 1317 	mov	r0,a
+      0000BC 86 82            [24] 1318 	mov	dpl,@r0
+      0000BE 08               [12] 1319 	inc	r0
+      0000BF 86 83            [24] 1320 	mov	dph,@r0
+      0000C1 08               [12] 1321 	inc	r0
+      0000C2 86 F0            [24] 1322 	mov	b,@r0
+      0000C4 78r00            [12] 1323 	mov	r0,#_uip_ds6_nbr_get_ipaddr
+      0000C6 79s00            [12] 1324 	mov	r1,#(_uip_ds6_nbr_get_ipaddr >> 8)
+      0000C8 7As00            [12] 1325 	mov	r2,#(_uip_ds6_nbr_get_ipaddr >> 16)
+      0000CA 12r00r00         [24] 1326 	lcall	__sdcc_banked_call
+      0000CD AB 82            [24] 1327 	mov	r3,dpl
+      0000CF AC 83            [24] 1328 	mov	r4,dph
+      0000D1 AF F0            [24] 1329 	mov	r7,b
+      0000D3 8C 06            [24] 1330 	mov	ar6,r4
+      0000D5 8F 05            [24] 1331 	mov	ar5,r7
+      0000D7 E5 81            [12] 1332 	mov	a,sp
+      0000D9 24 F6            [12] 1333 	add	a,#0xf6
+      0000DB F8               [12] 1334 	mov	r0,a
+      0000DC E6               [12] 1335 	mov	a,@r0
+      0000DD 24r03            [12] 1336 	add	a,#_buf
+      0000DF FA               [12] 1337 	mov	r2,a
+      0000E0 E4               [12] 1338 	clr	a
+      0000E1 34s00            [12] 1339 	addc	a,#(_buf >> 8)
+      0000E3 FF               [12] 1340 	mov	r7,a
+      0000E4 7C 00            [12] 1341 	mov	r4,#0x00
+      0000E6 74 10            [12] 1342 	mov	a,#0x10
+      0000E8 C0 E0            [24] 1343 	push	acc
+      0000EA E4               [12] 1344 	clr	a
+      0000EB C0 E0            [24] 1345 	push	acc
+      0000ED C0 03            [24] 1346 	push	ar3
+      0000EF C0 06            [24] 1347 	push	ar6
+      0000F1 C0 05            [24] 1348 	push	ar5
+      0000F3 8A 82            [24] 1349 	mov	dpl,r2
+      0000F5 8F 83            [24] 1350 	mov	dph,r7
+      0000F7 8C F0            [24] 1351 	mov	b,r4
+      0000F9 78r00            [12] 1352 	mov	r0,#_memcpy
+      0000FB 79s00            [12] 1353 	mov	r1,#(_memcpy >> 8)
+      0000FD 7As00            [12] 1354 	mov	r2,#(_memcpy >> 16)
+      0000FF 12r00r00         [24] 1355 	lcall	__sdcc_banked_call
+      000102 E5 81            [12] 1356 	mov	a,sp
+      000104 24 FB            [12] 1357 	add	a,#0xfb
+                                   1358 ;	../../platform/cc2530dk/./viztool.c:106: len += sizeof(uip_ipaddr_t);
+      000106 F5 81            [12] 1359 	mov	sp,a
+      000108 24 F6            [12] 1360 	add	a,#0xf6
+      00010A F8               [12] 1361 	mov	r0,a
+      00010B 74 10            [12] 1362 	mov	a,#0x10
+      00010D 26               [12] 1363 	add	a,@r0
+      00010E F6               [12] 1364 	mov	@r0,a
+                                   1365 ;	../../platform/cc2530dk/./viztool.c:107: memcpy(buf + len, uip_ds6_nbr_get_ll(nbr), sizeof(uip_lladdr_t));
+      00010F E5 81            [12] 1366 	mov	a,sp
+      000111 24 FA            [12] 1367 	add	a,#0xfa
+      000113 F8               [12] 1368 	mov	r0,a
+      000114 86 82            [24] 1369 	mov	dpl,@r0
+      000116 08               [12] 1370 	inc	r0
+      000117 86 83            [24] 1371 	mov	dph,@r0
+      000119 08               [12] 1372 	inc	r0
+      00011A 86 F0            [24] 1373 	mov	b,@r0
+      00011C 78r00            [12] 1374 	mov	r0,#_uip_ds6_nbr_get_ll
+      00011E 79s00            [12] 1375 	mov	r1,#(_uip_ds6_nbr_get_ll >> 8)
+      000120 7As00            [12] 1376 	mov	r2,#(_uip_ds6_nbr_get_ll >> 16)
+      000122 12r00r00         [24] 1377 	lcall	__sdcc_banked_call
+      000125 AB 82            [24] 1378 	mov	r3,dpl
+      000127 AC 83            [24] 1379 	mov	r4,dph
+      000129 AF F0            [24] 1380 	mov	r7,b
+      00012B 8C 06            [24] 1381 	mov	ar6,r4
+      00012D 8F 05            [24] 1382 	mov	ar5,r7
+      00012F E5 81            [12] 1383 	mov	a,sp
+      000131 24 F6            [12] 1384 	add	a,#0xf6
+      000133 F8               [12] 1385 	mov	r0,a
+      000134 E6               [12] 1386 	mov	a,@r0
+      000135 24r03            [12] 1387 	add	a,#_buf
+      000137 FA               [12] 1388 	mov	r2,a
+      000138 E4               [12] 1389 	clr	a
+      000139 34s00            [12] 1390 	addc	a,#(_buf >> 8)
+      00013B FF               [12] 1391 	mov	r7,a
+      00013C 7C 00            [12] 1392 	mov	r4,#0x00
+      00013E 74 08            [12] 1393 	mov	a,#0x08
+      000140 C0 E0            [24] 1394 	push	acc
+      000142 E4               [12] 1395 	clr	a
+      000143 C0 E0            [24] 1396 	push	acc
+      000145 C0 03            [24] 1397 	push	ar3
+      000147 C0 06            [24] 1398 	push	ar6
+      000149 C0 05            [24] 1399 	push	ar5
+      00014B 8A 82            [24] 1400 	mov	dpl,r2
+      00014D 8F 83            [24] 1401 	mov	dph,r7
+      00014F 8C F0            [24] 1402 	mov	b,r4
+      000151 78r00            [12] 1403 	mov	r0,#_memcpy
+      000153 79s00            [12] 1404 	mov	r1,#(_memcpy >> 8)
+      000155 7As00            [12] 1405 	mov	r2,#(_memcpy >> 16)
+      000157 12r00r00         [24] 1406 	lcall	__sdcc_banked_call
+      00015A E5 81            [12] 1407 	mov	a,sp
+      00015C 24 FB            [12] 1408 	add	a,#0xfb
+                                   1409 ;	../../platform/cc2530dk/./viztool.c:108: len += sizeof(uip_lladdr_t);
+      00015E F5 81            [12] 1410 	mov	sp,a
+      000160 24 F6            [12] 1411 	add	a,#0xf6
+      000162 F8               [12] 1412 	mov	r0,a
+      000163 74 08            [12] 1413 	mov	a,#0x08
+      000165 26               [12] 1414 	add	a,@r0
+      000166 F6               [12] 1415 	mov	@r0,a
+                                   1416 ;	../../platform/cc2530dk/./viztool.c:109: memcpy(buf + len, &nbr->state,
+      000167 E5 81            [12] 1417 	mov	a,sp
+      000169 24 FA            [12] 1418 	add	a,#0xfa
+      00016B F8               [12] 1419 	mov	r0,a
+      00016C 74 22            [12] 1420 	mov	a,#0x22
+      00016E 26               [12] 1421 	add	a,@r0
+      00016F FB               [12] 1422 	mov	r3,a
+      000170 E4               [12] 1423 	clr	a
+      000171 08               [12] 1424 	inc	r0
+      000172 36               [12] 1425 	addc	a,@r0
+      000173 FC               [12] 1426 	mov	r4,a
+      000174 08               [12] 1427 	inc	r0
+      000175 86 07            [24] 1428 	mov	ar7,@r0
+      000177 8C 06            [24] 1429 	mov	ar6,r4
+      000179 8F 05            [24] 1430 	mov	ar5,r7
+      00017B E5 81            [12] 1431 	mov	a,sp
+      00017D 24 F6            [12] 1432 	add	a,#0xf6
+      00017F F8               [12] 1433 	mov	r0,a
+      000180 E6               [12] 1434 	mov	a,@r0
+      000181 24r03            [12] 1435 	add	a,#_buf
+      000183 FA               [12] 1436 	mov	r2,a
+      000184 E4               [12] 1437 	clr	a
+      000185 34s00            [12] 1438 	addc	a,#(_buf >> 8)
+      000187 FF               [12] 1439 	mov	r7,a
+      000188 7C 00            [12] 1440 	mov	r4,#0x00
+      00018A 74 01            [12] 1441 	mov	a,#0x01
+      00018C C0 E0            [24] 1442 	push	acc
+      00018E E4               [12] 1443 	clr	a
+      00018F C0 E0            [24] 1444 	push	acc
+      000191 C0 03            [24] 1445 	push	ar3
+      000193 C0 06            [24] 1446 	push	ar6
+      000195 C0 05            [24] 1447 	push	ar5
+      000197 8A 82            [24] 1448 	mov	dpl,r2
+      000199 8F 83            [24] 1449 	mov	dph,r7
+      00019B 8C F0            [24] 1450 	mov	b,r4
+      00019D 78r00            [12] 1451 	mov	r0,#_memcpy
+      00019F 79s00            [12] 1452 	mov	r1,#(_memcpy >> 8)
+      0001A1 7As00            [12] 1453 	mov	r2,#(_memcpy >> 16)
+      0001A3 12r00r00         [24] 1454 	lcall	__sdcc_banked_call
+      0001A6 E5 81            [12] 1455 	mov	a,sp
+      0001A8 24 FB            [12] 1456 	add	a,#0xfb
+                                   1457 ;	../../platform/cc2530dk/./viztool.c:111: len += sizeof(nbr->state);
+      0001AA F5 81            [12] 1458 	mov	sp,a
+      0001AC 24 F6            [12] 1459 	add	a,#0xf6
+      0001AE F8               [12] 1460 	mov	r0,a
+      0001AF 06               [12] 1461 	inc	@r0
+                                   1462 ;	../../platform/cc2530dk/./viztool.c:113: count++;
+      0001B0 E5 81            [12] 1463 	mov	a,sp
+      0001B2 24 F7            [12] 1464 	add	a,#0xf7
+      0001B4 F8               [12] 1465 	mov	r0,a
+      0001B5 06               [12] 1466 	inc	@r0
+                                   1467 ;	../../platform/cc2530dk/./viztool.c:114: left -= entry_size;
+      0001B6 E5 81            [12] 1468 	mov	a,sp
+      0001B8 24 F9            [12] 1469 	add	a,#0xf9
+      0001BA F8               [12] 1470 	mov	r0,a
+      0001BB E6               [12] 1471 	mov	a,@r0
+      0001BC 24 E6            [12] 1472 	add	a,#0xE6
+      0001BE F6               [12] 1473 	mov	@r0,a
+                                   1474 ;	../../platform/cc2530dk/./viztool.c:116: if(left < entry_size) {
+      0001BF E5 81            [12] 1475 	mov	a,sp
+      0001C1 24 F9            [12] 1476 	add	a,#0xf9
+      0001C3 F8               [12] 1477 	mov	r0,a
+      0001C4 B6 1A 00         [24] 1478 	cjne	@r0,#0x1A,00227$
+      0001C7                       1479 00227$:
+      0001C7 50 03            [24] 1480 	jnc	00228$
+      0001C9 02r07rCE         [24] 1481 	ljmp	00176$
+      0001CC                       1482 00228$:
+                                   1483 ;	../../platform/cc2530dk/./viztool.c:94: nbr = nbr_table_next(ds6_neighbors, nbr)) {
+      0001CC E5 81            [12] 1484 	mov	a,sp
+      0001CE 24 FA            [12] 1485 	add	a,#0xfa
+      0001D0 F8               [12] 1486 	mov	r0,a
+      0001D1 86 02            [24] 1487 	mov	ar2,@r0
+      0001D3 08               [12] 1488 	inc	r0
+      0001D4 86 06            [24] 1489 	mov	ar6,@r0
+      0001D6 08               [12] 1490 	inc	r0
+      0001D7 86 05            [24] 1491 	mov	ar5,@r0
+      0001D9 90r00r00         [24] 1492 	mov	dptr,#_ds6_neighbors
+      0001DC E0               [24] 1493 	movx	a,@dptr
+      0001DD FB               [12] 1494 	mov	r3,a
+      0001DE A3               [24] 1495 	inc	dptr
+      0001DF E0               [24] 1496 	movx	a,@dptr
+      0001E0 FC               [12] 1497 	mov	r4,a
+      0001E1 A3               [24] 1498 	inc	dptr
+      0001E2 E0               [24] 1499 	movx	a,@dptr
+      0001E3 FF               [12] 1500 	mov	r7,a
+      0001E4 C0 02            [24] 1501 	push	ar2
+      0001E6 C0 06            [24] 1502 	push	ar6
+      0001E8 C0 05            [24] 1503 	push	ar5
+      0001EA 8B 82            [24] 1504 	mov	dpl,r3
+      0001EC 8C 83            [24] 1505 	mov	dph,r4
+      0001EE 8F F0            [24] 1506 	mov	b,r7
+      0001F0 78r00            [12] 1507 	mov	r0,#_nbr_table_next
+      0001F2 79s00            [12] 1508 	mov	r1,#(_nbr_table_next >> 8)
+      0001F4 7As00            [12] 1509 	mov	r2,#(_nbr_table_next >> 16)
+      0001F6 12r00r00         [24] 1510 	lcall	__sdcc_banked_call
+      0001F9 AB 82            [24] 1511 	mov	r3,dpl
+      0001FB AC 83            [24] 1512 	mov	r4,dph
+      0001FD AF F0            [24] 1513 	mov	r7,b
+      0001FF 15 81            [12] 1514 	dec	sp
+      000201 15 81            [12] 1515 	dec	sp
+      000203 15 81            [12] 1516 	dec	sp
+      000205 E5 81            [12] 1517 	mov	a,sp
+      000207 24 FA            [12] 1518 	add	a,#0xfa
+      000209 F8               [12] 1519 	mov	r0,a
+      00020A A6 03            [24] 1520 	mov	@r0,ar3
+      00020C 08               [12] 1521 	inc	r0
+      00020D A6 04            [24] 1522 	mov	@r0,ar4
+      00020F 08               [12] 1523 	inc	r0
+      000210 A6 07            [24] 1524 	mov	@r0,ar7
+      000212 02r00r55         [24] 1525 	ljmp	00139$
+      000215                       1526 00136$:
+                                   1527 ;	../../platform/cc2530dk/./viztool.c:120: } else if(buf[0] == REQUEST_TYPE_RT) {
+      000215 BD 02 02         [24] 1528 	cjne	r5,#0x02,00229$
+      000218 80 03            [24] 1529 	sjmp	00230$
+      00021A                       1530 00229$:
+      00021A 02r04r93         [24] 1531 	ljmp	00133$
+      00021D                       1532 00230$:
+                                   1533 ;	../../platform/cc2530dk/./viztool.c:121: uint32_t flip = 0;
+      00021D E5 81            [12] 1534 	mov	a,sp
+      00021F 24 FD            [12] 1535 	add	a,#0xfd
+      000221 F8               [12] 1536 	mov	r0,a
+      000222 E4               [12] 1537 	clr	a
+      000223 F6               [12] 1538 	mov	@r0,a
+      000224 08               [12] 1539 	inc	r0
+      000225 F6               [12] 1540 	mov	@r0,a
+      000226 08               [12] 1541 	inc	r0
+      000227 F6               [12] 1542 	mov	@r0,a
+      000228 08               [12] 1543 	inc	r0
+      000229 F6               [12] 1544 	mov	@r0,a
+                                   1545 ;	../../platform/cc2530dk/./viztool.c:124: rt = uip_ds6_route_head();
+      00022A 78r00            [12] 1546 	mov	r0,#_uip_ds6_route_head
+      00022C 79s00            [12] 1547 	mov	r1,#(_uip_ds6_route_head >> 8)
+      00022E 7As00            [12] 1548 	mov	r2,#(_uip_ds6_route_head >> 16)
+      000230 12r00r00         [24] 1549 	lcall	__sdcc_banked_call
+      000233 AB 82            [24] 1550 	mov	r3,dpl
+      000235 AC 83            [24] 1551 	mov	r4,dph
+      000237 AF F0            [24] 1552 	mov	r7,b
+      000239 90r00r40         [24] 1553 	mov	dptr,#_rt
+      00023C EB               [12] 1554 	mov	a,r3
+      00023D F0               [24] 1555 	movx	@dptr,a
+      00023E EC               [12] 1556 	mov	a,r4
+      00023F A3               [24] 1557 	inc	dptr
+      000240 F0               [24] 1558 	movx	@dptr,a
+      000241 EF               [12] 1559 	mov	a,r7
+      000242 A3               [24] 1560 	inc	dptr
+      000243 F0               [24] 1561 	movx	@dptr,a
+                                   1562 ;	../../platform/cc2530dk/./viztool.c:126: for(i = buf[1]; i < uip_ds6_route_num_routes(); i++) {
+      000244 90r00r04         [24] 1563 	mov	dptr,#(_buf + 0x0001)
+      000247 E5 81            [12] 1564 	mov	a,sp
+      000249 24 F8            [12] 1565 	add	a,#0xf8
+      00024B F8               [12] 1566 	mov	r0,a
+      00024C E0               [24] 1567 	movx	a,@dptr
+      00024D F6               [12] 1568 	mov	@r0,a
+      00024E E5 81            [12] 1569 	mov	a,sp
+      000250 24 F7            [12] 1570 	add	a,#0xf7
+      000252 F8               [12] 1571 	mov	r0,a
+      000253 76 00            [12] 1572 	mov	@r0,#0x00
+      000255 E5 81            [12] 1573 	mov	a,sp
+      000257 24 F9            [12] 1574 	add	a,#0xf9
+      000259 F8               [12] 1575 	mov	r0,a
+      00025A 76 3B            [12] 1576 	mov	@r0,#0x3B
+      00025C                       1577 00142$:
+      00025C 78r00            [12] 1578 	mov	r0,#_uip_ds6_route_num_routes
+      00025E 79s00            [12] 1579 	mov	r1,#(_uip_ds6_route_num_routes >> 8)
+      000260 7As00            [12] 1580 	mov	r2,#(_uip_ds6_route_num_routes >> 16)
+      000262 12r00r00         [24] 1581 	lcall	__sdcc_banked_call
+      000265 AA 82            [24] 1582 	mov	r2,dpl
+      000267 AB 83            [24] 1583 	mov	r3,dph
+      000269 E5 81            [12] 1584 	mov	a,sp
+      00026B 24 F8            [12] 1585 	add	a,#0xf8
+      00026D F8               [12] 1586 	mov	r0,a
+      00026E 86 04            [24] 1587 	mov	ar4,@r0
+      000270 7F 00            [12] 1588 	mov	r7,#0x00
+      000272 C3               [12] 1589 	clr	c
+      000273 EC               [12] 1590 	mov	a,r4
+      000274 9A               [12] 1591 	subb	a,r2
+      000275 EF               [12] 1592 	mov	a,r7
+      000276 64 80            [12] 1593 	xrl	a,#0x80
+      000278 8B F0            [24] 1594 	mov	b,r3
+      00027A 63 F0 80         [24] 1595 	xrl	b,#0x80
+      00027D 95 F0            [12] 1596 	subb	a,b
+      00027F 40 03            [24] 1597 	jc	00231$
+      000281 02r07rD7         [24] 1598 	ljmp	00177$
+      000284                       1599 00231$:
+                                   1600 ;	../../platform/cc2530dk/./viztool.c:127: if(rt != NULL) {
+      000284 90r00r40         [24] 1601 	mov	dptr,#_rt
+      000287 E0               [24] 1602 	movx	a,@dptr
+      000288 FA               [12] 1603 	mov	r2,a
+      000289 A3               [24] 1604 	inc	dptr
+      00028A E0               [24] 1605 	movx	a,@dptr
+      00028B FB               [12] 1606 	mov	r3,a
+      00028C A3               [24] 1607 	inc	dptr
+      00028D E0               [24] 1608 	movx	a,@dptr
+      00028E FC               [12] 1609 	mov	r4,a
+      00028F EA               [12] 1610 	mov	a,r2
+      000290 4B               [12] 1611 	orl	a,r3
+      000291 70 03            [24] 1612 	jnz	00232$
+      000293 02r04r8A         [24] 1613 	ljmp	00143$
+      000296                       1614 00232$:
+                                   1615 ;	../../platform/cc2530dk/./viztool.c:133: memcpy(buf + len, &i, sizeof(i));
+      000296 E5 81            [12] 1616 	mov	a,sp
+      000298 24 F8            [12] 1617 	add	a,#0xF8
+      00029A FE               [12] 1618 	mov	r6,a
+      00029B 7D 00            [12] 1619 	mov	r5,#0x00
+      00029D 7A 40            [12] 1620 	mov	r2,#0x40
+      00029F E5 81            [12] 1621 	mov	a,sp
+      0002A1 24 F6            [12] 1622 	add	a,#0xf6
+      0002A3 F8               [12] 1623 	mov	r0,a
+      0002A4 E6               [12] 1624 	mov	a,@r0
+      0002A5 24r03            [12] 1625 	add	a,#_buf
+      0002A7 FC               [12] 1626 	mov	r4,a
+      0002A8 E4               [12] 1627 	clr	a
+      0002A9 34s00            [12] 1628 	addc	a,#(_buf >> 8)
+      0002AB FF               [12] 1629 	mov	r7,a
+      0002AC 7B 00            [12] 1630 	mov	r3,#0x00
+      0002AE 74 01            [12] 1631 	mov	a,#0x01
+      0002B0 C0 E0            [24] 1632 	push	acc
+      0002B2 E4               [12] 1633 	clr	a
+      0002B3 C0 E0            [24] 1634 	push	acc
+      0002B5 C0 06            [24] 1635 	push	ar6
+      0002B7 C0 05            [24] 1636 	push	ar5
+      0002B9 C0 02            [24] 1637 	push	ar2
+      0002BB 8C 82            [24] 1638 	mov	dpl,r4
+      0002BD 8F 83            [24] 1639 	mov	dph,r7
+      0002BF 8B F0            [24] 1640 	mov	b,r3
+      0002C1 78r00            [12] 1641 	mov	r0,#_memcpy
+      0002C3 79s00            [12] 1642 	mov	r1,#(_memcpy >> 8)
+      0002C5 7As00            [12] 1643 	mov	r2,#(_memcpy >> 16)
+      0002C7 12r00r00         [24] 1644 	lcall	__sdcc_banked_call
+      0002CA E5 81            [12] 1645 	mov	a,sp
+      0002CC 24 FB            [12] 1646 	add	a,#0xfb
+                                   1647 ;	../../platform/cc2530dk/./viztool.c:134: len += sizeof(i);
+      0002CE F5 81            [12] 1648 	mov	sp,a
+      0002D0 24 F6            [12] 1649 	add	a,#0xf6
+      0002D2 F8               [12] 1650 	mov	r0,a
+      0002D3 06               [12] 1651 	inc	@r0
+                                   1652 ;	../../platform/cc2530dk/./viztool.c:135: memcpy(buf + len, &rt->ipaddr, sizeof(rt->ipaddr));
+      0002D4 90r00r40         [24] 1653 	mov	dptr,#_rt
+      0002D7 E0               [24] 1654 	movx	a,@dptr
+      0002D8 FB               [12] 1655 	mov	r3,a
+      0002D9 A3               [24] 1656 	inc	dptr
+      0002DA E0               [24] 1657 	movx	a,@dptr
+      0002DB FC               [12] 1658 	mov	r4,a
+      0002DC A3               [24] 1659 	inc	dptr
+      0002DD E0               [24] 1660 	movx	a,@dptr
+      0002DE FF               [12] 1661 	mov	r7,a
+      0002DF 74 06            [12] 1662 	mov	a,#0x06
+      0002E1 2B               [12] 1663 	add	a,r3
+      0002E2 FB               [12] 1664 	mov	r3,a
+      0002E3 E4               [12] 1665 	clr	a
+      0002E4 3C               [12] 1666 	addc	a,r4
+      0002E5 FE               [12] 1667 	mov	r6,a
+      0002E6 8F 05            [24] 1668 	mov	ar5,r7
+      0002E8 E5 81            [12] 1669 	mov	a,sp
+      0002EA 24 F6            [12] 1670 	add	a,#0xf6
+      0002EC F8               [12] 1671 	mov	r0,a
+      0002ED E6               [12] 1672 	mov	a,@r0
+      0002EE 24r03            [12] 1673 	add	a,#_buf
+      0002F0 FA               [12] 1674 	mov	r2,a
+      0002F1 E4               [12] 1675 	clr	a
+      0002F2 34s00            [12] 1676 	addc	a,#(_buf >> 8)
+      0002F4 FF               [12] 1677 	mov	r7,a
+      0002F5 7C 00            [12] 1678 	mov	r4,#0x00
+      0002F7 74 10            [12] 1679 	mov	a,#0x10
+      0002F9 C0 E0            [24] 1680 	push	acc
+      0002FB E4               [12] 1681 	clr	a
+      0002FC C0 E0            [24] 1682 	push	acc
+      0002FE C0 03            [24] 1683 	push	ar3
+      000300 C0 06            [24] 1684 	push	ar6
+      000302 C0 05            [24] 1685 	push	ar5
+      000304 8A 82            [24] 1686 	mov	dpl,r2
+      000306 8F 83            [24] 1687 	mov	dph,r7
+      000308 8C F0            [24] 1688 	mov	b,r4
+      00030A 78r00            [12] 1689 	mov	r0,#_memcpy
+      00030C 79s00            [12] 1690 	mov	r1,#(_memcpy >> 8)
+      00030E 7As00            [12] 1691 	mov	r2,#(_memcpy >> 16)
+      000310 12r00r00         [24] 1692 	lcall	__sdcc_banked_call
+      000313 E5 81            [12] 1693 	mov	a,sp
+      000315 24 FB            [12] 1694 	add	a,#0xfb
+                                   1695 ;	../../platform/cc2530dk/./viztool.c:136: len += sizeof(rt->ipaddr);
+      000317 F5 81            [12] 1696 	mov	sp,a
+      000319 24 F6            [12] 1697 	add	a,#0xf6
+      00031B F8               [12] 1698 	mov	r0,a
+      00031C 74 10            [12] 1699 	mov	a,#0x10
+      00031E 26               [12] 1700 	add	a,@r0
+      00031F F6               [12] 1701 	mov	@r0,a
+                                   1702 ;	../../platform/cc2530dk/./viztool.c:137: memcpy(buf + len, &rt->length, sizeof(rt->length));
+      000320 90r00r40         [24] 1703 	mov	dptr,#_rt
+      000323 E0               [24] 1704 	movx	a,@dptr
+      000324 FB               [12] 1705 	mov	r3,a
+      000325 A3               [24] 1706 	inc	dptr
+      000326 E0               [24] 1707 	movx	a,@dptr
+      000327 FC               [12] 1708 	mov	r4,a
+      000328 A3               [24] 1709 	inc	dptr
+      000329 E0               [24] 1710 	movx	a,@dptr
+      00032A FF               [12] 1711 	mov	r7,a
+      00032B 74 1F            [12] 1712 	mov	a,#0x1F
+      00032D 2B               [12] 1713 	add	a,r3
+      00032E FB               [12] 1714 	mov	r3,a
+      00032F E4               [12] 1715 	clr	a
+      000330 3C               [12] 1716 	addc	a,r4
+      000331 FE               [12] 1717 	mov	r6,a
+      000332 8F 05            [24] 1718 	mov	ar5,r7
+      000334 E5 81            [12] 1719 	mov	a,sp
+      000336 24 F6            [12] 1720 	add	a,#0xf6
+      000338 F8               [12] 1721 	mov	r0,a
+      000339 E6               [12] 1722 	mov	a,@r0
+      00033A 24r03            [12] 1723 	add	a,#_buf
+      00033C FA               [12] 1724 	mov	r2,a
+      00033D E4               [12] 1725 	clr	a
+      00033E 34s00            [12] 1726 	addc	a,#(_buf >> 8)
+      000340 FF               [12] 1727 	mov	r7,a
+      000341 7C 00            [12] 1728 	mov	r4,#0x00
+      000343 74 01            [12] 1729 	mov	a,#0x01
+      000345 C0 E0            [24] 1730 	push	acc
+      000347 E4               [12] 1731 	clr	a
+      000348 C0 E0            [24] 1732 	push	acc
+      00034A C0 03            [24] 1733 	push	ar3
+      00034C C0 06            [24] 1734 	push	ar6
+      00034E C0 05            [24] 1735 	push	ar5
+      000350 8A 82            [24] 1736 	mov	dpl,r2
+      000352 8F 83            [24] 1737 	mov	dph,r7
+      000354 8C F0            [24] 1738 	mov	b,r4
+      000356 78r00            [12] 1739 	mov	r0,#_memcpy
+      000358 79s00            [12] 1740 	mov	r1,#(_memcpy >> 8)
+      00035A 7As00            [12] 1741 	mov	r2,#(_memcpy >> 16)
+      00035C 12r00r00         [24] 1742 	lcall	__sdcc_banked_call
+      00035F E5 81            [12] 1743 	mov	a,sp
+      000361 24 FB            [12] 1744 	add	a,#0xfb
+                                   1745 ;	../../platform/cc2530dk/./viztool.c:138: len += sizeof(rt->length);
+      000363 F5 81            [12] 1746 	mov	sp,a
+      000365 24 F6            [12] 1747 	add	a,#0xf6
+      000367 F8               [12] 1748 	mov	r0,a
+      000368 06               [12] 1749 	inc	@r0
+                                   1750 ;	../../platform/cc2530dk/./viztool.c:145: flip = uip_htonl(rt->state.lifetime);
+      000369 90r00r40         [24] 1751 	mov	dptr,#_rt
+      00036C E0               [24] 1752 	movx	a,@dptr
+      00036D FB               [12] 1753 	mov	r3,a
+      00036E A3               [24] 1754 	inc	dptr
+      00036F E0               [24] 1755 	movx	a,@dptr
+      000370 FC               [12] 1756 	mov	r4,a
+      000371 A3               [24] 1757 	inc	dptr
+      000372 E0               [24] 1758 	movx	a,@dptr
+      000373 FF               [12] 1759 	mov	r7,a
+      000374 74 16            [12] 1760 	mov	a,#0x16
+      000376 2B               [12] 1761 	add	a,r3
+      000377 FB               [12] 1762 	mov	r3,a
+      000378 E4               [12] 1763 	clr	a
+      000379 3C               [12] 1764 	addc	a,r4
+      00037A FC               [12] 1765 	mov	r4,a
+      00037B 8B 82            [24] 1766 	mov	dpl,r3
+      00037D 8C 83            [24] 1767 	mov	dph,r4
+      00037F 8F F0            [24] 1768 	mov	b,r7
+      000381 12r00r00         [24] 1769 	lcall	__gptrget
+      000384 FB               [12] 1770 	mov	r3,a
+      000385 A3               [24] 1771 	inc	dptr
+      000386 12r00r00         [24] 1772 	lcall	__gptrget
+      000389 FC               [12] 1773 	mov	r4,a
+      00038A A3               [24] 1774 	inc	dptr
+      00038B 12r00r00         [24] 1775 	lcall	__gptrget
+      00038E FF               [12] 1776 	mov	r7,a
+      00038F A3               [24] 1777 	inc	dptr
+      000390 12r00r00         [24] 1778 	lcall	__gptrget
+      000393 8B 82            [24] 1779 	mov	dpl,r3
+      000395 8C 83            [24] 1780 	mov	dph,r4
+      000397 8F F0            [24] 1781 	mov	b,r7
+      000399 78r00            [12] 1782 	mov	r0,#_uip_htonl
+      00039B 79s00            [12] 1783 	mov	r1,#(_uip_htonl >> 8)
+      00039D 7As00            [12] 1784 	mov	r2,#(_uip_htonl >> 16)
+      00039F 12r00r00         [24] 1785 	lcall	__sdcc_banked_call
+      0003A2 AA 82            [24] 1786 	mov	r2,dpl
+      0003A4 AB 83            [24] 1787 	mov	r3,dph
+      0003A6 AC F0            [24] 1788 	mov	r4,b
+      0003A8 FF               [12] 1789 	mov	r7,a
+      0003A9 E5 81            [12] 1790 	mov	a,sp
+      0003AB 24 FD            [12] 1791 	add	a,#0xfd
+      0003AD F8               [12] 1792 	mov	r0,a
+      0003AE A6 02            [24] 1793 	mov	@r0,ar2
+      0003B0 08               [12] 1794 	inc	r0
+      0003B1 A6 03            [24] 1795 	mov	@r0,ar3
+      0003B3 08               [12] 1796 	inc	r0
+      0003B4 A6 04            [24] 1797 	mov	@r0,ar4
+      0003B6 08               [12] 1798 	inc	r0
+      0003B7 A6 07            [24] 1799 	mov	@r0,ar7
+                                   1800 ;	../../platform/cc2530dk/./viztool.c:146: memcpy(buf + len, &flip, sizeof(flip));
+      0003B9 E5 81            [12] 1801 	mov	a,sp
+      0003BB 24 FD            [12] 1802 	add	a,#0xFD
+      0003BD FE               [12] 1803 	mov	r6,a
+      0003BE 7D 00            [12] 1804 	mov	r5,#0x00
+      0003C0 7B 40            [12] 1805 	mov	r3,#0x40
+      0003C2 E5 81            [12] 1806 	mov	a,sp
+      0003C4 24 F6            [12] 1807 	add	a,#0xf6
+      0003C6 F8               [12] 1808 	mov	r0,a
+      0003C7 E6               [12] 1809 	mov	a,@r0
+      0003C8 24r03            [12] 1810 	add	a,#_buf
+      0003CA FA               [12] 1811 	mov	r2,a
+      0003CB E4               [12] 1812 	clr	a
+      0003CC 34s00            [12] 1813 	addc	a,#(_buf >> 8)
+      0003CE FF               [12] 1814 	mov	r7,a
+      0003CF 7C 00            [12] 1815 	mov	r4,#0x00
+      0003D1 74 04            [12] 1816 	mov	a,#0x04
+      0003D3 C0 E0            [24] 1817 	push	acc
+      0003D5 E4               [12] 1818 	clr	a
+      0003D6 C0 E0            [24] 1819 	push	acc
+      0003D8 C0 06            [24] 1820 	push	ar6
+      0003DA C0 05            [24] 1821 	push	ar5
+      0003DC C0 03            [24] 1822 	push	ar3
+      0003DE 8A 82            [24] 1823 	mov	dpl,r2
+      0003E0 8F 83            [24] 1824 	mov	dph,r7
+      0003E2 8C F0            [24] 1825 	mov	b,r4
+      0003E4 78r00            [12] 1826 	mov	r0,#_memcpy
+      0003E6 79s00            [12] 1827 	mov	r1,#(_memcpy >> 8)
+      0003E8 7As00            [12] 1828 	mov	r2,#(_memcpy >> 16)
+      0003EA 12r00r00         [24] 1829 	lcall	__sdcc_banked_call
+      0003ED E5 81            [12] 1830 	mov	a,sp
+      0003EF 24 FB            [12] 1831 	add	a,#0xfb
+                                   1832 ;	../../platform/cc2530dk/./viztool.c:147: len += sizeof(flip);
+      0003F1 F5 81            [12] 1833 	mov	sp,a
+      0003F3 24 F6            [12] 1834 	add	a,#0xf6
+      0003F5 F8               [12] 1835 	mov	r0,a
+      0003F6 E6               [12] 1836 	mov	a,@r0
+      0003F7 24 04            [12] 1837 	add	a,#0x04
+      0003F9 F6               [12] 1838 	mov	@r0,a
+                                   1839 ;	../../platform/cc2530dk/./viztool.c:150: memcpy(buf + len, &rt->state.learned_from,
+      0003FA 90r00r40         [24] 1840 	mov	dptr,#_rt
+      0003FD E0               [24] 1841 	movx	a,@dptr
+      0003FE FB               [12] 1842 	mov	r3,a
+      0003FF A3               [24] 1843 	inc	dptr
+      000400 E0               [24] 1844 	movx	a,@dptr
+      000401 FC               [12] 1845 	mov	r4,a
+      000402 A3               [24] 1846 	inc	dptr
+      000403 E0               [24] 1847 	movx	a,@dptr
+      000404 FF               [12] 1848 	mov	r7,a
+      000405 74 1D            [12] 1849 	mov	a,#0x1D
+      000407 2B               [12] 1850 	add	a,r3
+      000408 FB               [12] 1851 	mov	r3,a
+      000409 E4               [12] 1852 	clr	a
+      00040A 3C               [12] 1853 	addc	a,r4
+      00040B FE               [12] 1854 	mov	r6,a
+      00040C 8F 05            [24] 1855 	mov	ar5,r7
+      00040E E5 81            [12] 1856 	mov	a,sp
+      000410 24 F6            [12] 1857 	add	a,#0xf6
+      000412 F8               [12] 1858 	mov	r0,a
+      000413 E6               [12] 1859 	mov	a,@r0
+      000414 24r03            [12] 1860 	add	a,#_buf
+      000416 FA               [12] 1861 	mov	r2,a
+      000417 E4               [12] 1862 	clr	a
+      000418 34s00            [12] 1863 	addc	a,#(_buf >> 8)
+      00041A FF               [12] 1864 	mov	r7,a
+      00041B 7C 00            [12] 1865 	mov	r4,#0x00
+      00041D 74 01            [12] 1866 	mov	a,#0x01
+      00041F C0 E0            [24] 1867 	push	acc
+      000421 E4               [12] 1868 	clr	a
+      000422 C0 E0            [24] 1869 	push	acc
+      000424 C0 03            [24] 1870 	push	ar3
+      000426 C0 06            [24] 1871 	push	ar6
+      000428 C0 05            [24] 1872 	push	ar5
+      00042A 8A 82            [24] 1873 	mov	dpl,r2
+      00042C 8F 83            [24] 1874 	mov	dph,r7
+      00042E 8C F0            [24] 1875 	mov	b,r4
+      000430 78r00            [12] 1876 	mov	r0,#_memcpy
+      000432 79s00            [12] 1877 	mov	r1,#(_memcpy >> 8)
+      000434 7As00            [12] 1878 	mov	r2,#(_memcpy >> 16)
+      000436 12r00r00         [24] 1879 	lcall	__sdcc_banked_call
+      000439 E5 81            [12] 1880 	mov	a,sp
+      00043B 24 FB            [12] 1881 	add	a,#0xfb
+                                   1882 ;	../../platform/cc2530dk/./viztool.c:152: len += sizeof(rt->state.learned_from);
+      00043D F5 81            [12] 1883 	mov	sp,a
+      00043F 24 F6            [12] 1884 	add	a,#0xf6
+      000441 F8               [12] 1885 	mov	r0,a
+      000442 06               [12] 1886 	inc	@r0
+                                   1887 ;	../../platform/cc2530dk/./viztool.c:156: count++;
+      000443 E5 81            [12] 1888 	mov	a,sp
+      000445 24 F7            [12] 1889 	add	a,#0xf7
+      000447 F8               [12] 1890 	mov	r0,a
+      000448 06               [12] 1891 	inc	@r0
+                                   1892 ;	../../platform/cc2530dk/./viztool.c:157: left -= entry_size;
+      000449 E5 81            [12] 1893 	mov	a,sp
+      00044B 24 F9            [12] 1894 	add	a,#0xf9
+      00044D F8               [12] 1895 	mov	r0,a
+      00044E E6               [12] 1896 	mov	a,@r0
+      00044F 24 E9            [12] 1897 	add	a,#0xE9
+      000451 F6               [12] 1898 	mov	@r0,a
+                                   1899 ;	../../platform/cc2530dk/./viztool.c:159: rt = uip_ds6_route_next(rt);
+      000452 90r00r40         [24] 1900 	mov	dptr,#_rt
+      000455 E0               [24] 1901 	movx	a,@dptr
+      000456 FB               [12] 1902 	mov	r3,a
+      000457 A3               [24] 1903 	inc	dptr
+      000458 E0               [24] 1904 	movx	a,@dptr
+      000459 FC               [12] 1905 	mov	r4,a
+      00045A A3               [24] 1906 	inc	dptr
+      00045B E0               [24] 1907 	movx	a,@dptr
+      00045C FF               [12] 1908 	mov	r7,a
+      00045D 8B 82            [24] 1909 	mov	dpl,r3
+      00045F 8C 83            [24] 1910 	mov	dph,r4
+      000461 8F F0            [24] 1911 	mov	b,r7
+      000463 78r00            [12] 1912 	mov	r0,#_uip_ds6_route_next
+      000465 79s00            [12] 1913 	mov	r1,#(_uip_ds6_route_next >> 8)
+      000467 7As00            [12] 1914 	mov	r2,#(_uip_ds6_route_next >> 16)
+      000469 12r00r00         [24] 1915 	lcall	__sdcc_banked_call
+      00046C AB 82            [24] 1916 	mov	r3,dpl
+      00046E AC 83            [24] 1917 	mov	r4,dph
+      000470 AF F0            [24] 1918 	mov	r7,b
+      000472 90r00r40         [24] 1919 	mov	dptr,#_rt
+      000475 EB               [12] 1920 	mov	a,r3
+      000476 F0               [24] 1921 	movx	@dptr,a
+      000477 EC               [12] 1922 	mov	a,r4
+      000478 A3               [24] 1923 	inc	dptr
+      000479 F0               [24] 1924 	movx	@dptr,a
+      00047A EF               [12] 1925 	mov	a,r7
+      00047B A3               [24] 1926 	inc	dptr
+      00047C F0               [24] 1927 	movx	@dptr,a
+                                   1928 ;	../../platform/cc2530dk/./viztool.c:161: if(left < entry_size) {
+      00047D E5 81            [12] 1929 	mov	a,sp
+      00047F 24 F9            [12] 1930 	add	a,#0xf9
+      000481 F8               [12] 1931 	mov	r0,a
+      000482 B6 17 00         [24] 1932 	cjne	@r0,#0x17,00233$
+      000485                       1933 00233$:
+      000485 50 03            [24] 1934 	jnc	00234$
+      000487 02r07rD7         [24] 1935 	ljmp	00177$
+      00048A                       1936 00234$:
+                                   1937 ;	../../platform/cc2530dk/./viztool.c:162: break;
+      00048A                       1938 00143$:
+                                   1939 ;	../../platform/cc2530dk/./viztool.c:126: for(i = buf[1]; i < uip_ds6_route_num_routes(); i++) {
+      00048A E5 81            [12] 1940 	mov	a,sp
+      00048C 24 F8            [12] 1941 	add	a,#0xf8
+      00048E F8               [12] 1942 	mov	r0,a
+      00048F 06               [12] 1943 	inc	@r0
+      000490 02r02r5C         [24] 1944 	ljmp	00142$
+      000493                       1945 00133$:
+                                   1946 ;	../../platform/cc2530dk/./viztool.c:166: } else if(buf[0] == REQUEST_TYPE_DRT) {
+      000493 BD 03 02         [24] 1947 	cjne	r5,#0x03,00235$
+      000496 80 03            [24] 1948 	sjmp	00236$
+      000498                       1949 00235$:
+      000498 02r05rA4         [24] 1950 	ljmp	00130$
+      00049B                       1951 00236$:
+                                   1952 ;	../../platform/cc2530dk/./viztool.c:170: addr = uip_ds6_defrt_choose();
+      00049B C0 06            [24] 1953 	push	ar6
+      00049D 78r00            [12] 1954 	mov	r0,#_uip_ds6_defrt_choose
+      00049F 79s00            [12] 1955 	mov	r1,#(_uip_ds6_defrt_choose >> 8)
+      0004A1 7As00            [12] 1956 	mov	r2,#(_uip_ds6_defrt_choose >> 16)
+      0004A3 12r00r00         [24] 1957 	lcall	__sdcc_banked_call
+      0004A6 AB 82            [24] 1958 	mov	r3,dpl
+      0004A8 AC 83            [24] 1959 	mov	r4,dph
+      0004AA AF F0            [24] 1960 	mov	r7,b
+      0004AC D0 06            [24] 1961 	pop	ar6
+      0004AE 90r00r46         [24] 1962 	mov	dptr,#_addr
+      0004B1 EB               [12] 1963 	mov	a,r3
+      0004B2 F0               [24] 1964 	movx	@dptr,a
+      0004B3 EC               [12] 1965 	mov	a,r4
+      0004B4 A3               [24] 1966 	inc	dptr
+      0004B5 F0               [24] 1967 	movx	@dptr,a
+      0004B6 EF               [12] 1968 	mov	a,r7
+      0004B7 A3               [24] 1969 	inc	dptr
+      0004B8 F0               [24] 1970 	movx	@dptr,a
+                                   1971 ;	../../platform/cc2530dk/./viztool.c:171: if(addr != NULL) {
+      0004B9 EB               [12] 1972 	mov	a,r3
+      0004BA 4C               [12] 1973 	orl	a,r4
+      0004BB 60 24            [24] 1974 	jz	00110$
+                                   1975 ;	../../platform/cc2530dk/./viztool.c:172: defrt = uip_ds6_defrt_lookup(addr);
+      0004BD 8B 82            [24] 1976 	mov	dpl,r3
+      0004BF 8C 83            [24] 1977 	mov	dph,r4
+      0004C1 8F F0            [24] 1978 	mov	b,r7
+      0004C3 C0 06            [24] 1979 	push	ar6
+      0004C5 78r00            [12] 1980 	mov	r0,#_uip_ds6_defrt_lookup
+      0004C7 79s00            [12] 1981 	mov	r1,#(_uip_ds6_defrt_lookup >> 8)
+      0004C9 7As00            [12] 1982 	mov	r2,#(_uip_ds6_defrt_lookup >> 16)
+      0004CB 12r00r00         [24] 1983 	lcall	__sdcc_banked_call
+      0004CE AB 82            [24] 1984 	mov	r3,dpl
+      0004D0 AC 83            [24] 1985 	mov	r4,dph
+      0004D2 AF F0            [24] 1986 	mov	r7,b
+      0004D4 D0 06            [24] 1987 	pop	ar6
+      0004D6 90r00r43         [24] 1988 	mov	dptr,#_defrt
+      0004D9 EB               [12] 1989 	mov	a,r3
+      0004DA F0               [24] 1990 	movx	@dptr,a
+      0004DB EC               [12] 1991 	mov	a,r4
+      0004DC A3               [24] 1992 	inc	dptr
+      0004DD F0               [24] 1993 	movx	@dptr,a
+      0004DE EF               [12] 1994 	mov	a,r7
+      0004DF A3               [24] 1995 	inc	dptr
+      0004E0 F0               [24] 1996 	movx	@dptr,a
+      0004E1                       1997 00110$:
+                                   1998 ;	../../platform/cc2530dk/./viztool.c:175: i = buf[1];
+      0004E1 90r00r04         [24] 1999 	mov	dptr,#(_buf + 0x0001)
+      0004E4 E0               [24] 2000 	movx	a,@dptr
+      0004E5 FF               [12] 2001 	mov	r7,a
+      0004E6 E5 81            [12] 2002 	mov	a,sp
+      0004E8 24 F8            [12] 2003 	add	a,#0xf8
+      0004EA F8               [12] 2004 	mov	r0,a
+      0004EB A6 07            [24] 2005 	mov	@r0,ar7
+                                   2006 ;	../../platform/cc2530dk/./viztool.c:177: if(defrt != NULL && i < 1) {
+      0004ED 90r00r43         [24] 2007 	mov	dptr,#_defrt
+      0004F0 E0               [24] 2008 	movx	a,@dptr
+      0004F1 FA               [12] 2009 	mov	r2,a
+      0004F2 A3               [24] 2010 	inc	dptr
+      0004F3 E0               [24] 2011 	movx	a,@dptr
+      0004F4 FB               [12] 2012 	mov	r3,a
+      0004F5 A3               [24] 2013 	inc	dptr
+      0004F6 E0               [24] 2014 	movx	a,@dptr
+      0004F7 FC               [12] 2015 	mov	r4,a
+      0004F8 EA               [12] 2016 	mov	a,r2
+      0004F9 4B               [12] 2017 	orl	a,r3
+      0004FA 70 03            [24] 2018 	jnz	00238$
+      0004FC 02r07rE7         [24] 2019 	ljmp	00137$
+      0004FF                       2020 00238$:
+      0004FF BF 01 00         [24] 2021 	cjne	r7,#0x01,00239$
+      000502                       2022 00239$:
+      000502 40 03            [24] 2023 	jc	00240$
+      000504 02r07rE7         [24] 2024 	ljmp	00137$
+      000507                       2025 00240$:
+                                   2026 ;	../../platform/cc2530dk/./viztool.c:181: memcpy(buf + len, &i, sizeof(i));
+      000507 E5 81            [12] 2027 	mov	a,sp
+      000509 24 F8            [12] 2028 	add	a,#0xF8
+      00050B FF               [12] 2029 	mov	r7,a
+      00050C 7C 00            [12] 2030 	mov	r4,#0x00
+      00050E 7B 40            [12] 2031 	mov	r3,#0x40
+      000510 74 01            [12] 2032 	mov	a,#0x01
+      000512 C0 E0            [24] 2033 	push	acc
+      000514 E4               [12] 2034 	clr	a
+      000515 C0 E0            [24] 2035 	push	acc
+      000517 C0 07            [24] 2036 	push	ar7
+      000519 C0 04            [24] 2037 	push	ar4
+      00051B C0 03            [24] 2038 	push	ar3
+      00051D 90r00r05         [24] 2039 	mov	dptr,#(_buf + 0x0002)
+      000520 75 F0 00         [24] 2040 	mov	b,#0x00
+      000523 78r00            [12] 2041 	mov	r0,#_memcpy
+      000525 79s00            [12] 2042 	mov	r1,#(_memcpy >> 8)
+      000527 7As00            [12] 2043 	mov	r2,#(_memcpy >> 16)
+      000529 12r00r00         [24] 2044 	lcall	__sdcc_banked_call
+      00052C E5 81            [12] 2045 	mov	a,sp
+      00052E 24 FB            [12] 2046 	add	a,#0xfb
+      000530 F5 81            [12] 2047 	mov	sp,a
+                                   2048 ;	../../platform/cc2530dk/./viztool.c:183: memcpy(buf + len, &defrt->ipaddr, sizeof(defrt->ipaddr));
+      000532 90r00r43         [24] 2049 	mov	dptr,#_defrt
+      000535 E0               [24] 2050 	movx	a,@dptr
+      000536 FB               [12] 2051 	mov	r3,a
+      000537 A3               [24] 2052 	inc	dptr
+      000538 E0               [24] 2053 	movx	a,@dptr
+      000539 FC               [12] 2054 	mov	r4,a
+      00053A A3               [24] 2055 	inc	dptr
+      00053B E0               [24] 2056 	movx	a,@dptr
+      00053C FF               [12] 2057 	mov	r7,a
+      00053D 74 03            [12] 2058 	mov	a,#0x03
+      00053F 2B               [12] 2059 	add	a,r3
+      000540 FB               [12] 2060 	mov	r3,a
+      000541 E4               [12] 2061 	clr	a
+      000542 3C               [12] 2062 	addc	a,r4
+      000543 FC               [12] 2063 	mov	r4,a
+      000544 74 10            [12] 2064 	mov	a,#0x10
+      000546 C0 E0            [24] 2065 	push	acc
+      000548 E4               [12] 2066 	clr	a
+      000549 C0 E0            [24] 2067 	push	acc
+      00054B C0 03            [24] 2068 	push	ar3
+      00054D C0 04            [24] 2069 	push	ar4
+      00054F C0 07            [24] 2070 	push	ar7
+      000551 90r00r06         [24] 2071 	mov	dptr,#(_buf + 0x0003)
+      000554 75 F0 00         [24] 2072 	mov	b,#0x00
+      000557 78r00            [12] 2073 	mov	r0,#_memcpy
+      000559 79s00            [12] 2074 	mov	r1,#(_memcpy >> 8)
+      00055B 7As00            [12] 2075 	mov	r2,#(_memcpy >> 16)
+      00055D 12r00r00         [24] 2076 	lcall	__sdcc_banked_call
+      000560 E5 81            [12] 2077 	mov	a,sp
+      000562 24 FB            [12] 2078 	add	a,#0xfb
+      000564 F5 81            [12] 2079 	mov	sp,a
+                                   2080 ;	../../platform/cc2530dk/./viztool.c:185: memcpy(buf + len, &defrt->isinfinite, sizeof(defrt->isinfinite));
+      000566 90r00r43         [24] 2081 	mov	dptr,#_defrt
+      000569 E0               [24] 2082 	movx	a,@dptr
+      00056A FB               [12] 2083 	mov	r3,a
+      00056B A3               [24] 2084 	inc	dptr
+      00056C E0               [24] 2085 	movx	a,@dptr
+      00056D FC               [12] 2086 	mov	r4,a
+      00056E A3               [24] 2087 	inc	dptr
+      00056F E0               [24] 2088 	movx	a,@dptr
+      000570 FF               [12] 2089 	mov	r7,a
+      000571 74 1B            [12] 2090 	mov	a,#0x1B
+      000573 2B               [12] 2091 	add	a,r3
+      000574 FB               [12] 2092 	mov	r3,a
+      000575 E4               [12] 2093 	clr	a
+      000576 3C               [12] 2094 	addc	a,r4
+      000577 FC               [12] 2095 	mov	r4,a
+      000578 74 01            [12] 2096 	mov	a,#0x01
+      00057A C0 E0            [24] 2097 	push	acc
+      00057C E4               [12] 2098 	clr	a
+      00057D C0 E0            [24] 2099 	push	acc
+      00057F C0 03            [24] 2100 	push	ar3
+      000581 C0 04            [24] 2101 	push	ar4
+      000583 C0 07            [24] 2102 	push	ar7
+      000585 90r00r16         [24] 2103 	mov	dptr,#(_buf + 0x0013)
+      000588 75 F0 00         [24] 2104 	mov	b,#0x00
+      00058B 78r00            [12] 2105 	mov	r0,#_memcpy
+      00058D 79s00            [12] 2106 	mov	r1,#(_memcpy >> 8)
+      00058F 7As00            [12] 2107 	mov	r2,#(_memcpy >> 16)
+      000591 12r00r00         [24] 2108 	lcall	__sdcc_banked_call
+      000594 E5 81            [12] 2109 	mov	a,sp
+      000596 24 FB            [12] 2110 	add	a,#0xfb
+                                   2111 ;	../../platform/cc2530dk/./viztool.c:186: len += sizeof(defrt->isinfinite);
+      000598 F5 81            [12] 2112 	mov	sp,a
+      00059A 24 F6            [12] 2113 	add	a,#0xf6
+      00059C F8               [12] 2114 	mov	r0,a
+      00059D 76 14            [12] 2115 	mov	@r0,#0x14
+                                   2116 ;	../../platform/cc2530dk/./viztool.c:190: count++;
+      00059F 7E 01            [12] 2117 	mov	r6,#0x01
+                                   2118 ;	../../platform/cc2530dk/./viztool.c:191: left -= entry_size;
+      0005A1 02r07rE7         [24] 2119 	ljmp	00137$
+      0005A4                       2120 00130$:
+                                   2121 ;	../../platform/cc2530dk/./viztool.c:193: } else if(buf[0] == REQUEST_TYPE_ADDR) {
+      0005A4 BD 04 02         [24] 2122 	cjne	r5,#0x04,00241$
+      0005A7 80 03            [24] 2123 	sjmp	00242$
+      0005A9                       2124 00241$:
+      0005A9 02r06rA3         [24] 2125 	ljmp	00127$
+      0005AC                       2126 00242$:
+                                   2127 ;	../../platform/cc2530dk/./viztool.c:195: for(i = buf[1]; i < UIP_DS6_ADDR_NB; i++) {
+      0005AC 90r00r04         [24] 2128 	mov	dptr,#(_buf + 0x0001)
+      0005AF E5 81            [12] 2129 	mov	a,sp
+      0005B1 24 F8            [12] 2130 	add	a,#0xf8
+      0005B3 F8               [12] 2131 	mov	r0,a
+      0005B4 E0               [24] 2132 	movx	a,@dptr
+      0005B5 F6               [12] 2133 	mov	@r0,a
+      0005B6 E5 81            [12] 2134 	mov	a,sp
+      0005B8 24 F7            [12] 2135 	add	a,#0xf7
+      0005BA F8               [12] 2136 	mov	r0,a
+      0005BB 76 00            [12] 2137 	mov	@r0,#0x00
+      0005BD E5 81            [12] 2138 	mov	a,sp
+      0005BF 24 F9            [12] 2139 	add	a,#0xf9
+      0005C1 F8               [12] 2140 	mov	r0,a
+      0005C2 76 3B            [12] 2141 	mov	@r0,#0x3B
+      0005C4                       2142 00145$:
+      0005C4 E5 81            [12] 2143 	mov	a,sp
+      0005C6 24 F8            [12] 2144 	add	a,#0xf8
+      0005C8 F8               [12] 2145 	mov	r0,a
+      0005C9 B6 03 00         [24] 2146 	cjne	@r0,#0x03,00243$
+      0005CC                       2147 00243$:
+      0005CC 40 03            [24] 2148 	jc	00244$
+      0005CE 02r07rE0         [24] 2149 	ljmp	00178$
+      0005D1                       2150 00244$:
+                                   2151 ;	../../platform/cc2530dk/./viztool.c:196: if(uip_ds6_if.addr_list[i].isused) {
+      0005D1 E5 81            [12] 2152 	mov	a,sp
+      0005D3 24 F8            [12] 2153 	add	a,#0xf8
+      0005D5 F8               [12] 2154 	mov	r0,a
+      0005D6 E6               [12] 2155 	mov	a,@r0
+      0005D7 75 F0 1C         [24] 2156 	mov	b,#0x1C
+      0005DA A4               [48] 2157 	mul	ab
+      0005DB 24r12            [12] 2158 	add	a,#(_uip_ds6_if + 0x0012)
+      0005DD FA               [12] 2159 	mov	r2,a
+      0005DE E4               [12] 2160 	clr	a
+      0005DF 34s00            [12] 2161 	addc	a,#((_uip_ds6_if + 0x0012) >> 8)
+      0005E1 FB               [12] 2162 	mov	r3,a
+      0005E2 8A 82            [24] 2163 	mov	dpl,r2
+      0005E4 8B 83            [24] 2164 	mov	dph,r3
+      0005E6 E0               [24] 2165 	movx	a,@dptr
+      0005E7 70 03            [24] 2166 	jnz	00245$
+      0005E9 02r06r9A         [24] 2167 	ljmp	00146$
+      0005EC                       2168 00245$:
+                                   2169 ;	../../platform/cc2530dk/./viztool.c:199: memcpy(buf + len, &i, sizeof(i));
+      0005EC E5 81            [12] 2170 	mov	a,sp
+      0005EE 24 F8            [12] 2171 	add	a,#0xF8
+      0005F0 FE               [12] 2172 	mov	r6,a
+      0005F1 7D 00            [12] 2173 	mov	r5,#0x00
+      0005F3 7A 40            [12] 2174 	mov	r2,#0x40
+      0005F5 E5 81            [12] 2175 	mov	a,sp
+      0005F7 24 F6            [12] 2176 	add	a,#0xf6
+      0005F9 F8               [12] 2177 	mov	r0,a
+      0005FA E6               [12] 2178 	mov	a,@r0
+      0005FB 24r03            [12] 2179 	add	a,#_buf
+      0005FD FC               [12] 2180 	mov	r4,a
+      0005FE E4               [12] 2181 	clr	a
+      0005FF 34s00            [12] 2182 	addc	a,#(_buf >> 8)
+      000601 FF               [12] 2183 	mov	r7,a
+      000602 7B 00            [12] 2184 	mov	r3,#0x00
+      000604 74 01            [12] 2185 	mov	a,#0x01
+      000606 C0 E0            [24] 2186 	push	acc
+      000608 E4               [12] 2187 	clr	a
+      000609 C0 E0            [24] 2188 	push	acc
+      00060B C0 06            [24] 2189 	push	ar6
+      00060D C0 05            [24] 2190 	push	ar5
+      00060F C0 02            [24] 2191 	push	ar2
+      000611 8C 82            [24] 2192 	mov	dpl,r4
+      000613 8F 83            [24] 2193 	mov	dph,r7
+      000615 8B F0            [24] 2194 	mov	b,r3
+      000617 78r00            [12] 2195 	mov	r0,#_memcpy
+      000619 79s00            [12] 2196 	mov	r1,#(_memcpy >> 8)
+      00061B 7As00            [12] 2197 	mov	r2,#(_memcpy >> 16)
+      00061D 12r00r00         [24] 2198 	lcall	__sdcc_banked_call
+      000620 E5 81            [12] 2199 	mov	a,sp
+      000622 24 FB            [12] 2200 	add	a,#0xfb
+                                   2201 ;	../../platform/cc2530dk/./viztool.c:200: len += sizeof(i);
+      000624 F5 81            [12] 2202 	mov	sp,a
+      000626 24 F6            [12] 2203 	add	a,#0xf6
+      000628 F8               [12] 2204 	mov	r0,a
+      000629 06               [12] 2205 	inc	@r0
+                                   2206 ;	../../platform/cc2530dk/./viztool.c:201: memcpy(buf + len, &uip_ds6_if.addr_list[i].ipaddr,
+      00062A E5 81            [12] 2207 	mov	a,sp
+      00062C 24 F8            [12] 2208 	add	a,#0xf8
+      00062E F8               [12] 2209 	mov	r0,a
+      00062F E6               [12] 2210 	mov	a,@r0
+      000630 75 F0 1C         [24] 2211 	mov	b,#0x1C
+      000633 A4               [48] 2212 	mul	ab
+      000634 24r12            [12] 2213 	add	a,#(_uip_ds6_if + 0x0012)
+      000636 FC               [12] 2214 	mov	r4,a
+      000637 E4               [12] 2215 	clr	a
+      000638 34s00            [12] 2216 	addc	a,#((_uip_ds6_if + 0x0012) >> 8)
+      00063A FF               [12] 2217 	mov	r7,a
+      00063B 0C               [12] 2218 	inc	r4
+      00063C BC 00 01         [24] 2219 	cjne	r4,#0x00,00246$
+      00063F 0F               [12] 2220 	inc	r7
+      000640                       2221 00246$:
+      000640 8C 06            [24] 2222 	mov	ar6,r4
+      000642 8F 05            [24] 2223 	mov	ar5,r7
+      000644 7B 00            [12] 2224 	mov	r3,#0x00
+      000646 E5 81            [12] 2225 	mov	a,sp
+      000648 24 F6            [12] 2226 	add	a,#0xf6
+      00064A F8               [12] 2227 	mov	r0,a
+      00064B E6               [12] 2228 	mov	a,@r0
+      00064C 24r03            [12] 2229 	add	a,#_buf
+      00064E FA               [12] 2230 	mov	r2,a
+      00064F E4               [12] 2231 	clr	a
+      000650 34s00            [12] 2232 	addc	a,#(_buf >> 8)
+      000652 FF               [12] 2233 	mov	r7,a
+      000653 7C 00            [12] 2234 	mov	r4,#0x00
+      000655 74 10            [12] 2235 	mov	a,#0x10
+      000657 C0 E0            [24] 2236 	push	acc
+      000659 E4               [12] 2237 	clr	a
+      00065A C0 E0            [24] 2238 	push	acc
+      00065C C0 06            [24] 2239 	push	ar6
+      00065E C0 05            [24] 2240 	push	ar5
+      000660 C0 03            [24] 2241 	push	ar3
+      000662 8A 82            [24] 2242 	mov	dpl,r2
+      000664 8F 83            [24] 2243 	mov	dph,r7
+      000666 8C F0            [24] 2244 	mov	b,r4
+      000668 78r00            [12] 2245 	mov	r0,#_memcpy
+      00066A 79s00            [12] 2246 	mov	r1,#(_memcpy >> 8)
+      00066C 7As00            [12] 2247 	mov	r2,#(_memcpy >> 16)
+      00066E 12r00r00         [24] 2248 	lcall	__sdcc_banked_call
+      000671 E5 81            [12] 2249 	mov	a,sp
+      000673 24 FB            [12] 2250 	add	a,#0xfb
+                                   2251 ;	../../platform/cc2530dk/./viztool.c:203: len += sizeof(uip_ds6_if.addr_list[i].ipaddr);
+      000675 F5 81            [12] 2252 	mov	sp,a
+      000677 24 F6            [12] 2253 	add	a,#0xf6
+      000679 F8               [12] 2254 	mov	r0,a
+      00067A 74 10            [12] 2255 	mov	a,#0x10
+      00067C 26               [12] 2256 	add	a,@r0
+      00067D F6               [12] 2257 	mov	@r0,a
+                                   2258 ;	../../platform/cc2530dk/./viztool.c:207: count++;
+      00067E E5 81            [12] 2259 	mov	a,sp
+      000680 24 F7            [12] 2260 	add	a,#0xf7
+      000682 F8               [12] 2261 	mov	r0,a
+      000683 06               [12] 2262 	inc	@r0
+                                   2263 ;	../../platform/cc2530dk/./viztool.c:208: left -= entry_size;
+      000684 E5 81            [12] 2264 	mov	a,sp
+      000686 24 F9            [12] 2265 	add	a,#0xf9
+      000688 F8               [12] 2266 	mov	r0,a
+      000689 E6               [12] 2267 	mov	a,@r0
+      00068A 24 EF            [12] 2268 	add	a,#0xEF
+      00068C F6               [12] 2269 	mov	@r0,a
+                                   2270 ;	../../platform/cc2530dk/./viztool.c:210: if(left < entry_size) {
+      00068D E5 81            [12] 2271 	mov	a,sp
+      00068F 24 F9            [12] 2272 	add	a,#0xf9
+      000691 F8               [12] 2273 	mov	r0,a
+      000692 B6 11 00         [24] 2274 	cjne	@r0,#0x11,00247$
+      000695                       2275 00247$:
+      000695 50 03            [24] 2276 	jnc	00248$
+      000697 02r07rE0         [24] 2277 	ljmp	00178$
+      00069A                       2278 00248$:
+                                   2279 ;	../../platform/cc2530dk/./viztool.c:211: break;
+      00069A                       2280 00146$:
+                                   2281 ;	../../platform/cc2530dk/./viztool.c:195: for(i = buf[1]; i < UIP_DS6_ADDR_NB; i++) {
+      00069A E5 81            [12] 2282 	mov	a,sp
+      00069C 24 F8            [12] 2283 	add	a,#0xf8
+      00069E F8               [12] 2284 	mov	r0,a
+      00069F 06               [12] 2285 	inc	@r0
+      0006A0 02r05rC4         [24] 2286 	ljmp	00145$
+      0006A3                       2287 00127$:
+                                   2288 ;	../../platform/cc2530dk/./viztool.c:215: } else if(buf[0] == REQUEST_TYPE_TOTALS) {
+      0006A3 BD FF 02         [24] 2289 	cjne	r5,#0xFF,00249$
+      0006A6 80 03            [24] 2290 	sjmp	00250$
+      0006A8                       2291 00249$:
+      0006A8 02r07rC9         [24] 2292 	ljmp	00124$
+      0006AB                       2293 00250$:
+                                   2294 ;	../../platform/cc2530dk/./viztool.c:216: memset(&buf[2], 0, 4);
+      0006AB 74 04            [12] 2295 	mov	a,#0x04
+      0006AD C0 E0            [24] 2296 	push	acc
+      0006AF E4               [12] 2297 	clr	a
+      0006B0 C0 E0            [24] 2298 	push	acc
+      0006B2 E4               [12] 2299 	clr	a
+      0006B3 C0 E0            [24] 2300 	push	acc
+      0006B5 90r00r05         [24] 2301 	mov	dptr,#(_buf + 0x0002)
+      0006B8 75 F0 00         [24] 2302 	mov	b,#0x00
+      0006BB 78r00            [12] 2303 	mov	r0,#_memset
+      0006BD 79s00            [12] 2304 	mov	r1,#(_memset >> 8)
+      0006BF 7As00            [12] 2305 	mov	r2,#(_memset >> 16)
+      0006C1 12r00r00         [24] 2306 	lcall	__sdcc_banked_call
+      0006C4 15 81            [12] 2307 	dec	sp
+      0006C6 15 81            [12] 2308 	dec	sp
+      0006C8 15 81            [12] 2309 	dec	sp
+                                   2310 ;	../../platform/cc2530dk/./viztool.c:217: for(i = 0; i < UIP_DS6_ADDR_NB; i++) {
+      0006CA E5 81            [12] 2311 	mov	a,sp
+      0006CC 24 F8            [12] 2312 	add	a,#0xf8
+      0006CE F8               [12] 2313 	mov	r0,a
+      0006CF 76 00            [12] 2314 	mov	@r0,#0x00
+      0006D1 7F 00            [12] 2315 	mov	r7,#0x00
+      0006D3                       2316 00147$:
+                                   2317 ;	../../platform/cc2530dk/./viztool.c:218: if(uip_ds6_if.addr_list[i].isused) {
+      0006D3 EF               [12] 2318 	mov	a,r7
+      0006D4 75 F0 1C         [24] 2319 	mov	b,#0x1C
+      0006D7 A4               [48] 2320 	mul	ab
+      0006D8 24r12            [12] 2321 	add	a,#(_uip_ds6_if + 0x0012)
+      0006DA FC               [12] 2322 	mov	r4,a
+      0006DB E4               [12] 2323 	clr	a
+      0006DC 34s00            [12] 2324 	addc	a,#((_uip_ds6_if + 0x0012) >> 8)
+      0006DE FD               [12] 2325 	mov	r5,a
+      0006DF 8C 82            [24] 2326 	mov	dpl,r4
+      0006E1 8D 83            [24] 2327 	mov	dph,r5
+      0006E3 E0               [24] 2328 	movx	a,@dptr
+      0006E4 60 0B            [24] 2329 	jz	00148$
+                                   2330 ;	../../platform/cc2530dk/./viztool.c:219: buf[2]++;
+      0006E6 90r00r05         [24] 2331 	mov	dptr,#(_buf + 0x0002)
+      0006E9 E0               [24] 2332 	movx	a,@dptr
+      0006EA FD               [12] 2333 	mov	r5,a
+      0006EB 0D               [12] 2334 	inc	r5
+      0006EC 90r00r05         [24] 2335 	mov	dptr,#(_buf + 0x0002)
+      0006EF ED               [12] 2336 	mov	a,r5
+      0006F0 F0               [24] 2337 	movx	@dptr,a
+      0006F1                       2338 00148$:
+                                   2339 ;	../../platform/cc2530dk/./viztool.c:217: for(i = 0; i < UIP_DS6_ADDR_NB; i++) {
+      0006F1 0F               [12] 2340 	inc	r7
+      0006F2 E5 81            [12] 2341 	mov	a,sp
+      0006F4 24 F8            [12] 2342 	add	a,#0xf8
+      0006F6 F8               [12] 2343 	mov	r0,a
+      0006F7 A6 07            [24] 2344 	mov	@r0,ar7
+      0006F9 BF 03 00         [24] 2345 	cjne	r7,#0x03,00252$
+      0006FC                       2346 00252$:
+      0006FC 40 D5            [24] 2347 	jc	00147$
+                                   2348 ;	../../platform/cc2530dk/./viztool.c:222: for(nbr = nbr_table_head(ds6_neighbors);
+      0006FE E5 81            [12] 2349 	mov	a,sp
+      000700 24 F8            [12] 2350 	add	a,#0xf8
+      000702 F8               [12] 2351 	mov	r0,a
+      000703 A6 07            [24] 2352 	mov	@r0,ar7
+      000705 90r00r00         [24] 2353 	mov	dptr,#_ds6_neighbors
+      000708 E0               [24] 2354 	movx	a,@dptr
+      000709 FC               [12] 2355 	mov	r4,a
+      00070A A3               [24] 2356 	inc	dptr
+      00070B E0               [24] 2357 	movx	a,@dptr
+      00070C FD               [12] 2358 	mov	r5,a
+      00070D A3               [24] 2359 	inc	dptr
+      00070E E0               [24] 2360 	movx	a,@dptr
+      00070F FF               [12] 2361 	mov	r7,a
+      000710 8C 82            [24] 2362 	mov	dpl,r4
+      000712 8D 83            [24] 2363 	mov	dph,r5
+      000714 8F F0            [24] 2364 	mov	b,r7
+      000716 78r00            [12] 2365 	mov	r0,#_nbr_table_head
+      000718 79s00            [12] 2366 	mov	r1,#(_nbr_table_head >> 8)
+      00071A 7As00            [12] 2367 	mov	r2,#(_nbr_table_head >> 16)
+      00071C 12r00r00         [24] 2368 	lcall	__sdcc_banked_call
+      00071F AC 82            [24] 2369 	mov	r4,dpl
+      000721 AD 83            [24] 2370 	mov	r5,dph
+      000723 AF F0            [24] 2371 	mov	r7,b
+      000725 E5 81            [12] 2372 	mov	a,sp
+      000727 24 FA            [12] 2373 	add	a,#0xfa
+      000729 F8               [12] 2374 	mov	r0,a
+      00072A A6 04            [24] 2375 	mov	@r0,ar4
+      00072C 08               [12] 2376 	inc	r0
+      00072D A6 05            [24] 2377 	mov	@r0,ar5
+      00072F 08               [12] 2378 	inc	r0
+      000730 A6 07            [24] 2379 	mov	@r0,ar7
+      000732                       2380 00150$:
+                                   2381 ;	../../platform/cc2530dk/./viztool.c:223: nbr != NULL;
+      000732 E5 81            [12] 2382 	mov	a,sp
+      000734 24 FA            [12] 2383 	add	a,#0xfa
+      000736 F8               [12] 2384 	mov	r0,a
+      000737 E4               [12] 2385 	clr	a
+      000738 C0 E0            [24] 2386 	push	acc
+      00073A E4               [12] 2387 	clr	a
+      00073B C0 E0            [24] 2388 	push	acc
+      00073D E4               [12] 2389 	clr	a
+      00073E C0 E0            [24] 2390 	push	acc
+      000740 86 82            [24] 2391 	mov	dpl,@r0
+      000742 08               [12] 2392 	inc	r0
+      000743 86 83            [24] 2393 	mov	dph,@r0
+      000745 08               [12] 2394 	inc	r0
+      000746 86 F0            [24] 2395 	mov	b,@r0
+      000748 12r00r00         [24] 2396 	lcall	___gptr_cmp
+      00074B 15 81            [12] 2397 	dec	sp
+      00074D 15 81            [12] 2398 	dec	sp
+      00074F 15 81            [12] 2399 	dec	sp
+      000751 60 53            [24] 2400 	jz	00122$
+                                   2401 ;	../../platform/cc2530dk/./viztool.c:225: buf[3]++;
+      000753 90r00r06         [24] 2402 	mov	dptr,#(_buf + 0x0003)
+      000756 E0               [24] 2403 	movx	a,@dptr
+      000757 FF               [12] 2404 	mov	r7,a
+      000758 0F               [12] 2405 	inc	r7
+      000759 90r00r06         [24] 2406 	mov	dptr,#(_buf + 0x0003)
+      00075C EF               [12] 2407 	mov	a,r7
+      00075D F0               [24] 2408 	movx	@dptr,a
+                                   2409 ;	../../platform/cc2530dk/./viztool.c:224: nbr = nbr_table_next(ds6_neighbors, nbr)) {
+      00075E E5 81            [12] 2410 	mov	a,sp
+      000760 24 FA            [12] 2411 	add	a,#0xfa
+      000762 F8               [12] 2412 	mov	r0,a
+      000763 86 02            [24] 2413 	mov	ar2,@r0
+      000765 08               [12] 2414 	inc	r0
+      000766 86 03            [24] 2415 	mov	ar3,@r0
+      000768 08               [12] 2416 	inc	r0
+      000769 86 06            [24] 2417 	mov	ar6,@r0
+      00076B 90r00r00         [24] 2418 	mov	dptr,#_ds6_neighbors
+      00076E E0               [24] 2419 	movx	a,@dptr
+      00076F FC               [12] 2420 	mov	r4,a
+      000770 A3               [24] 2421 	inc	dptr
+      000771 E0               [24] 2422 	movx	a,@dptr
+      000772 FD               [12] 2423 	mov	r5,a
+      000773 A3               [24] 2424 	inc	dptr
+      000774 E0               [24] 2425 	movx	a,@dptr
+      000775 FF               [12] 2426 	mov	r7,a
+      000776 C0 02            [24] 2427 	push	ar2
+      000778 C0 03            [24] 2428 	push	ar3
+      00077A C0 06            [24] 2429 	push	ar6
+      00077C 8C 82            [24] 2430 	mov	dpl,r4
+      00077E 8D 83            [24] 2431 	mov	dph,r5
+      000780 8F F0            [24] 2432 	mov	b,r7
+      000782 78r00            [12] 2433 	mov	r0,#_nbr_table_next
+      000784 79s00            [12] 2434 	mov	r1,#(_nbr_table_next >> 8)
+      000786 7As00            [12] 2435 	mov	r2,#(_nbr_table_next >> 16)
+      000788 12r00r00         [24] 2436 	lcall	__sdcc_banked_call
+      00078B AC 82            [24] 2437 	mov	r4,dpl
+      00078D AD 83            [24] 2438 	mov	r5,dph
+      00078F AF F0            [24] 2439 	mov	r7,b
+      000791 15 81            [12] 2440 	dec	sp
+      000793 15 81            [12] 2441 	dec	sp
+      000795 15 81            [12] 2442 	dec	sp
+      000797 E5 81            [12] 2443 	mov	a,sp
+      000799 24 FA            [12] 2444 	add	a,#0xfa
+      00079B F8               [12] 2445 	mov	r0,a
+      00079C A6 04            [24] 2446 	mov	@r0,ar4
+      00079E 08               [12] 2447 	inc	r0
+      00079F A6 05            [24] 2448 	mov	@r0,ar5
+      0007A1 08               [12] 2449 	inc	r0
+      0007A2 A6 07            [24] 2450 	mov	@r0,ar7
+      0007A4 80 8C            [24] 2451 	sjmp	00150$
+      0007A6                       2452 00122$:
+                                   2453 ;	../../platform/cc2530dk/./viztool.c:228: buf[4] = uip_ds6_route_num_routes();
+      0007A6 78r00            [12] 2454 	mov	r0,#_uip_ds6_route_num_routes
+      0007A8 79s00            [12] 2455 	mov	r1,#(_uip_ds6_route_num_routes >> 8)
+      0007AA 7As00            [12] 2456 	mov	r2,#(_uip_ds6_route_num_routes >> 16)
+      0007AC 12r00r00         [24] 2457 	lcall	__sdcc_banked_call
+      0007AF AD 82            [24] 2458 	mov	r5,dpl
+      0007B1 AF 83            [24] 2459 	mov	r7,dph
+      0007B3 90r00r07         [24] 2460 	mov	dptr,#(_buf + 0x0004)
+      0007B6 ED               [12] 2461 	mov	a,r5
+      0007B7 F0               [24] 2462 	movx	@dptr,a
+                                   2463 ;	../../platform/cc2530dk/./viztool.c:229: buf[5] = 1;
+      0007B8 90r00r08         [24] 2464 	mov	dptr,#(_buf + 0x0005)
+      0007BB 74 01            [12] 2465 	mov	a,#0x01
+      0007BD F0               [24] 2466 	movx	@dptr,a
+                                   2467 ;	../../platform/cc2530dk/./viztool.c:231: len += 4;
+      0007BE E5 81            [12] 2468 	mov	a,sp
+      0007C0 24 F6            [12] 2469 	add	a,#0xf6
+      0007C2 F8               [12] 2470 	mov	r0,a
+      0007C3 76 06            [12] 2471 	mov	@r0,#0x06
+                                   2472 ;	../../platform/cc2530dk/./viztool.c:232: count = 4;
+      0007C5 7E 04            [12] 2473 	mov	r6,#0x04
+      0007C7 80 1E            [24] 2474 	sjmp	00137$
+      0007C9                       2475 00124$:
+                                   2476 ;	../../platform/cc2530dk/./viztool.c:234: return 0;
+      0007C9 75 82 00         [24] 2477 	mov	dpl,#0x00
+      0007CC 80 25            [24] 2478 	sjmp	00152$
+      0007CE                       2479 00176$:
+      0007CE E5 81            [12] 2480 	mov	a,sp
+      0007D0 24 F7            [12] 2481 	add	a,#0xf7
+      0007D2 F8               [12] 2482 	mov	r0,a
+      0007D3 86 06            [24] 2483 	mov	ar6,@r0
+                                   2484 ;	../../platform/cc2530dk/./viztool.c:237: return len;
+                                   2485 ;	../../platform/cc2530dk/./viztool.c:234: return 0;
+      0007D5 80 10            [24] 2486 	sjmp	00137$
+      0007D7                       2487 00177$:
+      0007D7 E5 81            [12] 2488 	mov	a,sp
+      0007D9 24 F7            [12] 2489 	add	a,#0xf7
+      0007DB F8               [12] 2490 	mov	r0,a
+      0007DC 86 06            [24] 2491 	mov	ar6,@r0
+                                   2492 ;	../../platform/cc2530dk/./viztool.c:237: return len;
+                                   2493 ;	../../platform/cc2530dk/./viztool.c:234: return 0;
+      0007DE 80 07            [24] 2494 	sjmp	00137$
+      0007E0                       2495 00178$:
+      0007E0 E5 81            [12] 2496 	mov	a,sp
+      0007E2 24 F7            [12] 2497 	add	a,#0xf7
+      0007E4 F8               [12] 2498 	mov	r0,a
+      0007E5 86 06            [24] 2499 	mov	ar6,@r0
+      0007E7                       2500 00137$:
+                                   2501 ;	../../platform/cc2530dk/./viztool.c:236: buf[1] = count;
+      0007E7 90r00r04         [24] 2502 	mov	dptr,#(_buf + 0x0001)
+      0007EA EE               [12] 2503 	mov	a,r6
+      0007EB F0               [24] 2504 	movx	@dptr,a
+                                   2505 ;	../../platform/cc2530dk/./viztool.c:237: return len;
+      0007EC E5 81            [12] 2506 	mov	a,sp
+      0007EE 24 F6            [12] 2507 	add	a,#0xf6
+      0007F0 F8               [12] 2508 	mov	r0,a
+      0007F1 86 82            [24] 2509 	mov	dpl,@r0
+      0007F3                       2510 00152$:
+      0007F3 E5 81            [12] 2511 	mov	a,sp
+      0007F5 24 F5            [12] 2512 	add	a,#0xF5
+      0007F7 F5 81            [12] 2513 	mov	sp,a
+      0007F9 22               [24] 2514 	ret
+                                   2515 ;------------------------------------------------------------
+                                   2516 ;Allocation info for local variables in function 'tcpip_handler'
+                                   2517 ;------------------------------------------------------------
+                                   2518 ;	../../platform/cc2530dk/./viztool.c:243: tcpip_handler(void) CC_NON_BANKED
+                                   2519 ;	-----------------------------------------
+                                   2520 ;	 function tcpip_handler
+                                   2521 ;	-----------------------------------------
+      0007FA                       2522 _tcpip_handler:
+                                   2523 ;	../../platform/cc2530dk/./viztool.c:245: if(uip_newdata()) {
+      0007FA 90r00r00         [24] 2524 	mov	dptr,#_uip_flags
+      0007FD E0               [24] 2525 	movx	a,@dptr
+      0007FE FF               [12] 2526 	mov	r7,a
+      0007FF 20 E1 01         [24] 2527 	jb	acc.1,00116$
+      000802 22               [24] 2528 	ret
+      000803                       2529 00116$:
+                                   2530 ;	../../platform/cc2530dk/./viztool.c:246: memset(buf, 0, VIZTOOL_MAX_PAYLOAD_LEN);
+      000803 74 3C            [12] 2531 	mov	a,#0x3C
+      000805 C0 E0            [24] 2532 	push	acc
+      000807 E4               [12] 2533 	clr	a
+      000808 C0 E0            [24] 2534 	push	acc
+      00080A E4               [12] 2535 	clr	a
+      00080B C0 E0            [24] 2536 	push	acc
+      00080D 90r00r03         [24] 2537 	mov	dptr,#_buf
+      000810 75 F0 00         [24] 2538 	mov	b,#0x00
+      000813 78r00            [12] 2539 	mov	r0,#_memset
+      000815 79s00            [12] 2540 	mov	r1,#(_memset >> 8)
+      000817 7As00            [12] 2541 	mov	r2,#(_memset >> 16)
+      000819 12r00r00         [24] 2542 	lcall	__sdcc_banked_call
+      00081C 15 81            [12] 2543 	dec	sp
+      00081E 15 81            [12] 2544 	dec	sp
+      000820 15 81            [12] 2545 	dec	sp
+                                   2546 ;	../../platform/cc2530dk/./viztool.c:252: memcpy(buf, uip_appdata, uip_datalen());
+      000822 90r00r00         [24] 2547 	mov	dptr,#_uip_len
+      000825 E0               [24] 2548 	movx	a,@dptr
+      000826 C0 E0            [24] 2549 	push	acc
+      000828 A3               [24] 2550 	inc	dptr
+      000829 E0               [24] 2551 	movx	a,@dptr
+      00082A C0 E0            [24] 2552 	push	acc
+      00082C 90r00r00         [24] 2553 	mov	dptr,#_uip_appdata
+      00082F E0               [24] 2554 	movx	a,@dptr
+      000830 C0 E0            [24] 2555 	push	acc
+      000832 A3               [24] 2556 	inc	dptr
+      000833 E0               [24] 2557 	movx	a,@dptr
+      000834 C0 E0            [24] 2558 	push	acc
+      000836 A3               [24] 2559 	inc	dptr
+      000837 E0               [24] 2560 	movx	a,@dptr
+      000838 C0 E0            [24] 2561 	push	acc
+      00083A 90r00r03         [24] 2562 	mov	dptr,#_buf
+      00083D 75 F0 00         [24] 2563 	mov	b,#0x00
+      000840 78r00            [12] 2564 	mov	r0,#_memcpy
+      000842 79s00            [12] 2565 	mov	r1,#(_memcpy >> 8)
+      000844 7As00            [12] 2566 	mov	r2,#(_memcpy >> 16)
+      000846 12r00r00         [24] 2567 	lcall	__sdcc_banked_call
+      000849 E5 81            [12] 2568 	mov	a,sp
+      00084B 24 FB            [12] 2569 	add	a,#0xfb
+      00084D F5 81            [12] 2570 	mov	sp,a
+                                   2571 ;	../../platform/cc2530dk/./viztool.c:254: len = process_request();
+      00084F 12r00r00         [24] 2572 	lcall	_process_request
+      000852 AF 82            [24] 2573 	mov	r7,dpl
+      000854 90r00r3F         [24] 2574 	mov	dptr,#_len
+      000857 EF               [12] 2575 	mov	a,r7
+      000858 F0               [24] 2576 	movx	@dptr,a
+                                   2577 ;	../../platform/cc2530dk/./viztool.c:255: if(len) {
+      000859 EF               [12] 2578 	mov	a,r7
+      00085A 70 03            [24] 2579 	jnz	00117$
+      00085C 02r09r08         [24] 2580 	ljmp	00103$
+      00085F                       2581 00117$:
+                                   2582 ;	../../platform/cc2530dk/./viztool.c:256: server_conn->rport = UIP_UDP_BUF->srcport;
+      00085F 90r00r00         [24] 2583 	mov	dptr,#_server_conn
+      000862 E0               [24] 2584 	movx	a,@dptr
+      000863 FD               [12] 2585 	mov	r5,a
+      000864 A3               [24] 2586 	inc	dptr
+      000865 E0               [24] 2587 	movx	a,@dptr
+      000866 FE               [12] 2588 	mov	r6,a
+      000867 A3               [24] 2589 	inc	dptr
+      000868 E0               [24] 2590 	movx	a,@dptr
+      000869 FF               [12] 2591 	mov	r7,a
+      00086A 74 12            [12] 2592 	mov	a,#0x12
+      00086C 2D               [12] 2593 	add	a,r5
+      00086D FD               [12] 2594 	mov	r5,a
+      00086E E4               [12] 2595 	clr	a
+      00086F 3E               [12] 2596 	addc	a,r6
+      000870 FE               [12] 2597 	mov	r6,a
+      000871 90r00r00         [24] 2598 	mov	dptr,#_uip_ext_len
+      000874 E0               [24] 2599 	movx	a,@dptr
+      000875 24 28            [12] 2600 	add	a,#0x28
+      000877 24r00            [12] 2601 	add	a,#_uip_aligned_buf
+      000879 FB               [12] 2602 	mov	r3,a
+      00087A E4               [12] 2603 	clr	a
+      00087B 34s00            [12] 2604 	addc	a,#(_uip_aligned_buf >> 8)
+      00087D FC               [12] 2605 	mov	r4,a
+      00087E 8B 82            [24] 2606 	mov	dpl,r3
+      000880 8C 83            [24] 2607 	mov	dph,r4
+      000882 E0               [24] 2608 	movx	a,@dptr
+      000883 FB               [12] 2609 	mov	r3,a
+      000884 A3               [24] 2610 	inc	dptr
+      000885 E0               [24] 2611 	movx	a,@dptr
+      000886 FC               [12] 2612 	mov	r4,a
+      000887 8D 82            [24] 2613 	mov	dpl,r5
+      000889 8E 83            [24] 2614 	mov	dph,r6
+      00088B 8F F0            [24] 2615 	mov	b,r7
+      00088D EB               [12] 2616 	mov	a,r3
+      00088E 12r00r00         [24] 2617 	lcall	__gptrput
+      000891 A3               [24] 2618 	inc	dptr
+      000892 EC               [12] 2619 	mov	a,r4
+      000893 12r00r00         [24] 2620 	lcall	__gptrput
+                                   2621 ;	../../platform/cc2530dk/./viztool.c:257: uip_ipaddr_copy(&server_conn->ripaddr, &UIP_IP_BUF->srcipaddr);
+      000896 7Er00            [12] 2622 	mov	r6,#_uip_aligned_buf
+      000898 7Fs00            [12] 2623 	mov	r7,#(_uip_aligned_buf >> 8)
+      00089A 74 08            [12] 2624 	mov	a,#0x08
+      00089C 2E               [12] 2625 	add	a,r6
+      00089D FE               [12] 2626 	mov	r6,a
+      00089E E4               [12] 2627 	clr	a
+      00089F 3F               [12] 2628 	addc	a,r7
+      0008A0 FF               [12] 2629 	mov	r7,a
+      0008A1 7D 00            [12] 2630 	mov	r5,#0x00
+      0008A3 90r00r00         [24] 2631 	mov	dptr,#_server_conn
+      0008A6 E0               [24] 2632 	movx	a,@dptr
+      0008A7 FA               [12] 2633 	mov	r2,a
+      0008A8 A3               [24] 2634 	inc	dptr
+      0008A9 E0               [24] 2635 	movx	a,@dptr
+      0008AA FB               [12] 2636 	mov	r3,a
+      0008AB A3               [24] 2637 	inc	dptr
+      0008AC E0               [24] 2638 	movx	a,@dptr
+      0008AD FC               [12] 2639 	mov	r4,a
+      0008AE 74 10            [12] 2640 	mov	a,#0x10
+      0008B0 C0 E0            [24] 2641 	push	acc
+      0008B2 E4               [12] 2642 	clr	a
+      0008B3 C0 E0            [24] 2643 	push	acc
+      0008B5 C0 06            [24] 2644 	push	ar6
+      0008B7 C0 07            [24] 2645 	push	ar7
+      0008B9 C0 05            [24] 2646 	push	ar5
+      0008BB 8A 82            [24] 2647 	mov	dpl,r2
+      0008BD 8B 83            [24] 2648 	mov	dph,r3
+      0008BF 8C F0            [24] 2649 	mov	b,r4
+      0008C1 78r00            [12] 2650 	mov	r0,#_memcpy
+      0008C3 79s00            [12] 2651 	mov	r1,#(_memcpy >> 8)
+      0008C5 7As00            [12] 2652 	mov	r2,#(_memcpy >> 16)
+      0008C7 12r00r00         [24] 2653 	lcall	__sdcc_banked_call
+      0008CA E5 81            [12] 2654 	mov	a,sp
+      0008CC 24 FB            [12] 2655 	add	a,#0xfb
+      0008CE F5 81            [12] 2656 	mov	sp,a
+                                   2657 ;	../../platform/cc2530dk/./viztool.c:258: uip_udp_packet_send(server_conn, buf, len);
+      0008D0 90r00r3F         [24] 2658 	mov	dptr,#_len
+      0008D3 E0               [24] 2659 	movx	a,@dptr
+      0008D4 FF               [12] 2660 	mov	r7,a
+      0008D5 33               [12] 2661 	rlc	a
+      0008D6 95 E0            [12] 2662 	subb	a,acc
+      0008D8 FE               [12] 2663 	mov	r6,a
+      0008D9 90r00r00         [24] 2664 	mov	dptr,#_server_conn
+      0008DC E0               [24] 2665 	movx	a,@dptr
+      0008DD FB               [12] 2666 	mov	r3,a
+      0008DE A3               [24] 2667 	inc	dptr
+      0008DF E0               [24] 2668 	movx	a,@dptr
+      0008E0 FC               [12] 2669 	mov	r4,a
+      0008E1 A3               [24] 2670 	inc	dptr
+      0008E2 E0               [24] 2671 	movx	a,@dptr
+      0008E3 FD               [12] 2672 	mov	r5,a
+      0008E4 C0 07            [24] 2673 	push	ar7
+      0008E6 C0 06            [24] 2674 	push	ar6
+      0008E8 74r03            [12] 2675 	mov	a,#_buf
+      0008EA C0 E0            [24] 2676 	push	acc
+      0008EC 74s00            [12] 2677 	mov	a,#(_buf >> 8)
+      0008EE C0 E0            [24] 2678 	push	acc
+      0008F0 E4               [12] 2679 	clr	a
+      0008F1 C0 E0            [24] 2680 	push	acc
+      0008F3 8B 82            [24] 2681 	mov	dpl,r3
+      0008F5 8C 83            [24] 2682 	mov	dph,r4
+      0008F7 8D F0            [24] 2683 	mov	b,r5
+      0008F9 78r00            [12] 2684 	mov	r0,#_uip_udp_packet_send
+      0008FB 79s00            [12] 2685 	mov	r1,#(_uip_udp_packet_send >> 8)
+      0008FD 7As00            [12] 2686 	mov	r2,#(_uip_udp_packet_send >> 16)
+      0008FF 12r00r00         [24] 2687 	lcall	__sdcc_banked_call
+      000902 E5 81            [12] 2688 	mov	a,sp
+      000904 24 FB            [12] 2689 	add	a,#0xfb
+      000906 F5 81            [12] 2690 	mov	sp,a
+                                   2691 ;	../../platform/cc2530dk/./viztool.c:263: uip_create_unspecified(&server_conn->ripaddr);
+      000908                       2692 00103$:
+      000908 90r00r00         [24] 2693 	mov	dptr,#_server_conn
+      00090B E0               [24] 2694 	movx	a,@dptr
+      00090C FD               [12] 2695 	mov	r5,a
+      00090D A3               [24] 2696 	inc	dptr
+      00090E E0               [24] 2697 	movx	a,@dptr
+      00090F FE               [12] 2698 	mov	r6,a
+      000910 A3               [24] 2699 	inc	dptr
+      000911 E0               [24] 2700 	movx	a,@dptr
+      000912 FF               [12] 2701 	mov	r7,a
+      000913 8D 82            [24] 2702 	mov	dpl,r5
+      000915 8E 83            [24] 2703 	mov	dph,r6
+      000917 8F F0            [24] 2704 	mov	b,r7
+      000919 E4               [12] 2705 	clr	a
+      00091A 12r00r00         [24] 2706 	lcall	__gptrput
+      00091D A3               [24] 2707 	inc	dptr
+      00091E E4               [12] 2708 	clr	a
+      00091F 12r00r00         [24] 2709 	lcall	__gptrput
+      000922 90r00r00         [24] 2710 	mov	dptr,#_server_conn
+      000925 E0               [24] 2711 	movx	a,@dptr
+      000926 FD               [12] 2712 	mov	r5,a
+      000927 A3               [24] 2713 	inc	dptr
+      000928 E0               [24] 2714 	movx	a,@dptr
+      000929 FE               [12] 2715 	mov	r6,a
+      00092A A3               [24] 2716 	inc	dptr
+      00092B E0               [24] 2717 	movx	a,@dptr
+      00092C FF               [12] 2718 	mov	r7,a
+      00092D 74 02            [12] 2719 	mov	a,#0x02
+      00092F 2D               [12] 2720 	add	a,r5
+      000930 FD               [12] 2721 	mov	r5,a
+      000931 E4               [12] 2722 	clr	a
+      000932 3E               [12] 2723 	addc	a,r6
+      000933 FE               [12] 2724 	mov	r6,a
+      000934 8D 82            [24] 2725 	mov	dpl,r5
+      000936 8E 83            [24] 2726 	mov	dph,r6
+      000938 8F F0            [24] 2727 	mov	b,r7
+      00093A E4               [12] 2728 	clr	a
+      00093B 12r00r00         [24] 2729 	lcall	__gptrput
+      00093E A3               [24] 2730 	inc	dptr
+      00093F E4               [12] 2731 	clr	a
+      000940 12r00r00         [24] 2732 	lcall	__gptrput
+      000943 90r00r00         [24] 2733 	mov	dptr,#_server_conn
+      000946 E0               [24] 2734 	movx	a,@dptr
+      000947 FD               [12] 2735 	mov	r5,a
+      000948 A3               [24] 2736 	inc	dptr
+      000949 E0               [24] 2737 	movx	a,@dptr
+      00094A FE               [12] 2738 	mov	r6,a
+      00094B A3               [24] 2739 	inc	dptr
+      00094C E0               [24] 2740 	movx	a,@dptr
+      00094D FF               [12] 2741 	mov	r7,a
+      00094E 74 04            [12] 2742 	mov	a,#0x04
+      000950 2D               [12] 2743 	add	a,r5
+      000951 FD               [12] 2744 	mov	r5,a
+      000952 E4               [12] 2745 	clr	a
+      000953 3E               [12] 2746 	addc	a,r6
+      000954 FE               [12] 2747 	mov	r6,a
+      000955 8D 82            [24] 2748 	mov	dpl,r5
+      000957 8E 83            [24] 2749 	mov	dph,r6
+      000959 8F F0            [24] 2750 	mov	b,r7
+      00095B E4               [12] 2751 	clr	a
+      00095C 12r00r00         [24] 2752 	lcall	__gptrput
+      00095F A3               [24] 2753 	inc	dptr
+      000960 E4               [12] 2754 	clr	a
+      000961 12r00r00         [24] 2755 	lcall	__gptrput
+      000964 90r00r00         [24] 2756 	mov	dptr,#_server_conn
+      000967 E0               [24] 2757 	movx	a,@dptr
+      000968 FD               [12] 2758 	mov	r5,a
+      000969 A3               [24] 2759 	inc	dptr
+      00096A E0               [24] 2760 	movx	a,@dptr
+      00096B FE               [12] 2761 	mov	r6,a
+      00096C A3               [24] 2762 	inc	dptr
+      00096D E0               [24] 2763 	movx	a,@dptr
+      00096E FF               [12] 2764 	mov	r7,a
+      00096F 74 06            [12] 2765 	mov	a,#0x06
+      000971 2D               [12] 2766 	add	a,r5
+      000972 FD               [12] 2767 	mov	r5,a
+      000973 E4               [12] 2768 	clr	a
+      000974 3E               [12] 2769 	addc	a,r6
+      000975 FE               [12] 2770 	mov	r6,a
+      000976 8D 82            [24] 2771 	mov	dpl,r5
+      000978 8E 83            [24] 2772 	mov	dph,r6
+      00097A 8F F0            [24] 2773 	mov	b,r7
+      00097C E4               [12] 2774 	clr	a
+      00097D 12r00r00         [24] 2775 	lcall	__gptrput
+      000980 A3               [24] 2776 	inc	dptr
+      000981 E4               [12] 2777 	clr	a
+      000982 12r00r00         [24] 2778 	lcall	__gptrput
+      000985 90r00r00         [24] 2779 	mov	dptr,#_server_conn
+      000988 E0               [24] 2780 	movx	a,@dptr
+      000989 FD               [12] 2781 	mov	r5,a
+      00098A A3               [24] 2782 	inc	dptr
+      00098B E0               [24] 2783 	movx	a,@dptr
+      00098C FE               [12] 2784 	mov	r6,a
+      00098D A3               [24] 2785 	inc	dptr
+      00098E E0               [24] 2786 	movx	a,@dptr
+      00098F FF               [12] 2787 	mov	r7,a
+      000990 74 08            [12] 2788 	mov	a,#0x08
+      000992 2D               [12] 2789 	add	a,r5
+      000993 FD               [12] 2790 	mov	r5,a
+      000994 E4               [12] 2791 	clr	a
+      000995 3E               [12] 2792 	addc	a,r6
+      000996 FE               [12] 2793 	mov	r6,a
+      000997 8D 82            [24] 2794 	mov	dpl,r5
+      000999 8E 83            [24] 2795 	mov	dph,r6
+      00099B 8F F0            [24] 2796 	mov	b,r7
+      00099D E4               [12] 2797 	clr	a
+      00099E 12r00r00         [24] 2798 	lcall	__gptrput
+      0009A1 A3               [24] 2799 	inc	dptr
+      0009A2 E4               [12] 2800 	clr	a
+      0009A3 12r00r00         [24] 2801 	lcall	__gptrput
+      0009A6 90r00r00         [24] 2802 	mov	dptr,#_server_conn
+      0009A9 E0               [24] 2803 	movx	a,@dptr
+      0009AA FD               [12] 2804 	mov	r5,a
+      0009AB A3               [24] 2805 	inc	dptr
+      0009AC E0               [24] 2806 	movx	a,@dptr
+      0009AD FE               [12] 2807 	mov	r6,a
+      0009AE A3               [24] 2808 	inc	dptr
+      0009AF E0               [24] 2809 	movx	a,@dptr
+      0009B0 FF               [12] 2810 	mov	r7,a
+      0009B1 74 0A            [12] 2811 	mov	a,#0x0A
+      0009B3 2D               [12] 2812 	add	a,r5
+      0009B4 FD               [12] 2813 	mov	r5,a
+      0009B5 E4               [12] 2814 	clr	a
+      0009B6 3E               [12] 2815 	addc	a,r6
+      0009B7 FE               [12] 2816 	mov	r6,a
+      0009B8 8D 82            [24] 2817 	mov	dpl,r5
+      0009BA 8E 83            [24] 2818 	mov	dph,r6
+      0009BC 8F F0            [24] 2819 	mov	b,r7
+      0009BE E4               [12] 2820 	clr	a
+      0009BF 12r00r00         [24] 2821 	lcall	__gptrput
+      0009C2 A3               [24] 2822 	inc	dptr
+      0009C3 E4               [12] 2823 	clr	a
+      0009C4 12r00r00         [24] 2824 	lcall	__gptrput
+      0009C7 90r00r00         [24] 2825 	mov	dptr,#_server_conn
+      0009CA E0               [24] 2826 	movx	a,@dptr
+      0009CB FD               [12] 2827 	mov	r5,a
+      0009CC A3               [24] 2828 	inc	dptr
+      0009CD E0               [24] 2829 	movx	a,@dptr
+      0009CE FE               [12] 2830 	mov	r6,a
+      0009CF A3               [24] 2831 	inc	dptr
+      0009D0 E0               [24] 2832 	movx	a,@dptr
+      0009D1 FF               [12] 2833 	mov	r7,a
+      0009D2 74 0C            [12] 2834 	mov	a,#0x0C
+      0009D4 2D               [12] 2835 	add	a,r5
+      0009D5 FD               [12] 2836 	mov	r5,a
+      0009D6 E4               [12] 2837 	clr	a
+      0009D7 3E               [12] 2838 	addc	a,r6
+      0009D8 FE               [12] 2839 	mov	r6,a
+      0009D9 8D 82            [24] 2840 	mov	dpl,r5
+      0009DB 8E 83            [24] 2841 	mov	dph,r6
+      0009DD 8F F0            [24] 2842 	mov	b,r7
+      0009DF E4               [12] 2843 	clr	a
+      0009E0 12r00r00         [24] 2844 	lcall	__gptrput
+      0009E3 A3               [24] 2845 	inc	dptr
+      0009E4 E4               [12] 2846 	clr	a
+      0009E5 12r00r00         [24] 2847 	lcall	__gptrput
+      0009E8 90r00r00         [24] 2848 	mov	dptr,#_server_conn
+      0009EB E0               [24] 2849 	movx	a,@dptr
+      0009EC FD               [12] 2850 	mov	r5,a
+      0009ED A3               [24] 2851 	inc	dptr
+      0009EE E0               [24] 2852 	movx	a,@dptr
+      0009EF FE               [12] 2853 	mov	r6,a
+      0009F0 A3               [24] 2854 	inc	dptr
+      0009F1 E0               [24] 2855 	movx	a,@dptr
+      0009F2 FF               [12] 2856 	mov	r7,a
+      0009F3 74 0E            [12] 2857 	mov	a,#0x0E
+      0009F5 2D               [12] 2858 	add	a,r5
+      0009F6 FD               [12] 2859 	mov	r5,a
+      0009F7 E4               [12] 2860 	clr	a
+      0009F8 3E               [12] 2861 	addc	a,r6
+      0009F9 FE               [12] 2862 	mov	r6,a
+      0009FA 8D 82            [24] 2863 	mov	dpl,r5
+      0009FC 8E 83            [24] 2864 	mov	dph,r6
+      0009FE 8F F0            [24] 2865 	mov	b,r7
+      000A00 E4               [12] 2866 	clr	a
+      000A01 12r00r00         [24] 2867 	lcall	__gptrput
+      000A04 A3               [24] 2868 	inc	dptr
+      000A05 E4               [12] 2869 	clr	a
+      000A06 12r00r00         [24] 2870 	lcall	__gptrput
+                                   2871 ;	../../platform/cc2530dk/./viztool.c:264: server_conn->rport = 0;
+      000A09 90r00r00         [24] 2872 	mov	dptr,#_server_conn
+      000A0C E0               [24] 2873 	movx	a,@dptr
+      000A0D FD               [12] 2874 	mov	r5,a
+      000A0E A3               [24] 2875 	inc	dptr
+      000A0F E0               [24] 2876 	movx	a,@dptr
+      000A10 FE               [12] 2877 	mov	r6,a
+      000A11 A3               [24] 2878 	inc	dptr
+      000A12 E0               [24] 2879 	movx	a,@dptr
+      000A13 FF               [12] 2880 	mov	r7,a
+      000A14 74 12            [12] 2881 	mov	a,#0x12
+      000A16 2D               [12] 2882 	add	a,r5
+      000A17 FD               [12] 2883 	mov	r5,a
+      000A18 E4               [12] 2884 	clr	a
+      000A19 3E               [12] 2885 	addc	a,r6
+      000A1A FE               [12] 2886 	mov	r6,a
+      000A1B 8D 82            [24] 2887 	mov	dpl,r5
+      000A1D 8E 83            [24] 2888 	mov	dph,r6
+      000A1F 8F F0            [24] 2889 	mov	b,r7
+      000A21 E4               [12] 2890 	clr	a
+      000A22 12r00r00         [24] 2891 	lcall	__gptrput
+      000A25 A3               [24] 2892 	inc	dptr
+      000A26 E4               [12] 2893 	clr	a
+                                   2894 ;	../../platform/cc2530dk/./viztool.c:266: return;
+      000A27 02r00r00         [24] 2895 	ljmp	__gptrput
+                                   2896 ;------------------------------------------------------------
+                                   2897 ;Allocation info for local variables in function 'process_thread_viztool_process'
+                                   2898 ;------------------------------------------------------------
+                                   2899 ;ev                        Allocated to stack - sp -3
+                                   2900 ;data                      Allocated to stack - sp -6
+                                   2901 ;process_pt                Allocated to registers r5 r6 r7 
+                                   2902 ;PT_YIELD_FLAG             Allocated to registers r4 
+                                   2903 ;------------------------------------------------------------
+                                   2904 ;	../../platform/cc2530dk/./viztool.c:269: PROCESS_THREAD(viztool_process, ev, data)
+                                   2905 ;	-----------------------------------------
+                                   2906 ;	 function process_thread_viztool_process
+                                   2907 ;	-----------------------------------------
+      000A2A                       2908 _process_thread_viztool_process:
+                                   2909 ;	../../platform/cc2530dk/./viztool.c:272: PROCESS_BEGIN();
+      000A2A AD 82            [24] 2910 	mov	r5,dpl
+      000A2C AE 83            [24] 2911 	mov	r6,dph
+      000A2E AF F0            [24] 2912 	mov	r7,b
+      000A30 7C 01            [12] 2913 	mov	r4,#0x01
+      000A32 12r00r00         [24] 2914 	lcall	__gptrget
+      000A35 FA               [12] 2915 	mov	r2,a
+      000A36 A3               [24] 2916 	inc	dptr
+      000A37 12r00r00         [24] 2917 	lcall	__gptrget
+      000A3A FB               [12] 2918 	mov	r3,a
+      000A3B BA 00 05         [24] 2919 	cjne	r2,#0x00,00131$
+      000A3E BB 00 02         [24] 2920 	cjne	r3,#0x00,00131$
+      000A41 80 0B            [24] 2921 	sjmp	00101$
+      000A43                       2922 00131$:
+      000A43 BA 16 05         [24] 2923 	cjne	r2,#0x16,00132$
+      000A46 BB 01 02         [24] 2924 	cjne	r3,#0x01,00132$
+      000A49 80 74            [24] 2925 	sjmp	00102$
+      000A4B                       2926 00132$:
+      000A4B 02r0ArE6         [24] 2927 	ljmp	00113$
+      000A4E                       2928 00101$:
+                                   2929 ;	../../platform/cc2530dk/./viztool.c:274: server_conn = udp_new(NULL, UIP_HTONS(0), NULL);
+      000A4E C0 05            [24] 2930 	push	ar5
+      000A50 C0 06            [24] 2931 	push	ar6
+      000A52 C0 07            [24] 2932 	push	ar7
+      000A54 C0 06            [24] 2933 	push	ar6
+      000A56 C0 05            [24] 2934 	push	ar5
+      000A58 E4               [12] 2935 	clr	a
+      000A59 C0 E0            [24] 2936 	push	acc
+      000A5B C0 E0            [24] 2937 	push	acc
+      000A5D C0 E0            [24] 2938 	push	acc
+      000A5F E4               [12] 2939 	clr	a
+      000A60 C0 E0            [24] 2940 	push	acc
+      000A62 C0 E0            [24] 2941 	push	acc
+      000A64 90 00 00         [24] 2942 	mov	dptr,#0x0000
+      000A67 75 F0 00         [24] 2943 	mov	b,#0x00
+      000A6A 78r00            [12] 2944 	mov	r0,#_udp_new
+      000A6C 79s00            [12] 2945 	mov	r1,#(_udp_new >> 8)
+      000A6E 7As00            [12] 2946 	mov	r2,#(_udp_new >> 16)
+      000A70 12r00r00         [24] 2947 	lcall	__sdcc_banked_call
+      000A73 AA 82            [24] 2948 	mov	r2,dpl
+      000A75 AB 83            [24] 2949 	mov	r3,dph
+      000A77 AF F0            [24] 2950 	mov	r7,b
+      000A79 E5 81            [12] 2951 	mov	a,sp
+      000A7B 24 FB            [12] 2952 	add	a,#0xfb
+      000A7D F5 81            [12] 2953 	mov	sp,a
+      000A7F D0 05            [24] 2954 	pop	ar5
+      000A81 D0 06            [24] 2955 	pop	ar6
+      000A83 90r00r00         [24] 2956 	mov	dptr,#_server_conn
+      000A86 EA               [12] 2957 	mov	a,r2
+      000A87 F0               [24] 2958 	movx	@dptr,a
+      000A88 EB               [12] 2959 	mov	a,r3
+      000A89 A3               [24] 2960 	inc	dptr
+      000A8A F0               [24] 2961 	movx	@dptr,a
+      000A8B EF               [12] 2962 	mov	a,r7
+      000A8C A3               [24] 2963 	inc	dptr
+      000A8D F0               [24] 2964 	movx	@dptr,a
+                                   2965 ;	../../platform/cc2530dk/./viztool.c:275: udp_bind(server_conn, UIP_HTONS(VIZTOOL_UDP_PORT));
+      000A8E 74 10            [12] 2966 	mov	a,#0x10
+      000A90 2A               [12] 2967 	add	a,r2
+      000A91 FA               [12] 2968 	mov	r2,a
+      000A92 E4               [12] 2969 	clr	a
+      000A93 3B               [12] 2970 	addc	a,r3
+      000A94 FB               [12] 2971 	mov	r3,a
+      000A95 8A 82            [24] 2972 	mov	dpl,r2
+      000A97 8B 83            [24] 2973 	mov	dph,r3
+      000A99 8F F0            [24] 2974 	mov	b,r7
+      000A9B 74 EA            [12] 2975 	mov	a,#0xEA
+      000A9D 12r00r00         [24] 2976 	lcall	__gptrput
+      000AA0 A3               [24] 2977 	inc	dptr
+      000AA1 74 61            [12] 2978 	mov	a,#0x61
+      000AA3 12r00r00         [24] 2979 	lcall	__gptrput
+                                   2980 ;	../../platform/cc2530dk/./viztool.c:284: PROCESS_END();
+      000AA6 D0 07            [24] 2981 	pop	ar7
+      000AA8 D0 06            [24] 2982 	pop	ar6
+      000AAA D0 05            [24] 2983 	pop	ar5
+                                   2984 ;	../../platform/cc2530dk/./viztool.c:277: while(1) {
+      000AAC                       2985 00111$:
+                                   2986 ;	../../platform/cc2530dk/./viztool.c:278: PROCESS_YIELD();
+      000AAC 7C 00            [12] 2987 	mov	r4,#0x00
+      000AAE 8D 82            [24] 2988 	mov	dpl,r5
+      000AB0 8E 83            [24] 2989 	mov	dph,r6
+      000AB2 8F F0            [24] 2990 	mov	b,r7
+      000AB4 74 16            [12] 2991 	mov	a,#0x16
+      000AB6 12r00r00         [24] 2992 	lcall	__gptrput
+      000AB9 A3               [24] 2993 	inc	dptr
+      000ABA 74 01            [12] 2994 	mov	a,#0x01
+      000ABC 12r00r00         [24] 2995 	lcall	__gptrput
+      000ABF                       2996 00102$:
+      000ABF EC               [12] 2997 	mov	a,r4
+      000AC0 70 05            [24] 2998 	jnz	00106$
+      000AC2 75 82 01         [24] 2999 	mov	dpl,#0x01
+      000AC5 80 31            [24] 3000 	sjmp	00114$
+      000AC7                       3001 00106$:
+                                   3002 ;	../../platform/cc2530dk/./viztool.c:279: if(ev == tcpip_event) {
+      000AC7 90r00r00         [24] 3003 	mov	dptr,#_tcpip_event
+      000ACA E0               [24] 3004 	movx	a,@dptr
+      000ACB FC               [12] 3005 	mov	r4,a
+      000ACC E5 81            [12] 3006 	mov	a,sp
+      000ACE 24 FD            [12] 3007 	add	a,#0xfd
+      000AD0 F8               [12] 3008 	mov	r0,a
+      000AD1 E6               [12] 3009 	mov	a,@r0
+      000AD2 B5 04 D7         [24] 3010 	cjne	a,ar4,00111$
+                                   3011 ;	../../platform/cc2530dk/./viztool.c:280: tcpip_handler();
+      000AD5 C0 07            [24] 3012 	push	ar7
+      000AD7 C0 06            [24] 3013 	push	ar6
+      000AD9 C0 05            [24] 3014 	push	ar5
+      000ADB 12r07rFA         [24] 3015 	lcall	_tcpip_handler
+      000ADE D0 05            [24] 3016 	pop	ar5
+      000AE0 D0 06            [24] 3017 	pop	ar6
+      000AE2 D0 07            [24] 3018 	pop	ar7
+                                   3019 ;	../../platform/cc2530dk/./viztool.c:284: PROCESS_END();
+      000AE4 80 C6            [24] 3020 	sjmp	00111$
+      000AE6                       3021 00113$:
+      000AE6 8D 82            [24] 3022 	mov	dpl,r5
+      000AE8 8E 83            [24] 3023 	mov	dph,r6
+      000AEA 8F F0            [24] 3024 	mov	b,r7
+      000AEC E4               [12] 3025 	clr	a
+      000AED 12r00r00         [24] 3026 	lcall	__gptrput
+      000AF0 A3               [24] 3027 	inc	dptr
+      000AF1 E4               [12] 3028 	clr	a
+      000AF2 12r00r00         [24] 3029 	lcall	__gptrput
+      000AF5 75 82 03         [24] 3030 	mov	dpl,#0x03
+      000AF8                       3031 00114$:
+      000AF8 02r00r00         [24] 3032 	ljmp	__sdcc_banked_ret
+                                   3033 	.area CSEG    (CODE)
+                                   3034 	.area CONST   (CODE)
+                                   3035 	.area XINIT   (CODE)
+      000000                       3036 __xinit__viztool_process:
+                                   3037 ; generic printIvalPtr
+      000000 00 00 00              3038 	.byte #0x00,#0x00,#0x00
+      000003r2As0As00              3039 	.byte _process_thread_viztool_process,(_process_thread_viztool_process >> 8),(_process_thread_viztool_process >> 16)
+      000006 00 00                 3040 	.byte #0x00,#0x00	; 0
+      000008 00                    3041 	.db #0x00	; 0
+      000009 00                    3042 	.db #0x00	; 0
+                                   3043 	.area CABS    (ABS,CODE)

@@ -1,0 +1,716 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.3.1 #8804 (Aug  6 2013) (Linux)
+                                      4 ; This file was generated Sat Nov  3 15:44:49 2018
+                                      5 ;--------------------------------------------------------
+                                      6 	.module mmem
+                                      7 	.optsdcc -mmcs51 --model-huge
+                                      8 	
+                                      9 ;--------------------------------------------------------
+                                     10 ; Public variables in this module
+                                     11 ;--------------------------------------------------------
+                                     12 	.globl _memmove
+                                     13 	.globl _list_remove
+                                     14 	.globl _list_add
+                                     15 	.globl _list_init
+                                     16 	.globl _avail_memory
+                                     17 	.globl _mmem_alloc
+                                     18 	.globl _mmem_free
+                                     19 	.globl _mmem_init
+                                     20 ;--------------------------------------------------------
+                                     21 ; special function registers
+                                     22 ;--------------------------------------------------------
+                                     23 	.area RSEG    (ABS,DATA)
+      000000                         24 	.org 0x0000
+                                     25 ;--------------------------------------------------------
+                                     26 ; special function bits
+                                     27 ;--------------------------------------------------------
+                                     28 	.area RSEG    (ABS,DATA)
+      000000                         29 	.org 0x0000
+                                     30 ;--------------------------------------------------------
+                                     31 ; overlayable register banks
+                                     32 ;--------------------------------------------------------
+                                     33 	.area REG_BANK_0	(REL,OVR,DATA)
+      000000                         34 	.ds 8
+                                     35 ;--------------------------------------------------------
+                                     36 ; internal ram data
+                                     37 ;--------------------------------------------------------
+                                     38 	.area DSEG    (DATA)
+                                     39 ;--------------------------------------------------------
+                                     40 ; overlayable items in internal ram 
+                                     41 ;--------------------------------------------------------
+                                     42 ;--------------------------------------------------------
+                                     43 ; indirectly addressable internal ram data
+                                     44 ;--------------------------------------------------------
+                                     45 	.area ISEG    (DATA)
+                                     46 ;--------------------------------------------------------
+                                     47 ; absolute internal ram data
+                                     48 ;--------------------------------------------------------
+                                     49 	.area IABS    (ABS,DATA)
+                                     50 	.area IABS    (ABS,DATA)
+                                     51 ;--------------------------------------------------------
+                                     52 ; bit data
+                                     53 ;--------------------------------------------------------
+                                     54 	.area BSEG    (BIT)
+                                     55 ;--------------------------------------------------------
+                                     56 ; paged external ram data
+                                     57 ;--------------------------------------------------------
+                                     58 	.area PSEG    (PAG,XDATA)
+                                     59 ;--------------------------------------------------------
+                                     60 ; external ram data
+                                     61 ;--------------------------------------------------------
+                                     62 	.area XSEG    (XDATA)
+      000000                         63 _avail_memory::
+      000000                         64 	.ds 2
+      000002                         65 _memory:
+      000002                         66 	.ds 4096
+      001002                         67 _mmem_init_inited_1_44:
+      001002                         68 	.ds 2
+                                     69 ;--------------------------------------------------------
+                                     70 ; absolute external ram data
+                                     71 ;--------------------------------------------------------
+                                     72 	.area XABS    (ABS,XDATA)
+                                     73 ;--------------------------------------------------------
+                                     74 ; external initialized ram data
+                                     75 ;--------------------------------------------------------
+                                     76 	.area XISEG   (XDATA)
+      000000                         77 _mmemlist_list:
+      000000                         78 	.ds 3
+      000003                         79 _mmemlist:
+      000003                         80 	.ds 3
+                                     81 	.area HOME    (CODE)
+                                     82 	.area GSINIT0 (CODE)
+                                     83 	.area GSINIT1 (CODE)
+                                     84 	.area GSINIT2 (CODE)
+                                     85 	.area GSINIT3 (CODE)
+                                     86 	.area GSINIT4 (CODE)
+                                     87 	.area GSINIT5 (CODE)
+                                     88 	.area GSINIT  (CODE)
+                                     89 	.area GSFINAL (CODE)
+                                     90 	.area CSEG    (CODE)
+                                     91 ;--------------------------------------------------------
+                                     92 ; global & static initialisations
+                                     93 ;--------------------------------------------------------
+                                     94 	.area HOME    (CODE)
+                                     95 	.area GSINIT  (CODE)
+                                     96 	.area GSFINAL (CODE)
+                                     97 	.area GSINIT  (CODE)
+                                     98 ;------------------------------------------------------------
+                                     99 ;Allocation info for local variables in function 'mmem_init'
+                                    100 ;------------------------------------------------------------
+                                    101 ;inited                    Allocated with name '_mmem_init_inited_1_44'
+                                    102 ;------------------------------------------------------------
+                                    103 ;	../../core/lib/mmem.c:154: static int inited = 0;
+      000000 90r10r02         [24]  104 	mov	dptr,#_mmem_init_inited_1_44
+      000003 E4               [12]  105 	clr	a
+      000004 F0               [24]  106 	movx	@dptr,a
+      000005 E4               [12]  107 	clr	a
+      000006 A3               [24]  108 	inc	dptr
+      000007 F0               [24]  109 	movx	@dptr,a
+                                    110 ;--------------------------------------------------------
+                                    111 ; Home
+                                    112 ;--------------------------------------------------------
+                                    113 	.area HOME    (CODE)
+                                    114 	.area HOME    (CODE)
+                                    115 ;--------------------------------------------------------
+                                    116 ; code
+                                    117 ;--------------------------------------------------------
+                                    118 	.area BANK1   (CODE)
+                                    119 ;------------------------------------------------------------
+                                    120 ;Allocation info for local variables in function 'mmem_alloc'
+                                    121 ;------------------------------------------------------------
+                                    122 ;size                      Allocated to stack - sp -7
+                                    123 ;m                         Allocated to stack - sp -2
+                                    124 ;------------------------------------------------------------
+                                    125 ;	../../core/lib/mmem.c:83: mmem_alloc(struct mmem *m, unsigned int size)
+                                    126 ;	-----------------------------------------
+                                    127 ;	 function mmem_alloc
+                                    128 ;	-----------------------------------------
+      000000                        129 _mmem_alloc:
+                           000007   130 	ar7 = 0x07
+                           000006   131 	ar6 = 0x06
+                           000005   132 	ar5 = 0x05
+                           000004   133 	ar4 = 0x04
+                           000003   134 	ar3 = 0x03
+                           000002   135 	ar2 = 0x02
+                           000001   136 	ar1 = 0x01
+                           000000   137 	ar0 = 0x00
+      000000 C0 82            [24]  138 	push	dpl
+      000002 C0 83            [24]  139 	push	dph
+      000004 C0 F0            [24]  140 	push	b
+                                    141 ;	../../core/lib/mmem.c:86: if(avail_memory < size) {
+      000006 90r00r00         [24]  142 	mov	dptr,#_avail_memory
+      000009 E0               [24]  143 	movx	a,@dptr
+      00000A FB               [12]  144 	mov	r3,a
+      00000B A3               [24]  145 	inc	dptr
+      00000C E0               [24]  146 	movx	a,@dptr
+      00000D FC               [12]  147 	mov	r4,a
+      00000E E5 81            [12]  148 	mov	a,sp
+      000010 24 F9            [12]  149 	add	a,#0xf9
+      000012 F8               [12]  150 	mov	r0,a
+      000013 C3               [12]  151 	clr	c
+      000014 EB               [12]  152 	mov	a,r3
+      000015 96               [12]  153 	subb	a,@r0
+      000016 EC               [12]  154 	mov	a,r4
+      000017 08               [12]  155 	inc	r0
+      000018 96               [12]  156 	subb	a,@r0
+      000019 50 06            [24]  157 	jnc	00102$
+                                    158 ;	../../core/lib/mmem.c:87: return 0;
+      00001B 90 00 00         [24]  159 	mov	dptr,#0x0000
+      00001E 02r00rD0         [24]  160 	ljmp	00103$
+      000021                        161 00102$:
+                                    162 ;	../../core/lib/mmem.c:92: list_add(mmemlist, m);
+      000021 A8 81            [24]  163 	mov	r0,sp
+      000023 18               [12]  164 	dec	r0
+      000024 18               [12]  165 	dec	r0
+      000025 86 02            [24]  166 	mov	ar2,@r0
+      000027 08               [12]  167 	inc	r0
+      000028 86 03            [24]  168 	mov	ar3,@r0
+      00002A 08               [12]  169 	inc	r0
+      00002B 86 04            [24]  170 	mov	ar4,@r0
+      00002D 90r00r03         [24]  171 	mov	dptr,#_mmemlist
+      000030 E0               [24]  172 	movx	a,@dptr
+      000031 FD               [12]  173 	mov	r5,a
+      000032 A3               [24]  174 	inc	dptr
+      000033 E0               [24]  175 	movx	a,@dptr
+      000034 FE               [12]  176 	mov	r6,a
+      000035 A3               [24]  177 	inc	dptr
+      000036 E0               [24]  178 	movx	a,@dptr
+      000037 FF               [12]  179 	mov	r7,a
+      000038 C0 02            [24]  180 	push	ar2
+      00003A C0 03            [24]  181 	push	ar3
+      00003C C0 04            [24]  182 	push	ar4
+      00003E 8D 82            [24]  183 	mov	dpl,r5
+      000040 8E 83            [24]  184 	mov	dph,r6
+      000042 8F F0            [24]  185 	mov	b,r7
+      000044 78r00            [12]  186 	mov	r0,#_list_add
+      000046 79s00            [12]  187 	mov	r1,#(_list_add >> 8)
+      000048 7As00            [12]  188 	mov	r2,#(_list_add >> 16)
+      00004A 12r00r00         [24]  189 	lcall	__sdcc_banked_call
+      00004D 15 81            [12]  190 	dec	sp
+      00004F 15 81            [12]  191 	dec	sp
+      000051 15 81            [12]  192 	dec	sp
+                                    193 ;	../../core/lib/mmem.c:96: m->ptr = &memory[MMEM_SIZE - avail_memory];
+      000053 A8 81            [24]  194 	mov	r0,sp
+      000055 18               [12]  195 	dec	r0
+      000056 18               [12]  196 	dec	r0
+      000057 74 05            [12]  197 	mov	a,#0x05
+      000059 26               [12]  198 	add	a,@r0
+      00005A FD               [12]  199 	mov	r5,a
+      00005B E4               [12]  200 	clr	a
+      00005C 08               [12]  201 	inc	r0
+      00005D 36               [12]  202 	addc	a,@r0
+      00005E FE               [12]  203 	mov	r6,a
+      00005F 08               [12]  204 	inc	r0
+      000060 86 07            [24]  205 	mov	ar7,@r0
+      000062 90r00r00         [24]  206 	mov	dptr,#_avail_memory
+      000065 E0               [24]  207 	movx	a,@dptr
+      000066 FB               [12]  208 	mov	r3,a
+      000067 A3               [24]  209 	inc	dptr
+      000068 E0               [24]  210 	movx	a,@dptr
+      000069 FC               [12]  211 	mov	r4,a
+      00006A E4               [12]  212 	clr	a
+      00006B C3               [12]  213 	clr	c
+      00006C 9B               [12]  214 	subb	a,r3
+      00006D FB               [12]  215 	mov	r3,a
+      00006E 74 10            [12]  216 	mov	a,#0x10
+      000070 9C               [12]  217 	subb	a,r4
+      000071 FC               [12]  218 	mov	r4,a
+      000072 EB               [12]  219 	mov	a,r3
+      000073 24r02            [12]  220 	add	a,#_memory
+      000075 FB               [12]  221 	mov	r3,a
+      000076 EC               [12]  222 	mov	a,r4
+      000077 34s00            [12]  223 	addc	a,#(_memory >> 8)
+      000079 FC               [12]  224 	mov	r4,a
+      00007A 7A 00            [12]  225 	mov	r2,#0x00
+      00007C 8D 82            [24]  226 	mov	dpl,r5
+      00007E 8E 83            [24]  227 	mov	dph,r6
+      000080 8F F0            [24]  228 	mov	b,r7
+      000082 EB               [12]  229 	mov	a,r3
+      000083 12r00r00         [24]  230 	lcall	__gptrput
+      000086 A3               [24]  231 	inc	dptr
+      000087 EC               [12]  232 	mov	a,r4
+      000088 12r00r00         [24]  233 	lcall	__gptrput
+      00008B A3               [24]  234 	inc	dptr
+      00008C EA               [12]  235 	mov	a,r2
+      00008D 12r00r00         [24]  236 	lcall	__gptrput
+                                    237 ;	../../core/lib/mmem.c:99: m->size = size;
+      000090 A8 81            [24]  238 	mov	r0,sp
+      000092 18               [12]  239 	dec	r0
+      000093 18               [12]  240 	dec	r0
+      000094 74 03            [12]  241 	mov	a,#0x03
+      000096 26               [12]  242 	add	a,@r0
+      000097 FD               [12]  243 	mov	r5,a
+      000098 E4               [12]  244 	clr	a
+      000099 08               [12]  245 	inc	r0
+      00009A 36               [12]  246 	addc	a,@r0
+      00009B FE               [12]  247 	mov	r6,a
+      00009C 08               [12]  248 	inc	r0
+      00009D 86 07            [24]  249 	mov	ar7,@r0
+      00009F 8D 82            [24]  250 	mov	dpl,r5
+      0000A1 8E 83            [24]  251 	mov	dph,r6
+      0000A3 8F F0            [24]  252 	mov	b,r7
+      0000A5 E5 81            [12]  253 	mov	a,sp
+      0000A7 24 F9            [12]  254 	add	a,#0xf9
+      0000A9 F8               [12]  255 	mov	r0,a
+      0000AA E6               [12]  256 	mov	a,@r0
+      0000AB 12r00r00         [24]  257 	lcall	__gptrput
+      0000AE A3               [24]  258 	inc	dptr
+      0000AF 08               [12]  259 	inc	r0
+      0000B0 E6               [12]  260 	mov	a,@r0
+      0000B1 12r00r00         [24]  261 	lcall	__gptrput
+                                    262 ;	../../core/lib/mmem.c:102: avail_memory -= size;
+      0000B4 90r00r00         [24]  263 	mov	dptr,#_avail_memory
+      0000B7 E0               [24]  264 	movx	a,@dptr
+      0000B8 FE               [12]  265 	mov	r6,a
+      0000B9 A3               [24]  266 	inc	dptr
+      0000BA E0               [24]  267 	movx	a,@dptr
+      0000BB FF               [12]  268 	mov	r7,a
+      0000BC E5 81            [12]  269 	mov	a,sp
+      0000BE 24 F9            [12]  270 	add	a,#0xf9
+      0000C0 F8               [12]  271 	mov	r0,a
+      0000C1 90r00r00         [24]  272 	mov	dptr,#_avail_memory
+      0000C4 EE               [12]  273 	mov	a,r6
+      0000C5 C3               [12]  274 	clr	c
+      0000C6 96               [12]  275 	subb	a,@r0
+      0000C7 F0               [24]  276 	movx	@dptr,a
+      0000C8 EF               [12]  277 	mov	a,r7
+      0000C9 08               [12]  278 	inc	r0
+      0000CA 96               [12]  279 	subb	a,@r0
+      0000CB A3               [24]  280 	inc	dptr
+      0000CC F0               [24]  281 	movx	@dptr,a
+                                    282 ;	../../core/lib/mmem.c:106: return 1;
+      0000CD 90 00 01         [24]  283 	mov	dptr,#0x0001
+      0000D0                        284 00103$:
+      0000D0 15 81            [12]  285 	dec	sp
+      0000D2 15 81            [12]  286 	dec	sp
+      0000D4 15 81            [12]  287 	dec	sp
+      0000D6 02r00r00         [24]  288 	ljmp	__sdcc_banked_ret
+                                    289 ;------------------------------------------------------------
+                                    290 ;Allocation info for local variables in function 'mmem_free'
+                                    291 ;------------------------------------------------------------
+                                    292 ;m                         Allocated to stack - sp -13
+                                    293 ;n                         Allocated to stack - sp -2
+                                    294 ;sloc0                     Allocated to stack - sp -10
+                                    295 ;sloc1                     Allocated to stack - sp -8
+                                    296 ;sloc2                     Allocated to stack - sp -5
+                                    297 ;------------------------------------------------------------
+                                    298 ;	../../core/lib/mmem.c:119: mmem_free(struct mmem *m)
+                                    299 ;	-----------------------------------------
+                                    300 ;	 function mmem_free
+                                    301 ;	-----------------------------------------
+      0000D9                        302 _mmem_free:
+      0000D9 C0 82            [24]  303 	push	dpl
+      0000DB C0 83            [24]  304 	push	dph
+      0000DD C0 F0            [24]  305 	push	b
+      0000DF E5 81            [12]  306 	mov	a,sp
+      0000E1 24 0B            [12]  307 	add	a,#0x0B
+                                    308 ;	../../core/lib/mmem.c:123: if(m->next != NULL) {
+      0000E3 F5 81            [12]  309 	mov	sp,a
+      0000E5 24 F3            [12]  310 	add	a,#0xf3
+      0000E7 F8               [12]  311 	mov	r0,a
+      0000E8 86 82            [24]  312 	mov	dpl,@r0
+      0000EA 08               [12]  313 	inc	r0
+      0000EB 86 83            [24]  314 	mov	dph,@r0
+      0000ED 08               [12]  315 	inc	r0
+      0000EE 86 F0            [24]  316 	mov	b,@r0
+      0000F0 12r00r00         [24]  317 	lcall	__gptrget
+      0000F3 FA               [12]  318 	mov	r2,a
+      0000F4 A3               [24]  319 	inc	dptr
+      0000F5 12r00r00         [24]  320 	lcall	__gptrget
+      0000F8 FB               [12]  321 	mov	r3,a
+      0000F9 A3               [24]  322 	inc	dptr
+      0000FA 12r00r00         [24]  323 	lcall	__gptrget
+      0000FD FC               [12]  324 	mov	r4,a
+      0000FE EA               [12]  325 	mov	a,r2
+      0000FF 4B               [12]  326 	orl	a,r3
+      000100 70 03            [24]  327 	jnz	00118$
+      000102 02r02r80         [24]  328 	ljmp	00103$
+      000105                        329 00118$:
+                                    330 ;	../../core/lib/mmem.c:127: &memory[MMEM_SIZE - avail_memory] - (char *)m->next->ptr);
+      000105 90r00r00         [24]  331 	mov	dptr,#_avail_memory
+      000108 E0               [24]  332 	movx	a,@dptr
+      000109 FE               [12]  333 	mov	r6,a
+      00010A A3               [24]  334 	inc	dptr
+      00010B E0               [24]  335 	movx	a,@dptr
+      00010C FF               [12]  336 	mov	r7,a
+      00010D E4               [12]  337 	clr	a
+      00010E C3               [12]  338 	clr	c
+      00010F 9E               [12]  339 	subb	a,r6
+      000110 FE               [12]  340 	mov	r6,a
+      000111 74 10            [12]  341 	mov	a,#0x10
+      000113 9F               [12]  342 	subb	a,r7
+      000114 FF               [12]  343 	mov	r7,a
+      000115 E5 81            [12]  344 	mov	a,sp
+      000117 24 F6            [12]  345 	add	a,#0xf6
+      000119 F8               [12]  346 	mov	r0,a
+      00011A EE               [12]  347 	mov	a,r6
+      00011B 24r02            [12]  348 	add	a,#_memory
+      00011D F6               [12]  349 	mov	@r0,a
+      00011E EF               [12]  350 	mov	a,r7
+      00011F 34s00            [12]  351 	addc	a,#(_memory >> 8)
+      000121 08               [12]  352 	inc	r0
+      000122 F6               [12]  353 	mov	@r0,a
+      000123 74 05            [12]  354 	mov	a,#0x05
+      000125 2A               [12]  355 	add	a,r2
+      000126 FA               [12]  356 	mov	r2,a
+      000127 E4               [12]  357 	clr	a
+      000128 3B               [12]  358 	addc	a,r3
+      000129 FB               [12]  359 	mov	r3,a
+      00012A 8A 82            [24]  360 	mov	dpl,r2
+      00012C 8B 83            [24]  361 	mov	dph,r3
+      00012E 8C F0            [24]  362 	mov	b,r4
+      000130 12r00r00         [24]  363 	lcall	__gptrget
+      000133 FA               [12]  364 	mov	r2,a
+      000134 A3               [24]  365 	inc	dptr
+      000135 12r00r00         [24]  366 	lcall	__gptrget
+      000138 FB               [12]  367 	mov	r3,a
+      000139 A3               [24]  368 	inc	dptr
+      00013A 12r00r00         [24]  369 	lcall	__gptrget
+      00013D FC               [12]  370 	mov	r4,a
+      00013E 8A 05            [24]  371 	mov	ar5,r2
+      000140 8B 06            [24]  372 	mov	ar6,r3
+      000142 8C 07            [24]  373 	mov	ar7,r4
+      000144 E5 81            [12]  374 	mov	a,sp
+      000146 24 F6            [12]  375 	add	a,#0xf6
+      000148 F8               [12]  376 	mov	r0,a
+      000149 E6               [12]  377 	mov	a,@r0
+      00014A C3               [12]  378 	clr	c
+      00014B 9D               [12]  379 	subb	a,r5
+      00014C F6               [12]  380 	mov	@r0,a
+      00014D 08               [12]  381 	inc	r0
+      00014E E6               [12]  382 	mov	a,@r0
+      00014F 9E               [12]  383 	subb	a,r6
+      000150 F6               [12]  384 	mov	@r0,a
+                                    385 ;	../../core/lib/mmem.c:126: memmove(m->ptr, m->next->ptr,
+      000151 E5 81            [12]  386 	mov	a,sp
+      000153 24 F3            [12]  387 	add	a,#0xf3
+      000155 F8               [12]  388 	mov	r0,a
+      000156 74 05            [12]  389 	mov	a,#0x05
+      000158 26               [12]  390 	add	a,@r0
+      000159 FD               [12]  391 	mov	r5,a
+      00015A E4               [12]  392 	clr	a
+      00015B 08               [12]  393 	inc	r0
+      00015C 36               [12]  394 	addc	a,@r0
+      00015D FE               [12]  395 	mov	r6,a
+      00015E 08               [12]  396 	inc	r0
+      00015F 86 07            [24]  397 	mov	ar7,@r0
+      000161 8D 82            [24]  398 	mov	dpl,r5
+      000163 8E 83            [24]  399 	mov	dph,r6
+      000165 8F F0            [24]  400 	mov	b,r7
+      000167 12r00r00         [24]  401 	lcall	__gptrget
+      00016A FD               [12]  402 	mov	r5,a
+      00016B A3               [24]  403 	inc	dptr
+      00016C 12r00r00         [24]  404 	lcall	__gptrget
+      00016F FE               [12]  405 	mov	r6,a
+      000170 A3               [24]  406 	inc	dptr
+      000171 12r00r00         [24]  407 	lcall	__gptrget
+      000174 FF               [12]  408 	mov	r7,a
+      000175 E5 81            [12]  409 	mov	a,sp
+      000177 24 F6            [12]  410 	add	a,#0xf6
+      000179 F8               [12]  411 	mov	r0,a
+      00017A E6               [12]  412 	mov	a,@r0
+      00017B C0 E0            [24]  413 	push	acc
+      00017D 08               [12]  414 	inc	r0
+      00017E E6               [12]  415 	mov	a,@r0
+      00017F C0 E0            [24]  416 	push	acc
+      000181 C0 02            [24]  417 	push	ar2
+      000183 C0 03            [24]  418 	push	ar3
+      000185 C0 04            [24]  419 	push	ar4
+      000187 8D 82            [24]  420 	mov	dpl,r5
+      000189 8E 83            [24]  421 	mov	dph,r6
+      00018B 8F F0            [24]  422 	mov	b,r7
+      00018D 78r00            [12]  423 	mov	r0,#_memmove
+      00018F 79s00            [12]  424 	mov	r1,#(_memmove >> 8)
+      000191 7As00            [12]  425 	mov	r2,#(_memmove >> 16)
+      000193 12r00r00         [24]  426 	lcall	__sdcc_banked_call
+      000196 E5 81            [12]  427 	mov	a,sp
+      000198 24 FB            [12]  428 	add	a,#0xfb
+                                    429 ;	../../core/lib/mmem.c:131: for(n = m->next; n != NULL; n = n->next) {
+      00019A F5 81            [12]  430 	mov	sp,a
+      00019C 24 F3            [12]  431 	add	a,#0xf3
+      00019E F8               [12]  432 	mov	r0,a
+      00019F 86 82            [24]  433 	mov	dpl,@r0
+      0001A1 08               [12]  434 	inc	r0
+      0001A2 86 83            [24]  435 	mov	dph,@r0
+      0001A4 08               [12]  436 	inc	r0
+      0001A5 86 F0            [24]  437 	mov	b,@r0
+      0001A7 A9 81            [24]  438 	mov	r1,sp
+      0001A9 19               [12]  439 	dec	r1
+      0001AA 19               [12]  440 	dec	r1
+      0001AB 12r00r00         [24]  441 	lcall	__gptrget
+      0001AE F7               [12]  442 	mov	@r1,a
+      0001AF A3               [24]  443 	inc	dptr
+      0001B0 12r00r00         [24]  444 	lcall	__gptrget
+      0001B3 09               [12]  445 	inc	r1
+      0001B4 F7               [12]  446 	mov	@r1,a
+      0001B5 A3               [24]  447 	inc	dptr
+      0001B6 12r00r00         [24]  448 	lcall	__gptrget
+      0001B9 09               [12]  449 	inc	r1
+      0001BA F7               [12]  450 	mov	@r1,a
+      0001BB E5 81            [12]  451 	mov	a,sp
+      0001BD 24 F3            [12]  452 	add	a,#0xf3
+      0001BF F8               [12]  453 	mov	r0,a
+      0001C0 E5 81            [12]  454 	mov	a,sp
+      0001C2 24 F8            [12]  455 	add	a,#0xf8
+      0001C4 F9               [12]  456 	mov	r1,a
+      0001C5 74 03            [12]  457 	mov	a,#0x03
+      0001C7 26               [12]  458 	add	a,@r0
+      0001C8 F7               [12]  459 	mov	@r1,a
+      0001C9 E4               [12]  460 	clr	a
+      0001CA 08               [12]  461 	inc	r0
+      0001CB 36               [12]  462 	addc	a,@r0
+      0001CC 09               [12]  463 	inc	r1
+      0001CD F7               [12]  464 	mov	@r1,a
+      0001CE 08               [12]  465 	inc	r0
+      0001CF 09               [12]  466 	inc	r1
+      0001D0 E6               [12]  467 	mov	a,@r0
+      0001D1 F7               [12]  468 	mov	@r1,a
+      0001D2                        469 00105$:
+      0001D2 A8 81            [24]  470 	mov	r0,sp
+      0001D4 18               [12]  471 	dec	r0
+      0001D5 18               [12]  472 	dec	r0
+      0001D6 E4               [12]  473 	clr	a
+      0001D7 C0 E0            [24]  474 	push	acc
+      0001D9 E4               [12]  475 	clr	a
+      0001DA C0 E0            [24]  476 	push	acc
+      0001DC E4               [12]  477 	clr	a
+      0001DD C0 E0            [24]  478 	push	acc
+      0001DF 86 82            [24]  479 	mov	dpl,@r0
+      0001E1 08               [12]  480 	inc	r0
+      0001E2 86 83            [24]  481 	mov	dph,@r0
+      0001E4 08               [12]  482 	inc	r0
+      0001E5 86 F0            [24]  483 	mov	b,@r0
+      0001E7 12r00r00         [24]  484 	lcall	___gptr_cmp
+      0001EA 15 81            [12]  485 	dec	sp
+      0001EC 15 81            [12]  486 	dec	sp
+      0001EE 15 81            [12]  487 	dec	sp
+      0001F0 70 03            [24]  488 	jnz	00119$
+      0001F2 02r02r80         [24]  489 	ljmp	00103$
+      0001F5                        490 00119$:
+                                    491 ;	../../core/lib/mmem.c:132: n->ptr = (void *)((char *)n->ptr - m->size);
+      0001F5 A8 81            [24]  492 	mov	r0,sp
+      0001F7 18               [12]  493 	dec	r0
+      0001F8 18               [12]  494 	dec	r0
+      0001F9 74 05            [12]  495 	mov	a,#0x05
+      0001FB 26               [12]  496 	add	a,@r0
+      0001FC FD               [12]  497 	mov	r5,a
+      0001FD E4               [12]  498 	clr	a
+      0001FE 08               [12]  499 	inc	r0
+      0001FF 36               [12]  500 	addc	a,@r0
+      000200 FE               [12]  501 	mov	r6,a
+      000201 08               [12]  502 	inc	r0
+      000202 86 07            [24]  503 	mov	ar7,@r0
+      000204 8D 82            [24]  504 	mov	dpl,r5
+      000206 8E 83            [24]  505 	mov	dph,r6
+      000208 8F F0            [24]  506 	mov	b,r7
+      00020A 12r00r00         [24]  507 	lcall	__gptrget
+      00020D FA               [12]  508 	mov	r2,a
+      00020E A3               [24]  509 	inc	dptr
+      00020F 12r00r00         [24]  510 	lcall	__gptrget
+      000212 FB               [12]  511 	mov	r3,a
+      000213 A3               [24]  512 	inc	dptr
+      000214 12r00r00         [24]  513 	lcall	__gptrget
+      000217 FC               [12]  514 	mov	r4,a
+      000218 E5 81            [12]  515 	mov	a,sp
+      00021A 24 FB            [12]  516 	add	a,#0xfb
+      00021C F8               [12]  517 	mov	r0,a
+      00021D A6 02            [24]  518 	mov	@r0,ar2
+      00021F 08               [12]  519 	inc	r0
+      000220 A6 03            [24]  520 	mov	@r0,ar3
+      000222 08               [12]  521 	inc	r0
+      000223 A6 04            [24]  522 	mov	@r0,ar4
+      000225 E5 81            [12]  523 	mov	a,sp
+      000227 24 F8            [12]  524 	add	a,#0xf8
+      000229 F8               [12]  525 	mov	r0,a
+      00022A 86 82            [24]  526 	mov	dpl,@r0
+      00022C 08               [12]  527 	inc	r0
+      00022D 86 83            [24]  528 	mov	dph,@r0
+      00022F 08               [12]  529 	inc	r0
+      000230 86 F0            [24]  530 	mov	b,@r0
+      000232 12r00r00         [24]  531 	lcall	__gptrget
+      000235 FB               [12]  532 	mov	r3,a
+      000236 A3               [24]  533 	inc	dptr
+      000237 12r00r00         [24]  534 	lcall	__gptrget
+      00023A FC               [12]  535 	mov	r4,a
+      00023B E5 81            [12]  536 	mov	a,sp
+      00023D 24 FB            [12]  537 	add	a,#0xfb
+      00023F F8               [12]  538 	mov	r0,a
+      000240 E6               [12]  539 	mov	a,@r0
+      000241 C3               [12]  540 	clr	c
+      000242 9B               [12]  541 	subb	a,r3
+      000243 FB               [12]  542 	mov	r3,a
+      000244 08               [12]  543 	inc	r0
+      000245 E6               [12]  544 	mov	a,@r0
+      000246 9C               [12]  545 	subb	a,r4
+      000247 FC               [12]  546 	mov	r4,a
+      000248 08               [12]  547 	inc	r0
+      000249 86 02            [24]  548 	mov	ar2,@r0
+      00024B 8D 82            [24]  549 	mov	dpl,r5
+      00024D 8E 83            [24]  550 	mov	dph,r6
+      00024F 8F F0            [24]  551 	mov	b,r7
+      000251 EB               [12]  552 	mov	a,r3
+      000252 12r00r00         [24]  553 	lcall	__gptrput
+      000255 A3               [24]  554 	inc	dptr
+      000256 EC               [12]  555 	mov	a,r4
+      000257 12r00r00         [24]  556 	lcall	__gptrput
+      00025A A3               [24]  557 	inc	dptr
+      00025B EA               [12]  558 	mov	a,r2
+      00025C 12r00r00         [24]  559 	lcall	__gptrput
+                                    560 ;	../../core/lib/mmem.c:131: for(n = m->next; n != NULL; n = n->next) {
+      00025F A8 81            [24]  561 	mov	r0,sp
+      000261 18               [12]  562 	dec	r0
+      000262 18               [12]  563 	dec	r0
+      000263 86 82            [24]  564 	mov	dpl,@r0
+      000265 08               [12]  565 	inc	r0
+      000266 86 83            [24]  566 	mov	dph,@r0
+      000268 08               [12]  567 	inc	r0
+      000269 86 F0            [24]  568 	mov	b,@r0
+      00026B 12r00r00         [24]  569 	lcall	__gptrget
+      00026E 18               [12]  570 	dec	r0
+      00026F 18               [12]  571 	dec	r0
+      000270 F6               [12]  572 	mov	@r0,a
+      000271 A3               [24]  573 	inc	dptr
+      000272 12r00r00         [24]  574 	lcall	__gptrget
+      000275 08               [12]  575 	inc	r0
+      000276 F6               [12]  576 	mov	@r0,a
+      000277 A3               [24]  577 	inc	dptr
+      000278 12r00r00         [24]  578 	lcall	__gptrget
+      00027B 08               [12]  579 	inc	r0
+      00027C F6               [12]  580 	mov	@r0,a
+      00027D 02r01rD2         [24]  581 	ljmp	00105$
+      000280                        582 00103$:
+                                    583 ;	../../core/lib/mmem.c:136: avail_memory += m->size;
+      000280 E5 81            [12]  584 	mov	a,sp
+      000282 24 F3            [12]  585 	add	a,#0xf3
+      000284 F8               [12]  586 	mov	r0,a
+      000285 74 03            [12]  587 	mov	a,#0x03
+      000287 26               [12]  588 	add	a,@r0
+      000288 FD               [12]  589 	mov	r5,a
+      000289 E4               [12]  590 	clr	a
+      00028A 08               [12]  591 	inc	r0
+      00028B 36               [12]  592 	addc	a,@r0
+      00028C FE               [12]  593 	mov	r6,a
+      00028D 08               [12]  594 	inc	r0
+      00028E 86 07            [24]  595 	mov	ar7,@r0
+      000290 8D 82            [24]  596 	mov	dpl,r5
+      000292 8E 83            [24]  597 	mov	dph,r6
+      000294 8F F0            [24]  598 	mov	b,r7
+      000296 12r00r00         [24]  599 	lcall	__gptrget
+      000299 FD               [12]  600 	mov	r5,a
+      00029A A3               [24]  601 	inc	dptr
+      00029B 12r00r00         [24]  602 	lcall	__gptrget
+      00029E FE               [12]  603 	mov	r6,a
+      00029F 90r00r00         [24]  604 	mov	dptr,#_avail_memory
+      0002A2 E0               [24]  605 	movx	a,@dptr
+      0002A3 FC               [12]  606 	mov	r4,a
+      0002A4 A3               [24]  607 	inc	dptr
+      0002A5 E0               [24]  608 	movx	a,@dptr
+      0002A6 FF               [12]  609 	mov	r7,a
+      0002A7 90r00r00         [24]  610 	mov	dptr,#_avail_memory
+      0002AA ED               [12]  611 	mov	a,r5
+      0002AB 2C               [12]  612 	add	a,r4
+      0002AC F0               [24]  613 	movx	@dptr,a
+      0002AD EE               [12]  614 	mov	a,r6
+      0002AE 3F               [12]  615 	addc	a,r7
+      0002AF A3               [24]  616 	inc	dptr
+      0002B0 F0               [24]  617 	movx	@dptr,a
+                                    618 ;	../../core/lib/mmem.c:139: list_remove(mmemlist, m);
+      0002B1 E5 81            [12]  619 	mov	a,sp
+      0002B3 24 F3            [12]  620 	add	a,#0xf3
+      0002B5 F8               [12]  621 	mov	r0,a
+      0002B6 86 05            [24]  622 	mov	ar5,@r0
+      0002B8 08               [12]  623 	inc	r0
+      0002B9 86 06            [24]  624 	mov	ar6,@r0
+      0002BB 08               [12]  625 	inc	r0
+      0002BC 86 07            [24]  626 	mov	ar7,@r0
+      0002BE 90r00r03         [24]  627 	mov	dptr,#_mmemlist
+      0002C1 E0               [24]  628 	movx	a,@dptr
+      0002C2 FA               [12]  629 	mov	r2,a
+      0002C3 A3               [24]  630 	inc	dptr
+      0002C4 E0               [24]  631 	movx	a,@dptr
+      0002C5 FB               [12]  632 	mov	r3,a
+      0002C6 A3               [24]  633 	inc	dptr
+      0002C7 E0               [24]  634 	movx	a,@dptr
+      0002C8 FC               [12]  635 	mov	r4,a
+      0002C9 C0 05            [24]  636 	push	ar5
+      0002CB C0 06            [24]  637 	push	ar6
+      0002CD C0 07            [24]  638 	push	ar7
+      0002CF 8A 82            [24]  639 	mov	dpl,r2
+      0002D1 8B 83            [24]  640 	mov	dph,r3
+      0002D3 8C F0            [24]  641 	mov	b,r4
+      0002D5 78r00            [12]  642 	mov	r0,#_list_remove
+      0002D7 79s00            [12]  643 	mov	r1,#(_list_remove >> 8)
+      0002D9 7As00            [12]  644 	mov	r2,#(_list_remove >> 16)
+      0002DB 12r00r00         [24]  645 	lcall	__sdcc_banked_call
+      0002DE 15 81            [12]  646 	dec	sp
+      0002E0 15 81            [12]  647 	dec	sp
+      0002E2 15 81            [12]  648 	dec	sp
+      0002E4 E5 81            [12]  649 	mov	a,sp
+      0002E6 24 F2            [12]  650 	add	a,#0xF2
+      0002E8 F5 81            [12]  651 	mov	sp,a
+      0002EA 02r00r00         [24]  652 	ljmp	__sdcc_banked_ret
+                                    653 ;------------------------------------------------------------
+                                    654 ;Allocation info for local variables in function 'mmem_init'
+                                    655 ;------------------------------------------------------------
+                                    656 ;inited                    Allocated with name '_mmem_init_inited_1_44'
+                                    657 ;------------------------------------------------------------
+                                    658 ;	../../core/lib/mmem.c:152: mmem_init(void)
+                                    659 ;	-----------------------------------------
+                                    660 ;	 function mmem_init
+                                    661 ;	-----------------------------------------
+      0002ED                        662 _mmem_init:
+                                    663 ;	../../core/lib/mmem.c:155: if(inited) {
+      0002ED 90r10r02         [24]  664 	mov	dptr,#_mmem_init_inited_1_44
+      0002F0 E0               [24]  665 	movx	a,@dptr
+      0002F1 FE               [12]  666 	mov	r6,a
+      0002F2 A3               [24]  667 	inc	dptr
+      0002F3 E0               [24]  668 	movx	a,@dptr
+      0002F4 FF               [12]  669 	mov	r7,a
+      0002F5 4E               [12]  670 	orl	a,r6
+      0002F6 60 02            [24]  671 	jz	00102$
+                                    672 ;	../../core/lib/mmem.c:156: return;
+      0002F8 80 2C            [24]  673 	sjmp	00103$
+      0002FA                        674 00102$:
+                                    675 ;	../../core/lib/mmem.c:158: list_init(mmemlist);
+      0002FA 90r00r03         [24]  676 	mov	dptr,#_mmemlist
+      0002FD E0               [24]  677 	movx	a,@dptr
+      0002FE FD               [12]  678 	mov	r5,a
+      0002FF A3               [24]  679 	inc	dptr
+      000300 E0               [24]  680 	movx	a,@dptr
+      000301 FE               [12]  681 	mov	r6,a
+      000302 A3               [24]  682 	inc	dptr
+      000303 E0               [24]  683 	movx	a,@dptr
+      000304 FF               [12]  684 	mov	r7,a
+      000305 8D 82            [24]  685 	mov	dpl,r5
+      000307 8E 83            [24]  686 	mov	dph,r6
+      000309 8F F0            [24]  687 	mov	b,r7
+      00030B 78r00            [12]  688 	mov	r0,#_list_init
+      00030D 79s00            [12]  689 	mov	r1,#(_list_init >> 8)
+      00030F 7As00            [12]  690 	mov	r2,#(_list_init >> 16)
+      000311 12r00r00         [24]  691 	lcall	__sdcc_banked_call
+                                    692 ;	../../core/lib/mmem.c:159: avail_memory = MMEM_SIZE;
+      000314 90r00r00         [24]  693 	mov	dptr,#_avail_memory
+      000317 E4               [12]  694 	clr	a
+      000318 F0               [24]  695 	movx	@dptr,a
+      000319 74 10            [12]  696 	mov	a,#0x10
+      00031B A3               [24]  697 	inc	dptr
+      00031C F0               [24]  698 	movx	@dptr,a
+                                    699 ;	../../core/lib/mmem.c:160: inited = 1;
+      00031D 90r10r02         [24]  700 	mov	dptr,#_mmem_init_inited_1_44
+      000320 74 01            [12]  701 	mov	a,#0x01
+      000322 F0               [24]  702 	movx	@dptr,a
+      000323 E4               [12]  703 	clr	a
+      000324 A3               [24]  704 	inc	dptr
+      000325 F0               [24]  705 	movx	@dptr,a
+      000326                        706 00103$:
+      000326 02r00r00         [24]  707 	ljmp	__sdcc_banked_ret
+                                    708 	.area CSEG    (CODE)
+                                    709 	.area CONST   (CODE)
+                                    710 	.area XINIT   (CODE)
+      000000                        711 __xinit__mmemlist_list:
+                                    712 ; generic printIvalPtr
+      000000 00 00 00               713 	.byte #0x00,#0x00,#0x00
+      000003                        714 __xinit__mmemlist:
+      000003r00s00 00               715 	.byte _mmemlist_list,(_mmemlist_list >> 8),#0x00
+                                    716 	.area CABS    (ABS,CODE)

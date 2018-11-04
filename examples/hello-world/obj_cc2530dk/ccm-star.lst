@@ -1,0 +1,2290 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.3.1 #8804 (Aug  6 2013) (Linux)
+                                      4 ; This file was generated Sat Nov  3 15:44:47 2018
+                                      5 ;--------------------------------------------------------
+                                      6 	.module ccm_star
+                                      7 	.optsdcc -mmcs51 --model-huge
+                                      8 	
+                                      9 ;--------------------------------------------------------
+                                     10 ; Public variables in this module
+                                     11 ;--------------------------------------------------------
+                                     12 	.globl _ccm_star_driver
+                                     13 	.globl _memcpy
+                                     14 	.globl _ACTIVE
+                                     15 	.globl _TX_BYTE
+                                     16 	.globl _RX_BYTE
+                                     17 	.globl _ERR
+                                     18 	.globl _FE
+                                     19 	.globl _SLAVE
+                                     20 	.globl _RE
+                                     21 	.globl _MODE
+                                     22 	.globl _T3OVFIF
+                                     23 	.globl _T3CH0IF
+                                     24 	.globl _T3CH1IF
+                                     25 	.globl _T4OVFIF
+                                     26 	.globl _T4CH0IF
+                                     27 	.globl _T4CH1IF
+                                     28 	.globl _OVFIM
+                                     29 	.globl _B_0
+                                     30 	.globl _B_1
+                                     31 	.globl _B_2
+                                     32 	.globl _B_3
+                                     33 	.globl _B_4
+                                     34 	.globl _B_5
+                                     35 	.globl _B_6
+                                     36 	.globl _B_7
+                                     37 	.globl _P2IF
+                                     38 	.globl _UTX0IF
+                                     39 	.globl _UTX1IF
+                                     40 	.globl _P1IF
+                                     41 	.globl _WDTIF
+                                     42 	.globl _ACC_0
+                                     43 	.globl _ACC_1
+                                     44 	.globl _ACC_2
+                                     45 	.globl _ACC_3
+                                     46 	.globl _ACC_4
+                                     47 	.globl _ACC_5
+                                     48 	.globl _ACC_6
+                                     49 	.globl _ACC_7
+                                     50 	.globl _P
+                                     51 	.globl _F1
+                                     52 	.globl _OV
+                                     53 	.globl _RS0
+                                     54 	.globl _RS1
+                                     55 	.globl _F0
+                                     56 	.globl _AC
+                                     57 	.globl _CY
+                                     58 	.globl _DMAIF
+                                     59 	.globl _T1IF
+                                     60 	.globl _T2IF
+                                     61 	.globl _T3IF
+                                     62 	.globl _T4IF
+                                     63 	.globl _P0IF
+                                     64 	.globl _STIF
+                                     65 	.globl _DMAIE
+                                     66 	.globl _T1IE
+                                     67 	.globl _T2IE
+                                     68 	.globl _T3IE
+                                     69 	.globl _T4IE
+                                     70 	.globl _P0IE
+                                     71 	.globl _RFERRIE
+                                     72 	.globl _ADCIE
+                                     73 	.globl _URX0IE
+                                     74 	.globl _URX1IE
+                                     75 	.globl _ENCIE
+                                     76 	.globl _STIE
+                                     77 	.globl _EA
+                                     78 	.globl _P2_0
+                                     79 	.globl _P2_1
+                                     80 	.globl _P2_2
+                                     81 	.globl _P2_3
+                                     82 	.globl _P2_4
+                                     83 	.globl _P2_5
+                                     84 	.globl _P2_6
+                                     85 	.globl _P2_7
+                                     86 	.globl _ENCIF_0
+                                     87 	.globl _ENCIF_1
+                                     88 	.globl _P1_0
+                                     89 	.globl _P1_1
+                                     90 	.globl _P1_2
+                                     91 	.globl _P1_3
+                                     92 	.globl _P1_4
+                                     93 	.globl _P1_5
+                                     94 	.globl _P1_6
+                                     95 	.globl _P1_7
+                                     96 	.globl _IT0
+                                     97 	.globl _RFERRIF
+                                     98 	.globl _IT1
+                                     99 	.globl _URX0IF
+                                    100 	.globl _ADCIF
+                                    101 	.globl _URX1IF
+                                    102 	.globl _P0_0
+                                    103 	.globl _P0_1
+                                    104 	.globl _P0_2
+                                    105 	.globl _P0_3
+                                    106 	.globl _P0_4
+                                    107 	.globl _P0_5
+                                    108 	.globl _P0_6
+                                    109 	.globl _P0_7
+                                    110 	.globl _WDCTL
+                                    111 	.globl _U1GCR
+                                    112 	.globl _U1UCR
+                                    113 	.globl _U1BAUD
+                                    114 	.globl _U1DBUF
+                                    115 	.globl _U1CSR
+                                    116 	.globl _U0GCR
+                                    117 	.globl _U0UCR
+                                    118 	.globl _U0BAUD
+                                    119 	.globl _U0DBUF
+                                    120 	.globl _U0CSR
+                                    121 	.globl _TIMIF
+                                    122 	.globl _T4CC1
+                                    123 	.globl _T4CCTL1
+                                    124 	.globl _T4CC0
+                                    125 	.globl _T4CCTL0
+                                    126 	.globl _T4CTL
+                                    127 	.globl _T4CNT
+                                    128 	.globl _T3CC1
+                                    129 	.globl _T3CCTL1
+                                    130 	.globl _T3CC0
+                                    131 	.globl _T3CCTL0
+                                    132 	.globl _T3CTL
+                                    133 	.globl _T3CNT
+                                    134 	.globl _T2MSEL
+                                    135 	.globl _T2IRQM
+                                    136 	.globl _T2MOVF2
+                                    137 	.globl _T2MOVF1
+                                    138 	.globl _T2MOVF0
+                                    139 	.globl _T2M1
+                                    140 	.globl _T2M0
+                                    141 	.globl _T2IRQF
+                                    142 	.globl _T2EVTCFG
+                                    143 	.globl _T2CTRL
+                                    144 	.globl _T1STAT
+                                    145 	.globl _T1CCTL2
+                                    146 	.globl _T1CCTL1
+                                    147 	.globl _T1CCTL0
+                                    148 	.globl _T1CTL
+                                    149 	.globl _T1CNTH
+                                    150 	.globl _T1CNTL
+                                    151 	.globl _T1CC2H
+                                    152 	.globl _T1CC2L
+                                    153 	.globl _T1CC1H
+                                    154 	.globl _T1CC1L
+                                    155 	.globl _T1CC0H
+                                    156 	.globl _T1CC0L
+                                    157 	.globl _CLKCONSTA
+                                    158 	.globl _CLKCONCMD
+                                    159 	.globl _SLEEPSTA
+                                    160 	.globl _SLEEPCMD
+                                    161 	.globl _STLOAD
+                                    162 	.globl _ST2
+                                    163 	.globl _ST1
+                                    164 	.globl _ST0
+                                    165 	.globl _RFERRF
+                                    166 	.globl _RFIRQF0
+                                    167 	.globl _RFST
+                                    168 	.globl _RFD
+                                    169 	.globl _RFIRQF1
+                                    170 	.globl _PSBANK
+                                    171 	.globl _FMAP
+                                    172 	.globl _MEMCTR
+                                    173 	.globl __XPAGE
+                                    174 	.globl _MPAGE
+                                    175 	.globl _PMUX
+                                    176 	.globl _P2DIR
+                                    177 	.globl _P1DIR
+                                    178 	.globl _P0DIR
+                                    179 	.globl _P2INP
+                                    180 	.globl _P1INP
+                                    181 	.globl _P2SEL
+                                    182 	.globl _P1SEL
+                                    183 	.globl _P0SEL
+                                    184 	.globl _APCFG
+                                    185 	.globl _PERCFG
+                                    186 	.globl _P0INP
+                                    187 	.globl _P2IEN
+                                    188 	.globl _P1IEN
+                                    189 	.globl _P0IEN
+                                    190 	.globl _PICTL
+                                    191 	.globl _P2IFG
+                                    192 	.globl _P1IFG
+                                    193 	.globl _P0IFG
+                                    194 	.globl _DMAREQ
+                                    195 	.globl _DMAARM
+                                    196 	.globl _DMA0CFGH
+                                    197 	.globl _DMA0CFGL
+                                    198 	.globl _DMA1CFGH
+                                    199 	.globl _DMA1CFGL
+                                    200 	.globl _DMAIRQ
+                                    201 	.globl _ENCCS
+                                    202 	.globl _ENCDO
+                                    203 	.globl _ENCDI
+                                    204 	.globl _RNDH
+                                    205 	.globl _RNDL
+                                    206 	.globl _ADCH
+                                    207 	.globl _ADCL
+                                    208 	.globl _ADCCON3
+                                    209 	.globl _ADCCON2
+                                    210 	.globl _ADCCON1
+                                    211 	.globl _B
+                                    212 	.globl _IRCON2
+                                    213 	.globl _ACC
+                                    214 	.globl _PSW
+                                    215 	.globl _IRCON
+                                    216 	.globl _IP1
+                                    217 	.globl _IEN1
+                                    218 	.globl _IP0
+                                    219 	.globl _IEN0
+                                    220 	.globl _P2
+                                    221 	.globl _S1CON
+                                    222 	.globl _IEN2
+                                    223 	.globl _S0CON
+                                    224 	.globl _DPS
+                                    225 	.globl _P1
+                                    226 	.globl _TCON
+                                    227 	.globl _PCON
+                                    228 	.globl _DPH1
+                                    229 	.globl _DPL1
+                                    230 	.globl _DPH0
+                                    231 	.globl _DPL0
+                                    232 	.globl _SP
+                                    233 	.globl _P0
+                                    234 	.globl _X_IEEE_ADDR
+                                    235 	.globl _X_INFOPAGE
+                                    236 	.globl _X_P2DIR
+                                    237 	.globl _X_P1DIR
+                                    238 	.globl _X_P0DIR
+                                    239 	.globl _X_U1GCR
+                                    240 	.globl _X_U1UCR
+                                    241 	.globl _X_U1BAUD
+                                    242 	.globl _X_U1DBUF
+                                    243 	.globl _X_U1CSR
+                                    244 	.globl _X_P2INP
+                                    245 	.globl _X_P1INP
+                                    246 	.globl _X_P2SEL
+                                    247 	.globl _X_P1SEL
+                                    248 	.globl _X_P0SEL
+                                    249 	.globl _X_APCFG
+                                    250 	.globl _X_PERCFG
+                                    251 	.globl _X_T4CC1
+                                    252 	.globl _X_T4CCTL1
+                                    253 	.globl _X_T4CC0
+                                    254 	.globl _X_T4CCTL0
+                                    255 	.globl _X_T4CTL
+                                    256 	.globl _X_T4CNT
+                                    257 	.globl _X_RFIRQF0
+                                    258 	.globl _X_T1CCTL2
+                                    259 	.globl _X_T1CCTL1
+                                    260 	.globl _X_T1CCTL0
+                                    261 	.globl _X_T1CTL
+                                    262 	.globl _X_T1CNTH
+                                    263 	.globl _X_T1CNTL
+                                    264 	.globl _X_RFST
+                                    265 	.globl _X_T1CC2H
+                                    266 	.globl _X_T1CC2L
+                                    267 	.globl _X_T1CC1H
+                                    268 	.globl _X_T1CC1L
+                                    269 	.globl _X_T1CC0H
+                                    270 	.globl _X_T1CC0L
+                                    271 	.globl _X_RFD
+                                    272 	.globl _X_TIMIF
+                                    273 	.globl _X_DMAREQ
+                                    274 	.globl _X_DMAARM
+                                    275 	.globl _X_DMA0CFGH
+                                    276 	.globl _X_DMA0CFGL
+                                    277 	.globl _X_DMA1CFGH
+                                    278 	.globl _X_DMA1CFGL
+                                    279 	.globl _X_DMAIRQ
+                                    280 	.globl _X_T3CC1
+                                    281 	.globl _X_T3CCTL1
+                                    282 	.globl _X_T3CC0
+                                    283 	.globl _X_T3CCTL0
+                                    284 	.globl _X_T3CTL
+                                    285 	.globl _X_T3CNT
+                                    286 	.globl _X_WDCTL
+                                    287 	.globl _X_MEMCTR
+                                    288 	.globl _X_CLKCONCMD
+                                    289 	.globl _X_U0GCR
+                                    290 	.globl _X_U0UCR
+                                    291 	.globl _X_T2MSEL
+                                    292 	.globl _X_U0BAUD
+                                    293 	.globl _X_U0DBUF
+                                    294 	.globl _X_RFERRF
+                                    295 	.globl _X_SLEEPCMD
+                                    296 	.globl _X_RNDH
+                                    297 	.globl _X_RNDL
+                                    298 	.globl _X_ADCH
+                                    299 	.globl _X_ADCL
+                                    300 	.globl _X_ADCCON3
+                                    301 	.globl _X_ADCCON2
+                                    302 	.globl _X_ADCCON1
+                                    303 	.globl _X_ENCCS
+                                    304 	.globl _X_ENCDO
+                                    305 	.globl _X_ENCDI
+                                    306 	.globl _X_T1STAT
+                                    307 	.globl _X_PMUX
+                                    308 	.globl _X_STLOAD
+                                    309 	.globl _X_P2IEN
+                                    310 	.globl _X_P0IEN
+                                    311 	.globl _X_T2IRQM
+                                    312 	.globl _X_T2MOVF2
+                                    313 	.globl _X_T2MOVF1
+                                    314 	.globl _X_T2MOVF0
+                                    315 	.globl _X_T2M1
+                                    316 	.globl _X_T2M0
+                                    317 	.globl _X_T2IRQF
+                                    318 	.globl _X_P2
+                                    319 	.globl _X_PSBANK
+                                    320 	.globl _X_FMAP
+                                    321 	.globl _X_CLKCONSTA
+                                    322 	.globl _X_SLEEPSTA
+                                    323 	.globl _X_T2EVTCFG
+                                    324 	.globl _X_ST2
+                                    325 	.globl _X_ST1
+                                    326 	.globl _X_ST0
+                                    327 	.globl _X_T2CTRL
+                                    328 	.globl _X__XPAGE
+                                    329 	.globl _X_MPAGE
+                                    330 	.globl _X_RFIRQF1
+                                    331 	.globl _X_P1
+                                    332 	.globl _X_P0INP
+                                    333 	.globl _X_P1IEN
+                                    334 	.globl _X_PICTL
+                                    335 	.globl _X_P2IFG
+                                    336 	.globl _X_P1IFG
+                                    337 	.globl _X_P0IFG
+                                    338 	.globl _X_U0CSR
+                                    339 	.globl _X_P0
+                                    340 	.globl _USBF5
+                                    341 	.globl _USBF4
+                                    342 	.globl _USBF3
+                                    343 	.globl _USBF2
+                                    344 	.globl _USBF1
+                                    345 	.globl _USBF0
+                                    346 	.globl _USBCNTH
+                                    347 	.globl _USBCNTL
+                                    348 	.globl _USBCNT0
+                                    349 	.globl _USBCSOH
+                                    350 	.globl _USBCSOL
+                                    351 	.globl _USBMAXO
+                                    352 	.globl _USBCSIH
+                                    353 	.globl _USBCSIL
+                                    354 	.globl _USBCS0
+                                    355 	.globl _USBMAXI
+                                    356 	.globl _USBCTRL
+                                    357 	.globl _USBINDEX
+                                    358 	.globl _USBFRMH
+                                    359 	.globl _USBFRML
+                                    360 	.globl _USBCIE
+                                    361 	.globl _USBOIE
+                                    362 	.globl _USBIIE
+                                    363 	.globl _USBCIF
+                                    364 	.globl _USBOIF
+                                    365 	.globl _USBIIF
+                                    366 	.globl _USBPOW
+                                    367 	.globl _USBADDR
+                                    368 	.globl _CSPT
+                                    369 	.globl _CSPZ
+                                    370 	.globl _CSPY
+                                    371 	.globl _CSPX
+                                    372 	.globl _CSPSTAT
+                                    373 	.globl _CSPCTRL
+                                    374 	.globl _CSPPROG23
+                                    375 	.globl _CSPPROG22
+                                    376 	.globl _CSPPROG21
+                                    377 	.globl _CSPPROG20
+                                    378 	.globl _CSPPROG19
+                                    379 	.globl _CSPPROG18
+                                    380 	.globl _CSPPROG17
+                                    381 	.globl _CSPPROG16
+                                    382 	.globl _CSPPROG15
+                                    383 	.globl _CSPPROG14
+                                    384 	.globl _CSPPROG13
+                                    385 	.globl _CSPPROG12
+                                    386 	.globl _CSPPROG11
+                                    387 	.globl _CSPPROG10
+                                    388 	.globl _CSPPROG9
+                                    389 	.globl _CSPPROG8
+                                    390 	.globl _CSPPROG7
+                                    391 	.globl _CSPPROG6
+                                    392 	.globl _CSPPROG5
+                                    393 	.globl _CSPPROG4
+                                    394 	.globl _CSPPROG3
+                                    395 	.globl _CSPPROG2
+                                    396 	.globl _CSPPROG1
+                                    397 	.globl _CSPPROG0
+                                    398 	.globl _RFC_OBS_CTRL2
+                                    399 	.globl _RFC_OBS_CTRL1
+                                    400 	.globl _RFC_OBS_CTRL0
+                                    401 	.globl _TXFILTCFG
+                                    402 	.globl _PTEST1
+                                    403 	.globl _PTEST0
+                                    404 	.globl _ATEST
+                                    405 	.globl _DACTEST2
+                                    406 	.globl _DACTEST1
+                                    407 	.globl _DACTEST0
+                                    408 	.globl _MDMTEST1
+                                    409 	.globl _MDMTEST0
+                                    410 	.globl _ADCTEST2
+                                    411 	.globl _ADCTEST1
+                                    412 	.globl _ADCTEST0
+                                    413 	.globl _AGCCTRL3
+                                    414 	.globl _AGCCTRL2
+                                    415 	.globl _AGCCTRL1
+                                    416 	.globl _AGCCTRL0
+                                    417 	.globl _FSCAL3
+                                    418 	.globl _FSCAL2
+                                    419 	.globl _FSCAL1
+                                    420 	.globl _FSCAL0
+                                    421 	.globl _FSCTRL
+                                    422 	.globl _RXCTRL
+                                    423 	.globl _FREQEST
+                                    424 	.globl _MDMCTRL1
+                                    425 	.globl _MDMCTRL0
+                                    426 	.globl _RFRND
+                                    427 	.globl _RFERRM
+                                    428 	.globl _RFIRQM1
+                                    429 	.globl _RFIRQM0
+                                    430 	.globl _TXLAST_PTR
+                                    431 	.globl _TXFIRST_PTR
+                                    432 	.globl _RXP1_PTR
+                                    433 	.globl _RXLAST_PTR
+                                    434 	.globl _RXFIRST_PTR
+                                    435 	.globl _TXFIFOCNT
+                                    436 	.globl _RXFIFOCNT
+                                    437 	.globl _RXFIRST
+                                    438 	.globl _RSSISTAT
+                                    439 	.globl _RSSI
+                                    440 	.globl _CCACTRL1
+                                    441 	.globl _CCACTRL0
+                                    442 	.globl _FSMCTRL
+                                    443 	.globl _FIFOPCTRL
+                                    444 	.globl _FSMSTAT1
+                                    445 	.globl _FSMSTAT0
+                                    446 	.globl _TXCTRL
+                                    447 	.globl _TXPOWER
+                                    448 	.globl _FREQCTRL
+                                    449 	.globl _FREQTUNE
+                                    450 	.globl _RXMASKCLR
+                                    451 	.globl _RXMASKSET
+                                    452 	.globl _RXENABLE
+                                    453 	.globl _FRMCTRL1
+                                    454 	.globl _FRMCTRL0
+                                    455 	.globl _SRCEXTEN2
+                                    456 	.globl _SRCEXTEN1
+                                    457 	.globl _SRCEXTEN0
+                                    458 	.globl _SRCSHORTEN2
+                                    459 	.globl _SRCSHORTEN1
+                                    460 	.globl _SRCSHORTEN0
+                                    461 	.globl _SRCMATCH
+                                    462 	.globl _FRMFILT1
+                                    463 	.globl _FRMFILT0
+                                    464 	.globl _SHORT_ADDR1
+                                    465 	.globl _SHORT_ADDR0
+                                    466 	.globl _PAN_ID1
+                                    467 	.globl _PAN_ID0
+                                    468 	.globl _EXT_ADDR7
+                                    469 	.globl _EXT_ADDR6
+                                    470 	.globl _EXT_ADDR5
+                                    471 	.globl _EXT_ADDR4
+                                    472 	.globl _EXT_ADDR3
+                                    473 	.globl _EXT_ADDR2
+                                    474 	.globl _EXT_ADDR1
+                                    475 	.globl _EXT_ADDR0
+                                    476 	.globl _SRCSHORTPENDEN2
+                                    477 	.globl _SRCSHORTPENDEN1
+                                    478 	.globl _SRCSHORTPENDEN0
+                                    479 	.globl _SRCEXTPENDEN2
+                                    480 	.globl _SRCEXTPENDEN1
+                                    481 	.globl _SRCEXTPENDEN0
+                                    482 	.globl _SRCRESINDEX
+                                    483 	.globl _SRCRESMASK2
+                                    484 	.globl _SRCRESMASK1
+                                    485 	.globl _SRCRESMASK0
+                                    486 	.globl _SRC_ADDR_TABLE
+                                    487 	.globl _TXFIFO
+                                    488 	.globl _RXFIFO
+                                    489 	.globl _RFCORE_RAM
+                                    490 	.globl _CMPCTL
+                                    491 	.globl _OPAMPS
+                                    492 	.globl _OPAMPC
+                                    493 	.globl _STCV2
+                                    494 	.globl _STCV1
+                                    495 	.globl _STCV0
+                                    496 	.globl _STCS
+                                    497 	.globl _STCC
+                                    498 	.globl _T1CC4H
+                                    499 	.globl _T1CC4L
+                                    500 	.globl _T1CC3H
+                                    501 	.globl _T1CC3L
+                                    502 	.globl _XX_T1CC2H
+                                    503 	.globl _XX_T1CC2L
+                                    504 	.globl _XX_T1CC1H
+                                    505 	.globl _XX_T1CC1L
+                                    506 	.globl _XX_T1CC0H
+                                    507 	.globl _XX_T1CC0L
+                                    508 	.globl _T1CCTL4
+                                    509 	.globl _T1CCTL3
+                                    510 	.globl _XX_T1CCTL2
+                                    511 	.globl _XX_T1CCTL1
+                                    512 	.globl _XX_T1CCTL0
+                                    513 	.globl _CLD
+                                    514 	.globl _IRCTL
+                                    515 	.globl _CHIPINFO1
+                                    516 	.globl _CHIPINFO0
+                                    517 	.globl _FWDATA
+                                    518 	.globl _FADDRH
+                                    519 	.globl _FADDRL
+                                    520 	.globl _FCTL
+                                    521 	.globl _IVCTRL
+                                    522 	.globl _BATTMON
+                                    523 	.globl _SRCRC
+                                    524 	.globl _DBGDATA
+                                    525 	.globl _TESTREG0
+                                    526 	.globl _CHIPID
+                                    527 	.globl _CHVER
+                                    528 	.globl _OBSSEL5
+                                    529 	.globl _OBSSEL4
+                                    530 	.globl _OBSSEL3
+                                    531 	.globl _OBSSEL2
+                                    532 	.globl _OBSSEL1
+                                    533 	.globl _OBSSEL0
+                                    534 	.globl _I2CIO
+                                    535 	.globl _I2CWC
+                                    536 	.globl _I2CADDR
+                                    537 	.globl _I2CDATA
+                                    538 	.globl _I2CSTAT
+                                    539 	.globl _I2CCFG
+                                    540 	.globl _OPAMPMC
+                                    541 	.globl _MONMUX
+                                    542 ;--------------------------------------------------------
+                                    543 ; special function registers
+                                    544 ;--------------------------------------------------------
+                                    545 	.area RSEG    (ABS,DATA)
+      000000                        546 	.org 0x0000
+                           000080   547 _P0	=	0x0080
+                           000081   548 _SP	=	0x0081
+                           000082   549 _DPL0	=	0x0082
+                           000083   550 _DPH0	=	0x0083
+                           000084   551 _DPL1	=	0x0084
+                           000085   552 _DPH1	=	0x0085
+                           000087   553 _PCON	=	0x0087
+                           000088   554 _TCON	=	0x0088
+                           000090   555 _P1	=	0x0090
+                           000092   556 _DPS	=	0x0092
+                           000098   557 _S0CON	=	0x0098
+                           00009A   558 _IEN2	=	0x009a
+                           00009B   559 _S1CON	=	0x009b
+                           0000A0   560 _P2	=	0x00a0
+                           0000A8   561 _IEN0	=	0x00a8
+                           0000A9   562 _IP0	=	0x00a9
+                           0000B8   563 _IEN1	=	0x00b8
+                           0000B9   564 _IP1	=	0x00b9
+                           0000C0   565 _IRCON	=	0x00c0
+                           0000D0   566 _PSW	=	0x00d0
+                           0000E0   567 _ACC	=	0x00e0
+                           0000E8   568 _IRCON2	=	0x00e8
+                           0000F0   569 _B	=	0x00f0
+                           0000B4   570 _ADCCON1	=	0x00b4
+                           0000B5   571 _ADCCON2	=	0x00b5
+                           0000B6   572 _ADCCON3	=	0x00b6
+                           0000BA   573 _ADCL	=	0x00ba
+                           0000BB   574 _ADCH	=	0x00bb
+                           0000BC   575 _RNDL	=	0x00bc
+                           0000BD   576 _RNDH	=	0x00bd
+                           0000B1   577 _ENCDI	=	0x00b1
+                           0000B2   578 _ENCDO	=	0x00b2
+                           0000B3   579 _ENCCS	=	0x00b3
+                           0000D1   580 _DMAIRQ	=	0x00d1
+                           0000D2   581 _DMA1CFGL	=	0x00d2
+                           0000D3   582 _DMA1CFGH	=	0x00d3
+                           0000D4   583 _DMA0CFGL	=	0x00d4
+                           0000D5   584 _DMA0CFGH	=	0x00d5
+                           0000D6   585 _DMAARM	=	0x00d6
+                           0000D7   586 _DMAREQ	=	0x00d7
+                           000089   587 _P0IFG	=	0x0089
+                           00008A   588 _P1IFG	=	0x008a
+                           00008B   589 _P2IFG	=	0x008b
+                           00008C   590 _PICTL	=	0x008c
+                           0000AB   591 _P0IEN	=	0x00ab
+                           00008D   592 _P1IEN	=	0x008d
+                           0000AC   593 _P2IEN	=	0x00ac
+                           00008F   594 _P0INP	=	0x008f
+                           0000F1   595 _PERCFG	=	0x00f1
+                           0000F2   596 _APCFG	=	0x00f2
+                           0000F3   597 _P0SEL	=	0x00f3
+                           0000F4   598 _P1SEL	=	0x00f4
+                           0000F5   599 _P2SEL	=	0x00f5
+                           0000F6   600 _P1INP	=	0x00f6
+                           0000F7   601 _P2INP	=	0x00f7
+                           0000FD   602 _P0DIR	=	0x00fd
+                           0000FE   603 _P1DIR	=	0x00fe
+                           0000FF   604 _P2DIR	=	0x00ff
+                           0000AE   605 _PMUX	=	0x00ae
+                           000093   606 _MPAGE	=	0x0093
+                           000093   607 __XPAGE	=	0x0093
+                           0000C7   608 _MEMCTR	=	0x00c7
+                           00009F   609 _FMAP	=	0x009f
+                           00009F   610 _PSBANK	=	0x009f
+                           000091   611 _RFIRQF1	=	0x0091
+                           0000D9   612 _RFD	=	0x00d9
+                           0000E1   613 _RFST	=	0x00e1
+                           0000E9   614 _RFIRQF0	=	0x00e9
+                           0000BF   615 _RFERRF	=	0x00bf
+                           000095   616 _ST0	=	0x0095
+                           000096   617 _ST1	=	0x0096
+                           000097   618 _ST2	=	0x0097
+                           0000AD   619 _STLOAD	=	0x00ad
+                           0000BE   620 _SLEEPCMD	=	0x00be
+                           00009D   621 _SLEEPSTA	=	0x009d
+                           0000C6   622 _CLKCONCMD	=	0x00c6
+                           00009E   623 _CLKCONSTA	=	0x009e
+                           0000DA   624 _T1CC0L	=	0x00da
+                           0000DB   625 _T1CC0H	=	0x00db
+                           0000DC   626 _T1CC1L	=	0x00dc
+                           0000DD   627 _T1CC1H	=	0x00dd
+                           0000DE   628 _T1CC2L	=	0x00de
+                           0000DF   629 _T1CC2H	=	0x00df
+                           0000E2   630 _T1CNTL	=	0x00e2
+                           0000E3   631 _T1CNTH	=	0x00e3
+                           0000E4   632 _T1CTL	=	0x00e4
+                           0000E5   633 _T1CCTL0	=	0x00e5
+                           0000E6   634 _T1CCTL1	=	0x00e6
+                           0000E7   635 _T1CCTL2	=	0x00e7
+                           0000AF   636 _T1STAT	=	0x00af
+                           000094   637 _T2CTRL	=	0x0094
+                           00009C   638 _T2EVTCFG	=	0x009c
+                           0000A1   639 _T2IRQF	=	0x00a1
+                           0000A2   640 _T2M0	=	0x00a2
+                           0000A3   641 _T2M1	=	0x00a3
+                           0000A4   642 _T2MOVF0	=	0x00a4
+                           0000A5   643 _T2MOVF1	=	0x00a5
+                           0000A6   644 _T2MOVF2	=	0x00a6
+                           0000A7   645 _T2IRQM	=	0x00a7
+                           0000C3   646 _T2MSEL	=	0x00c3
+                           0000CA   647 _T3CNT	=	0x00ca
+                           0000CB   648 _T3CTL	=	0x00cb
+                           0000CC   649 _T3CCTL0	=	0x00cc
+                           0000CD   650 _T3CC0	=	0x00cd
+                           0000CE   651 _T3CCTL1	=	0x00ce
+                           0000CF   652 _T3CC1	=	0x00cf
+                           0000EA   653 _T4CNT	=	0x00ea
+                           0000EB   654 _T4CTL	=	0x00eb
+                           0000EC   655 _T4CCTL0	=	0x00ec
+                           0000ED   656 _T4CC0	=	0x00ed
+                           0000EE   657 _T4CCTL1	=	0x00ee
+                           0000EF   658 _T4CC1	=	0x00ef
+                           0000D8   659 _TIMIF	=	0x00d8
+                           000086   660 _U0CSR	=	0x0086
+                           0000C1   661 _U0DBUF	=	0x00c1
+                           0000C2   662 _U0BAUD	=	0x00c2
+                           0000C4   663 _U0UCR	=	0x00c4
+                           0000C5   664 _U0GCR	=	0x00c5
+                           0000F8   665 _U1CSR	=	0x00f8
+                           0000F9   666 _U1DBUF	=	0x00f9
+                           0000FA   667 _U1BAUD	=	0x00fa
+                           0000FB   668 _U1UCR	=	0x00fb
+                           0000FC   669 _U1GCR	=	0x00fc
+                           0000C9   670 _WDCTL	=	0x00c9
+                                    671 ;--------------------------------------------------------
+                                    672 ; special function bits
+                                    673 ;--------------------------------------------------------
+                                    674 	.area RSEG    (ABS,DATA)
+      000000                        675 	.org 0x0000
+                           000087   676 _P0_7	=	0x0087
+                           000086   677 _P0_6	=	0x0086
+                           000085   678 _P0_5	=	0x0085
+                           000084   679 _P0_4	=	0x0084
+                           000083   680 _P0_3	=	0x0083
+                           000082   681 _P0_2	=	0x0082
+                           000081   682 _P0_1	=	0x0081
+                           000080   683 _P0_0	=	0x0080
+                           00008F   684 _URX1IF	=	0x008f
+                           00008D   685 _ADCIF	=	0x008d
+                           00008B   686 _URX0IF	=	0x008b
+                           00008A   687 _IT1	=	0x008a
+                           000089   688 _RFERRIF	=	0x0089
+                           000088   689 _IT0	=	0x0088
+                           000097   690 _P1_7	=	0x0097
+                           000096   691 _P1_6	=	0x0096
+                           000095   692 _P1_5	=	0x0095
+                           000094   693 _P1_4	=	0x0094
+                           000093   694 _P1_3	=	0x0093
+                           000092   695 _P1_2	=	0x0092
+                           000091   696 _P1_1	=	0x0091
+                           000090   697 _P1_0	=	0x0090
+                           000099   698 _ENCIF_1	=	0x0099
+                           000098   699 _ENCIF_0	=	0x0098
+                           0000A7   700 _P2_7	=	0x00a7
+                           0000A6   701 _P2_6	=	0x00a6
+                           0000A5   702 _P2_5	=	0x00a5
+                           0000A4   703 _P2_4	=	0x00a4
+                           0000A3   704 _P2_3	=	0x00a3
+                           0000A2   705 _P2_2	=	0x00a2
+                           0000A1   706 _P2_1	=	0x00a1
+                           0000A0   707 _P2_0	=	0x00a0
+                           0000AF   708 _EA	=	0x00af
+                           0000AD   709 _STIE	=	0x00ad
+                           0000AC   710 _ENCIE	=	0x00ac
+                           0000AB   711 _URX1IE	=	0x00ab
+                           0000AA   712 _URX0IE	=	0x00aa
+                           0000A9   713 _ADCIE	=	0x00a9
+                           0000A8   714 _RFERRIE	=	0x00a8
+                           0000BD   715 _P0IE	=	0x00bd
+                           0000BC   716 _T4IE	=	0x00bc
+                           0000BB   717 _T3IE	=	0x00bb
+                           0000BA   718 _T2IE	=	0x00ba
+                           0000B9   719 _T1IE	=	0x00b9
+                           0000B8   720 _DMAIE	=	0x00b8
+                           0000C7   721 _STIF	=	0x00c7
+                           0000C5   722 _P0IF	=	0x00c5
+                           0000C4   723 _T4IF	=	0x00c4
+                           0000C3   724 _T3IF	=	0x00c3
+                           0000C2   725 _T2IF	=	0x00c2
+                           0000C1   726 _T1IF	=	0x00c1
+                           0000C0   727 _DMAIF	=	0x00c0
+                           0000D7   728 _CY	=	0x00d7
+                           0000D6   729 _AC	=	0x00d6
+                           0000D5   730 _F0	=	0x00d5
+                           0000D4   731 _RS1	=	0x00d4
+                           0000D3   732 _RS0	=	0x00d3
+                           0000D2   733 _OV	=	0x00d2
+                           0000D1   734 _F1	=	0x00d1
+                           0000D0   735 _P	=	0x00d0
+                           0000E7   736 _ACC_7	=	0x00e7
+                           0000E6   737 _ACC_6	=	0x00e6
+                           0000E5   738 _ACC_5	=	0x00e5
+                           0000E4   739 _ACC_4	=	0x00e4
+                           0000E3   740 _ACC_3	=	0x00e3
+                           0000E2   741 _ACC_2	=	0x00e2
+                           0000E1   742 _ACC_1	=	0x00e1
+                           0000E0   743 _ACC_0	=	0x00e0
+                           0000EC   744 _WDTIF	=	0x00ec
+                           0000EB   745 _P1IF	=	0x00eb
+                           0000EA   746 _UTX1IF	=	0x00ea
+                           0000E9   747 _UTX0IF	=	0x00e9
+                           0000E8   748 _P2IF	=	0x00e8
+                           0000F7   749 _B_7	=	0x00f7
+                           0000F6   750 _B_6	=	0x00f6
+                           0000F5   751 _B_5	=	0x00f5
+                           0000F4   752 _B_4	=	0x00f4
+                           0000F3   753 _B_3	=	0x00f3
+                           0000F2   754 _B_2	=	0x00f2
+                           0000F1   755 _B_1	=	0x00f1
+                           0000F0   756 _B_0	=	0x00f0
+                           0000DE   757 _OVFIM	=	0x00de
+                           0000DD   758 _T4CH1IF	=	0x00dd
+                           0000DC   759 _T4CH0IF	=	0x00dc
+                           0000DB   760 _T4OVFIF	=	0x00db
+                           0000DA   761 _T3CH1IF	=	0x00da
+                           0000D9   762 _T3CH0IF	=	0x00d9
+                           0000D8   763 _T3OVFIF	=	0x00d8
+                           0000FF   764 _MODE	=	0x00ff
+                           0000FE   765 _RE	=	0x00fe
+                           0000FD   766 _SLAVE	=	0x00fd
+                           0000FC   767 _FE	=	0x00fc
+                           0000FB   768 _ERR	=	0x00fb
+                           0000FA   769 _RX_BYTE	=	0x00fa
+                           0000F9   770 _TX_BYTE	=	0x00f9
+                           0000F8   771 _ACTIVE	=	0x00f8
+                                    772 ;--------------------------------------------------------
+                                    773 ; overlayable register banks
+                                    774 ;--------------------------------------------------------
+                                    775 	.area REG_BANK_0	(REL,OVR,DATA)
+      000000                        776 	.ds 8
+                                    777 ;--------------------------------------------------------
+                                    778 ; internal ram data
+                                    779 ;--------------------------------------------------------
+                                    780 	.area DSEG    (DATA)
+                                    781 ;--------------------------------------------------------
+                                    782 ; overlayable items in internal ram 
+                                    783 ;--------------------------------------------------------
+                                    784 ;--------------------------------------------------------
+                                    785 ; indirectly addressable internal ram data
+                                    786 ;--------------------------------------------------------
+                                    787 	.area ISEG    (DATA)
+                                    788 ;--------------------------------------------------------
+                                    789 ; absolute internal ram data
+                                    790 ;--------------------------------------------------------
+                                    791 	.area IABS    (ABS,DATA)
+                                    792 	.area IABS    (ABS,DATA)
+                                    793 ;--------------------------------------------------------
+                                    794 ; bit data
+                                    795 ;--------------------------------------------------------
+                                    796 	.area BSEG    (BIT)
+                                    797 ;--------------------------------------------------------
+                                    798 ; paged external ram data
+                                    799 ;--------------------------------------------------------
+                                    800 	.area PSEG    (PAG,XDATA)
+                                    801 ;--------------------------------------------------------
+                                    802 ; external ram data
+                                    803 ;--------------------------------------------------------
+                                    804 	.area XSEG    (XDATA)
+                           0061A6   805 _MONMUX	=	0x61a6
+                           0061A6   806 _OPAMPMC	=	0x61a6
+                           006230   807 _I2CCFG	=	0x6230
+                           006231   808 _I2CSTAT	=	0x6231
+                           006232   809 _I2CDATA	=	0x6232
+                           006233   810 _I2CADDR	=	0x6233
+                           006234   811 _I2CWC	=	0x6234
+                           006235   812 _I2CIO	=	0x6235
+                           006243   813 _OBSSEL0	=	0x6243
+                           006244   814 _OBSSEL1	=	0x6244
+                           006245   815 _OBSSEL2	=	0x6245
+                           006246   816 _OBSSEL3	=	0x6246
+                           006247   817 _OBSSEL4	=	0x6247
+                           006248   818 _OBSSEL5	=	0x6248
+                           006249   819 _CHVER	=	0x6249
+                           00624A   820 _CHIPID	=	0x624a
+                           00624B   821 _TESTREG0	=	0x624b
+                           006260   822 _DBGDATA	=	0x6260
+                           006262   823 _SRCRC	=	0x6262
+                           006264   824 _BATTMON	=	0x6264
+                           006265   825 _IVCTRL	=	0x6265
+                           006270   826 _FCTL	=	0x6270
+                           006271   827 _FADDRL	=	0x6271
+                           006272   828 _FADDRH	=	0x6272
+                           006273   829 _FWDATA	=	0x6273
+                           006276   830 _CHIPINFO0	=	0x6276
+                           006277   831 _CHIPINFO1	=	0x6277
+                           006281   832 _IRCTL	=	0x6281
+                           006290   833 _CLD	=	0x6290
+                           0062A0   834 _XX_T1CCTL0	=	0x62a0
+                           0062A1   835 _XX_T1CCTL1	=	0x62a1
+                           0062A2   836 _XX_T1CCTL2	=	0x62a2
+                           0062A3   837 _T1CCTL3	=	0x62a3
+                           0062A4   838 _T1CCTL4	=	0x62a4
+                           0062A6   839 _XX_T1CC0L	=	0x62a6
+                           0062A7   840 _XX_T1CC0H	=	0x62a7
+                           0062A8   841 _XX_T1CC1L	=	0x62a8
+                           0062A9   842 _XX_T1CC1H	=	0x62a9
+                           0062AA   843 _XX_T1CC2L	=	0x62aa
+                           0062AB   844 _XX_T1CC2H	=	0x62ab
+                           0062AC   845 _T1CC3L	=	0x62ac
+                           0062AD   846 _T1CC3H	=	0x62ad
+                           0062AE   847 _T1CC4L	=	0x62ae
+                           0062AF   848 _T1CC4H	=	0x62af
+                           0062B0   849 _STCC	=	0x62b0
+                           0062B1   850 _STCS	=	0x62b1
+                           0062B2   851 _STCV0	=	0x62b2
+                           0062B3   852 _STCV1	=	0x62b3
+                           0062B4   853 _STCV2	=	0x62b4
+                           0062C0   854 _OPAMPC	=	0x62c0
+                           0062C1   855 _OPAMPS	=	0x62c1
+                           0062D0   856 _CMPCTL	=	0x62d0
+                           006000   857 _RFCORE_RAM	=	0x6000
+                           006000   858 _RXFIFO	=	0x6000
+                           006080   859 _TXFIFO	=	0x6080
+                           006100   860 _SRC_ADDR_TABLE	=	0x6100
+                           006160   861 _SRCRESMASK0	=	0x6160
+                           006161   862 _SRCRESMASK1	=	0x6161
+                           006162   863 _SRCRESMASK2	=	0x6162
+                           006163   864 _SRCRESINDEX	=	0x6163
+                           006164   865 _SRCEXTPENDEN0	=	0x6164
+                           006165   866 _SRCEXTPENDEN1	=	0x6165
+                           006166   867 _SRCEXTPENDEN2	=	0x6166
+                           006167   868 _SRCSHORTPENDEN0	=	0x6167
+                           006168   869 _SRCSHORTPENDEN1	=	0x6168
+                           006169   870 _SRCSHORTPENDEN2	=	0x6169
+                           00616A   871 _EXT_ADDR0	=	0x616a
+                           00616B   872 _EXT_ADDR1	=	0x616b
+                           00616C   873 _EXT_ADDR2	=	0x616c
+                           00616D   874 _EXT_ADDR3	=	0x616d
+                           00616E   875 _EXT_ADDR4	=	0x616e
+                           00616F   876 _EXT_ADDR5	=	0x616f
+                           006170   877 _EXT_ADDR6	=	0x6170
+                           006171   878 _EXT_ADDR7	=	0x6171
+                           006172   879 _PAN_ID0	=	0x6172
+                           006173   880 _PAN_ID1	=	0x6173
+                           006174   881 _SHORT_ADDR0	=	0x6174
+                           006175   882 _SHORT_ADDR1	=	0x6175
+                           006180   883 _FRMFILT0	=	0x6180
+                           006181   884 _FRMFILT1	=	0x6181
+                           006182   885 _SRCMATCH	=	0x6182
+                           006183   886 _SRCSHORTEN0	=	0x6183
+                           006184   887 _SRCSHORTEN1	=	0x6184
+                           006185   888 _SRCSHORTEN2	=	0x6185
+                           006186   889 _SRCEXTEN0	=	0x6186
+                           006187   890 _SRCEXTEN1	=	0x6187
+                           006188   891 _SRCEXTEN2	=	0x6188
+                           006189   892 _FRMCTRL0	=	0x6189
+                           00618A   893 _FRMCTRL1	=	0x618a
+                           00618B   894 _RXENABLE	=	0x618b
+                           00618C   895 _RXMASKSET	=	0x618c
+                           00618D   896 _RXMASKCLR	=	0x618d
+                           00618E   897 _FREQTUNE	=	0x618e
+                           00618F   898 _FREQCTRL	=	0x618f
+                           006190   899 _TXPOWER	=	0x6190
+                           006191   900 _TXCTRL	=	0x6191
+                           006192   901 _FSMSTAT0	=	0x6192
+                           006193   902 _FSMSTAT1	=	0x6193
+                           006194   903 _FIFOPCTRL	=	0x6194
+                           006195   904 _FSMCTRL	=	0x6195
+                           006196   905 _CCACTRL0	=	0x6196
+                           006197   906 _CCACTRL1	=	0x6197
+                           006198   907 _RSSI	=	0x6198
+                           006199   908 _RSSISTAT	=	0x6199
+                           00619A   909 _RXFIRST	=	0x619a
+                           00619B   910 _RXFIFOCNT	=	0x619b
+                           00619C   911 _TXFIFOCNT	=	0x619c
+                           00619D   912 _RXFIRST_PTR	=	0x619d
+                           00619E   913 _RXLAST_PTR	=	0x619e
+                           00619F   914 _RXP1_PTR	=	0x619f
+                           0061A1   915 _TXFIRST_PTR	=	0x61a1
+                           0061A2   916 _TXLAST_PTR	=	0x61a2
+                           0061A3   917 _RFIRQM0	=	0x61a3
+                           0061A4   918 _RFIRQM1	=	0x61a4
+                           0061A5   919 _RFERRM	=	0x61a5
+                           0061A7   920 _RFRND	=	0x61a7
+                           0061A8   921 _MDMCTRL0	=	0x61a8
+                           0061A9   922 _MDMCTRL1	=	0x61a9
+                           0061AA   923 _FREQEST	=	0x61aa
+                           0061AB   924 _RXCTRL	=	0x61ab
+                           0061AC   925 _FSCTRL	=	0x61ac
+                           0061AD   926 _FSCAL0	=	0x61ad
+                           0061AE   927 _FSCAL1	=	0x61ae
+                           0061AF   928 _FSCAL2	=	0x61af
+                           0061B0   929 _FSCAL3	=	0x61b0
+                           0061B1   930 _AGCCTRL0	=	0x61b1
+                           0061B2   931 _AGCCTRL1	=	0x61b2
+                           0061B3   932 _AGCCTRL2	=	0x61b3
+                           0061B4   933 _AGCCTRL3	=	0x61b4
+                           0061B5   934 _ADCTEST0	=	0x61b5
+                           0061B6   935 _ADCTEST1	=	0x61b6
+                           0061B7   936 _ADCTEST2	=	0x61b7
+                           0061B8   937 _MDMTEST0	=	0x61b8
+                           0061B9   938 _MDMTEST1	=	0x61b9
+                           0061BA   939 _DACTEST0	=	0x61ba
+                           0061BB   940 _DACTEST1	=	0x61bb
+                           0061BC   941 _DACTEST2	=	0x61bc
+                           0061BD   942 _ATEST	=	0x61bd
+                           0061BE   943 _PTEST0	=	0x61be
+                           0061BF   944 _PTEST1	=	0x61bf
+                           0061FA   945 _TXFILTCFG	=	0x61fa
+                           0061EB   946 _RFC_OBS_CTRL0	=	0x61eb
+                           0061EC   947 _RFC_OBS_CTRL1	=	0x61ec
+                           0061ED   948 _RFC_OBS_CTRL2	=	0x61ed
+                           0061C0   949 _CSPPROG0	=	0x61c0
+                           0061C1   950 _CSPPROG1	=	0x61c1
+                           0061C2   951 _CSPPROG2	=	0x61c2
+                           0061C3   952 _CSPPROG3	=	0x61c3
+                           0061C4   953 _CSPPROG4	=	0x61c4
+                           0061C5   954 _CSPPROG5	=	0x61c5
+                           0061C6   955 _CSPPROG6	=	0x61c6
+                           0061C7   956 _CSPPROG7	=	0x61c7
+                           0061C8   957 _CSPPROG8	=	0x61c8
+                           0061C9   958 _CSPPROG9	=	0x61c9
+                           0061CA   959 _CSPPROG10	=	0x61ca
+                           0061CB   960 _CSPPROG11	=	0x61cb
+                           0061CC   961 _CSPPROG12	=	0x61cc
+                           0061CD   962 _CSPPROG13	=	0x61cd
+                           0061CE   963 _CSPPROG14	=	0x61ce
+                           0061CF   964 _CSPPROG15	=	0x61cf
+                           0061D0   965 _CSPPROG16	=	0x61d0
+                           0061D1   966 _CSPPROG17	=	0x61d1
+                           0061D2   967 _CSPPROG18	=	0x61d2
+                           0061D3   968 _CSPPROG19	=	0x61d3
+                           0061D4   969 _CSPPROG20	=	0x61d4
+                           0061D5   970 _CSPPROG21	=	0x61d5
+                           0061D6   971 _CSPPROG22	=	0x61d6
+                           0061D7   972 _CSPPROG23	=	0x61d7
+                           0061E0   973 _CSPCTRL	=	0x61e0
+                           0061E1   974 _CSPSTAT	=	0x61e1
+                           0061E2   975 _CSPX	=	0x61e2
+                           0061E3   976 _CSPY	=	0x61e3
+                           0061E4   977 _CSPZ	=	0x61e4
+                           0061E5   978 _CSPT	=	0x61e5
+                           006200   979 _USBADDR	=	0x6200
+                           006201   980 _USBPOW	=	0x6201
+                           006202   981 _USBIIF	=	0x6202
+                           006204   982 _USBOIF	=	0x6204
+                           006206   983 _USBCIF	=	0x6206
+                           006207   984 _USBIIE	=	0x6207
+                           006209   985 _USBOIE	=	0x6209
+                           00620B   986 _USBCIE	=	0x620b
+                           00620C   987 _USBFRML	=	0x620c
+                           00620D   988 _USBFRMH	=	0x620d
+                           00620E   989 _USBINDEX	=	0x620e
+                           00620F   990 _USBCTRL	=	0x620f
+                           006210   991 _USBMAXI	=	0x6210
+                           006211   992 _USBCS0	=	0x6211
+                           006211   993 _USBCSIL	=	0x6211
+                           006212   994 _USBCSIH	=	0x6212
+                           006213   995 _USBMAXO	=	0x6213
+                           006214   996 _USBCSOL	=	0x6214
+                           006215   997 _USBCSOH	=	0x6215
+                           006216   998 _USBCNT0	=	0x6216
+                           006216   999 _USBCNTL	=	0x6216
+                           006217  1000 _USBCNTH	=	0x6217
+                           006220  1001 _USBF0	=	0x6220
+                           006222  1002 _USBF1	=	0x6222
+                           006224  1003 _USBF2	=	0x6224
+                           006226  1004 _USBF3	=	0x6226
+                           006228  1005 _USBF4	=	0x6228
+                           00622A  1006 _USBF5	=	0x622a
+                           007080  1007 _X_P0	=	0x7080
+                           007086  1008 _X_U0CSR	=	0x7086
+                           007089  1009 _X_P0IFG	=	0x7089
+                           00708A  1010 _X_P1IFG	=	0x708a
+                           00708B  1011 _X_P2IFG	=	0x708b
+                           00708C  1012 _X_PICTL	=	0x708c
+                           00708D  1013 _X_P1IEN	=	0x708d
+                           00708F  1014 _X_P0INP	=	0x708f
+                           007090  1015 _X_P1	=	0x7090
+                           007091  1016 _X_RFIRQF1	=	0x7091
+                           007093  1017 _X_MPAGE	=	0x7093
+                           007093  1018 _X__XPAGE	=	0x7093
+                           007094  1019 _X_T2CTRL	=	0x7094
+                           007095  1020 _X_ST0	=	0x7095
+                           007096  1021 _X_ST1	=	0x7096
+                           007097  1022 _X_ST2	=	0x7097
+                           00709C  1023 _X_T2EVTCFG	=	0x709c
+                           00709D  1024 _X_SLEEPSTA	=	0x709d
+                           00709E  1025 _X_CLKCONSTA	=	0x709e
+                           00709F  1026 _X_FMAP	=	0x709f
+                           00709F  1027 _X_PSBANK	=	0x709f
+                           0070A0  1028 _X_P2	=	0x70a0
+                           0070A1  1029 _X_T2IRQF	=	0x70a1
+                           0070A2  1030 _X_T2M0	=	0x70a2
+                           0070A3  1031 _X_T2M1	=	0x70a3
+                           0070A4  1032 _X_T2MOVF0	=	0x70a4
+                           0070A5  1033 _X_T2MOVF1	=	0x70a5
+                           0070A6  1034 _X_T2MOVF2	=	0x70a6
+                           0070A7  1035 _X_T2IRQM	=	0x70a7
+                           0070AB  1036 _X_P0IEN	=	0x70ab
+                           0070AC  1037 _X_P2IEN	=	0x70ac
+                           0070AD  1038 _X_STLOAD	=	0x70ad
+                           0070AE  1039 _X_PMUX	=	0x70ae
+                           0070AF  1040 _X_T1STAT	=	0x70af
+                           0070B1  1041 _X_ENCDI	=	0x70b1
+                           0070B2  1042 _X_ENCDO	=	0x70b2
+                           0070B3  1043 _X_ENCCS	=	0x70b3
+                           0070B4  1044 _X_ADCCON1	=	0x70b4
+                           0070B5  1045 _X_ADCCON2	=	0x70b5
+                           0070B6  1046 _X_ADCCON3	=	0x70b6
+                           0070BA  1047 _X_ADCL	=	0x70ba
+                           0070BB  1048 _X_ADCH	=	0x70bb
+                           0070BC  1049 _X_RNDL	=	0x70bc
+                           0070BD  1050 _X_RNDH	=	0x70bd
+                           0070BE  1051 _X_SLEEPCMD	=	0x70be
+                           0070BF  1052 _X_RFERRF	=	0x70bf
+                           0070C1  1053 _X_U0DBUF	=	0x70c1
+                           0070C2  1054 _X_U0BAUD	=	0x70c2
+                           0070C3  1055 _X_T2MSEL	=	0x70c3
+                           0070C4  1056 _X_U0UCR	=	0x70c4
+                           0070C5  1057 _X_U0GCR	=	0x70c5
+                           0070C6  1058 _X_CLKCONCMD	=	0x70c6
+                           0070C7  1059 _X_MEMCTR	=	0x70c7
+                           0070C9  1060 _X_WDCTL	=	0x70c9
+                           0070CA  1061 _X_T3CNT	=	0x70ca
+                           0070CB  1062 _X_T3CTL	=	0x70cb
+                           0070CC  1063 _X_T3CCTL0	=	0x70cc
+                           0070CD  1064 _X_T3CC0	=	0x70cd
+                           0070CE  1065 _X_T3CCTL1	=	0x70ce
+                           0070CF  1066 _X_T3CC1	=	0x70cf
+                           0070D1  1067 _X_DMAIRQ	=	0x70d1
+                           0070D2  1068 _X_DMA1CFGL	=	0x70d2
+                           0070D3  1069 _X_DMA1CFGH	=	0x70d3
+                           0070D4  1070 _X_DMA0CFGL	=	0x70d4
+                           0070D5  1071 _X_DMA0CFGH	=	0x70d5
+                           0070D6  1072 _X_DMAARM	=	0x70d6
+                           0070D7  1073 _X_DMAREQ	=	0x70d7
+                           0070D8  1074 _X_TIMIF	=	0x70d8
+                           0070D9  1075 _X_RFD	=	0x70d9
+                           0070DA  1076 _X_T1CC0L	=	0x70da
+                           0070DB  1077 _X_T1CC0H	=	0x70db
+                           0070DC  1078 _X_T1CC1L	=	0x70dc
+                           0070DD  1079 _X_T1CC1H	=	0x70dd
+                           0070DE  1080 _X_T1CC2L	=	0x70de
+                           0070DF  1081 _X_T1CC2H	=	0x70df
+                           0070E1  1082 _X_RFST	=	0x70e1
+                           0070E2  1083 _X_T1CNTL	=	0x70e2
+                           0070E3  1084 _X_T1CNTH	=	0x70e3
+                           0070E4  1085 _X_T1CTL	=	0x70e4
+                           0070E5  1086 _X_T1CCTL0	=	0x70e5
+                           0070E6  1087 _X_T1CCTL1	=	0x70e6
+                           0070E7  1088 _X_T1CCTL2	=	0x70e7
+                           0070E9  1089 _X_RFIRQF0	=	0x70e9
+                           0070EA  1090 _X_T4CNT	=	0x70ea
+                           0070EB  1091 _X_T4CTL	=	0x70eb
+                           0070EC  1092 _X_T4CCTL0	=	0x70ec
+                           0070ED  1093 _X_T4CC0	=	0x70ed
+                           0070EE  1094 _X_T4CCTL1	=	0x70ee
+                           0070EF  1095 _X_T4CC1	=	0x70ef
+                           0070F1  1096 _X_PERCFG	=	0x70f1
+                           0070F2  1097 _X_APCFG	=	0x70f2
+                           0070F3  1098 _X_P0SEL	=	0x70f3
+                           0070F4  1099 _X_P1SEL	=	0x70f4
+                           0070F5  1100 _X_P2SEL	=	0x70f5
+                           0070F6  1101 _X_P1INP	=	0x70f6
+                           0070F7  1102 _X_P2INP	=	0x70f7
+                           0070F8  1103 _X_U1CSR	=	0x70f8
+                           0070F9  1104 _X_U1DBUF	=	0x70f9
+                           0070FA  1105 _X_U1BAUD	=	0x70fa
+                           0070FB  1106 _X_U1UCR	=	0x70fb
+                           0070FC  1107 _X_U1GCR	=	0x70fc
+                           0070FD  1108 _X_P0DIR	=	0x70fd
+                           0070FE  1109 _X_P1DIR	=	0x70fe
+                           0070FF  1110 _X_P2DIR	=	0x70ff
+                           007800  1111 _X_INFOPAGE	=	0x7800
+                           00780C  1112 _X_IEEE_ADDR	=	0x780c
+                                   1113 ;--------------------------------------------------------
+                                   1114 ; absolute external ram data
+                                   1115 ;--------------------------------------------------------
+                                   1116 	.area XABS    (ABS,XDATA)
+                                   1117 ;--------------------------------------------------------
+                                   1118 ; external initialized ram data
+                                   1119 ;--------------------------------------------------------
+                                   1120 	.area XISEG   (XDATA)
+                                   1121 	.area HOME    (CODE)
+                                   1122 	.area GSINIT0 (CODE)
+                                   1123 	.area GSINIT1 (CODE)
+                                   1124 	.area GSINIT2 (CODE)
+                                   1125 	.area GSINIT3 (CODE)
+                                   1126 	.area GSINIT4 (CODE)
+                                   1127 	.area GSINIT5 (CODE)
+                                   1128 	.area GSINIT  (CODE)
+                                   1129 	.area GSFINAL (CODE)
+                                   1130 	.area CSEG    (CODE)
+                                   1131 ;--------------------------------------------------------
+                                   1132 ; global & static initialisations
+                                   1133 ;--------------------------------------------------------
+                                   1134 	.area HOME    (CODE)
+                                   1135 	.area GSINIT  (CODE)
+                                   1136 	.area GSFINAL (CODE)
+                                   1137 	.area GSINIT  (CODE)
+                                   1138 ;--------------------------------------------------------
+                                   1139 ; Home
+                                   1140 ;--------------------------------------------------------
+                                   1141 	.area HOME    (CODE)
+                                   1142 	.area HOME    (CODE)
+                                   1143 ;--------------------------------------------------------
+                                   1144 ; code
+                                   1145 ;--------------------------------------------------------
+                                   1146 	.area BANK1   (CODE)
+                                   1147 ;------------------------------------------------------------
+                                   1148 ;Allocation info for local variables in function 'set_nonce'
+                                   1149 ;------------------------------------------------------------
+                                   1150 ;flags                     Allocated to stack - sp -6
+                                   1151 ;nonce                     Allocated to stack - sp -9
+                                   1152 ;counter                   Allocated to stack - sp -10
+                                   1153 ;iv                        Allocated to stack - sp -2
+                                   1154 ;------------------------------------------------------------
+                                   1155 ;	../../core/lib/ccm-star.c:51: set_nonce(uint8_t *iv,
+                                   1156 ;	-----------------------------------------
+                                   1157 ;	 function set_nonce
+                                   1158 ;	-----------------------------------------
+      000000                       1159 _set_nonce:
+                           000007  1160 	ar7 = 0x07
+                           000006  1161 	ar6 = 0x06
+                           000005  1162 	ar5 = 0x05
+                           000004  1163 	ar4 = 0x04
+                           000003  1164 	ar3 = 0x03
+                           000002  1165 	ar2 = 0x02
+                           000001  1166 	ar1 = 0x01
+                           000000  1167 	ar0 = 0x00
+      000000 C0 82            [24] 1168 	push	dpl
+      000002 C0 83            [24] 1169 	push	dph
+      000004 C0 F0            [24] 1170 	push	b
+                                   1171 ;	../../core/lib/ccm-star.c:59: iv[0] = flags;
+      000006 A8 81            [24] 1172 	mov	r0,sp
+      000008 18               [12] 1173 	dec	r0
+      000009 18               [12] 1174 	dec	r0
+      00000A 86 82            [24] 1175 	mov	dpl,@r0
+      00000C 08               [12] 1176 	inc	r0
+      00000D 86 83            [24] 1177 	mov	dph,@r0
+      00000F 08               [12] 1178 	inc	r0
+      000010 86 F0            [24] 1179 	mov	b,@r0
+      000012 E5 81            [12] 1180 	mov	a,sp
+      000014 24 FA            [12] 1181 	add	a,#0xfa
+      000016 F9               [12] 1182 	mov	r1,a
+      000017 E7               [12] 1183 	mov	a,@r1
+      000018 12r00r00         [24] 1184 	lcall	__gptrput
+                                   1185 ;	../../core/lib/ccm-star.c:60: memcpy(iv + 1, nonce, CCM_STAR_NONCE_LENGTH);
+      00001B E5 81            [12] 1186 	mov	a,sp
+      00001D 24 F7            [12] 1187 	add	a,#0xf7
+      00001F F8               [12] 1188 	mov	r0,a
+      000020 86 02            [24] 1189 	mov	ar2,@r0
+      000022 08               [12] 1190 	inc	r0
+      000023 86 03            [24] 1191 	mov	ar3,@r0
+      000025 08               [12] 1192 	inc	r0
+      000026 86 04            [24] 1193 	mov	ar4,@r0
+      000028 A8 81            [24] 1194 	mov	r0,sp
+      00002A 18               [12] 1195 	dec	r0
+      00002B 18               [12] 1196 	dec	r0
+      00002C 74 01            [12] 1197 	mov	a,#0x01
+      00002E 26               [12] 1198 	add	a,@r0
+      00002F FD               [12] 1199 	mov	r5,a
+      000030 E4               [12] 1200 	clr	a
+      000031 08               [12] 1201 	inc	r0
+      000032 36               [12] 1202 	addc	a,@r0
+      000033 FE               [12] 1203 	mov	r6,a
+      000034 08               [12] 1204 	inc	r0
+      000035 86 07            [24] 1205 	mov	ar7,@r0
+      000037 74 0D            [12] 1206 	mov	a,#0x0D
+      000039 C0 E0            [24] 1207 	push	acc
+      00003B E4               [12] 1208 	clr	a
+      00003C C0 E0            [24] 1209 	push	acc
+      00003E C0 02            [24] 1210 	push	ar2
+      000040 C0 03            [24] 1211 	push	ar3
+      000042 C0 04            [24] 1212 	push	ar4
+      000044 8D 82            [24] 1213 	mov	dpl,r5
+      000046 8E 83            [24] 1214 	mov	dph,r6
+      000048 8F F0            [24] 1215 	mov	b,r7
+      00004A 78r00            [12] 1216 	mov	r0,#_memcpy
+      00004C 79s00            [12] 1217 	mov	r1,#(_memcpy >> 8)
+      00004E 7As00            [12] 1218 	mov	r2,#(_memcpy >> 16)
+      000050 12r00r00         [24] 1219 	lcall	__sdcc_banked_call
+      000053 E5 81            [12] 1220 	mov	a,sp
+      000055 24 FB            [12] 1221 	add	a,#0xfb
+      000057 F5 81            [12] 1222 	mov	sp,a
+                                   1223 ;	../../core/lib/ccm-star.c:61: iv[14] = 0;
+      000059 A8 81            [24] 1224 	mov	r0,sp
+      00005B 18               [12] 1225 	dec	r0
+      00005C 18               [12] 1226 	dec	r0
+      00005D 74 0E            [12] 1227 	mov	a,#0x0E
+      00005F 26               [12] 1228 	add	a,@r0
+      000060 FD               [12] 1229 	mov	r5,a
+      000061 E4               [12] 1230 	clr	a
+      000062 08               [12] 1231 	inc	r0
+      000063 36               [12] 1232 	addc	a,@r0
+      000064 FE               [12] 1233 	mov	r6,a
+      000065 08               [12] 1234 	inc	r0
+      000066 86 07            [24] 1235 	mov	ar7,@r0
+      000068 8D 82            [24] 1236 	mov	dpl,r5
+      00006A 8E 83            [24] 1237 	mov	dph,r6
+      00006C 8F F0            [24] 1238 	mov	b,r7
+      00006E E4               [12] 1239 	clr	a
+      00006F 12r00r00         [24] 1240 	lcall	__gptrput
+                                   1241 ;	../../core/lib/ccm-star.c:62: iv[15] = counter;
+      000072 A8 81            [24] 1242 	mov	r0,sp
+      000074 18               [12] 1243 	dec	r0
+      000075 18               [12] 1244 	dec	r0
+      000076 74 0F            [12] 1245 	mov	a,#0x0F
+      000078 26               [12] 1246 	add	a,@r0
+      000079 FD               [12] 1247 	mov	r5,a
+      00007A E4               [12] 1248 	clr	a
+      00007B 08               [12] 1249 	inc	r0
+      00007C 36               [12] 1250 	addc	a,@r0
+      00007D FE               [12] 1251 	mov	r6,a
+      00007E 08               [12] 1252 	inc	r0
+      00007F 86 07            [24] 1253 	mov	ar7,@r0
+      000081 8D 82            [24] 1254 	mov	dpl,r5
+      000083 8E 83            [24] 1255 	mov	dph,r6
+      000085 8F F0            [24] 1256 	mov	b,r7
+      000087 E5 81            [12] 1257 	mov	a,sp
+      000089 24 F6            [12] 1258 	add	a,#0xf6
+      00008B F8               [12] 1259 	mov	r0,a
+      00008C E6               [12] 1260 	mov	a,@r0
+      00008D 12r00r00         [24] 1261 	lcall	__gptrput
+      000090 15 81            [12] 1262 	dec	sp
+      000092 15 81            [12] 1263 	dec	sp
+      000094 15 81            [12] 1264 	dec	sp
+      000096 02r00r00         [24] 1265 	ljmp	__sdcc_banked_ret
+                                   1266 ;------------------------------------------------------------
+                                   1267 ;Allocation info for local variables in function 'ctr_step'
+                                   1268 ;------------------------------------------------------------
+                                   1269 ;pos                       Allocated to stack - sp -26
+                                   1270 ;m_and_result              Allocated to stack - sp -29
+                                   1271 ;m_len                     Allocated to stack - sp -30
+                                   1272 ;counter                   Allocated to stack - sp -31
+                                   1273 ;nonce                     Allocated to stack - sp -22
+                                   1274 ;a                         Allocated to stack - sp -16
+                                   1275 ;i                         Allocated to stack - sp +0
+                                   1276 ;sloc0                     Allocated to stack - sp -19
+                                   1277 ;------------------------------------------------------------
+                                   1278 ;	../../core/lib/ccm-star.c:67: ctr_step(const uint8_t *nonce,
+                                   1279 ;	-----------------------------------------
+                                   1280 ;	 function ctr_step
+                                   1281 ;	-----------------------------------------
+      000099                       1282 _ctr_step:
+      000099 C0 82            [24] 1283 	push	dpl
+      00009B C0 83            [24] 1284 	push	dph
+      00009D C0 F0            [24] 1285 	push	b
+      00009F E5 81            [12] 1286 	mov	a,sp
+      0000A1 24 14            [12] 1287 	add	a,#0x14
+                                   1288 ;	../../core/lib/ccm-star.c:76: set_nonce(a, CCM_STAR_ENCRYPTION_FLAGS, nonce, counter);
+      0000A3 F5 81            [12] 1289 	mov	sp,a
+      0000A5 24 F0            [12] 1290 	add	a,#0xF0
+      0000A7 FC               [12] 1291 	mov	r4,a
+      0000A8 FA               [12] 1292 	mov	r2,a
+      0000A9 7B 00            [12] 1293 	mov	r3,#0x00
+      0000AB 7F 40            [12] 1294 	mov	r7,#0x40
+      0000AD C0 04            [24] 1295 	push	ar4
+      0000AF E5 81            [12] 1296 	mov	a,sp
+      0000B1 24 E0            [12] 1297 	add	a,#0xe0
+      0000B3 F8               [12] 1298 	mov	r0,a
+      0000B4 E6               [12] 1299 	mov	a,@r0
+      0000B5 C0 E0            [24] 1300 	push	acc
+      0000B7 E5 81            [12] 1301 	mov	a,sp
+      0000B9 24 E8            [12] 1302 	add	a,#0xe8
+      0000BB F8               [12] 1303 	mov	r0,a
+      0000BC E6               [12] 1304 	mov	a,@r0
+      0000BD C0 E0            [24] 1305 	push	acc
+      0000BF 08               [12] 1306 	inc	r0
+      0000C0 E6               [12] 1307 	mov	a,@r0
+      0000C1 C0 E0            [24] 1308 	push	acc
+      0000C3 08               [12] 1309 	inc	r0
+      0000C4 E6               [12] 1310 	mov	a,@r0
+      0000C5 C0 E0            [24] 1311 	push	acc
+      0000C7 74 01            [12] 1312 	mov	a,#0x01
+      0000C9 C0 E0            [24] 1313 	push	acc
+      0000CB 8A 82            [24] 1314 	mov	dpl,r2
+      0000CD 8B 83            [24] 1315 	mov	dph,r3
+      0000CF 8F F0            [24] 1316 	mov	b,r7
+      0000D1 78r00            [12] 1317 	mov	r0,#_set_nonce
+      0000D3 79s00            [12] 1318 	mov	r1,#(_set_nonce >> 8)
+      0000D5 7As00            [12] 1319 	mov	r2,#(_set_nonce >> 16)
+      0000D7 12r00r00         [24] 1320 	lcall	__sdcc_banked_call
+      0000DA E5 81            [12] 1321 	mov	a,sp
+      0000DC 24 FB            [12] 1322 	add	a,#0xfb
+      0000DE F5 81            [12] 1323 	mov	sp,a
+      0000E0 D0 04            [24] 1324 	pop	ar4
+                                   1325 ;	../../core/lib/ccm-star.c:77: AES_128.encrypt(a);
+      0000E2 90r00r03         [24] 1326 	mov	dptr,#(_aes_128_driver + 0x0003)
+      0000E5 E5 81            [12] 1327 	mov	a,sp
+      0000E7 24 ED            [12] 1328 	add	a,#0xed
+      0000E9 F8               [12] 1329 	mov	r0,a
+      0000EA E4               [12] 1330 	clr	a
+      0000EB 93               [24] 1331 	movc	a,@a+dptr
+      0000EC F6               [12] 1332 	mov	@r0,a
+      0000ED A3               [24] 1333 	inc	dptr
+      0000EE E4               [12] 1334 	clr	a
+      0000EF 93               [24] 1335 	movc	a,@a+dptr
+      0000F0 08               [12] 1336 	inc	r0
+      0000F1 F6               [12] 1337 	mov	@r0,a
+      0000F2 A3               [24] 1338 	inc	dptr
+      0000F3 E4               [12] 1339 	clr	a
+      0000F4 93               [24] 1340 	movc	a,@a+dptr
+      0000F5 08               [12] 1341 	inc	r0
+      0000F6 F6               [12] 1342 	mov	@r0,a
+      0000F7 8C 03            [24] 1343 	mov	ar3,r4
+      0000F9 8B 02            [24] 1344 	mov	ar2,r3
+      0000FB 7B 00            [12] 1345 	mov	r3,#0x00
+      0000FD 7F 40            [12] 1346 	mov	r7,#0x40
+      0000FF C0 04            [24] 1347 	push	ar4
+      000101 E5 81            [12] 1348 	mov	a,sp
+      000103 24 EC            [12] 1349 	add	a,#0xec
+      000105 F8               [12] 1350 	mov	r0,a
+      000106 E6               [12] 1351 	mov	a,@r0
+      000107 C0 E0            [24] 1352 	push	acc
+      000109 08               [12] 1353 	inc	r0
+      00010A E6               [12] 1354 	mov	a,@r0
+      00010B C0 E0            [24] 1355 	push	acc
+      00010D 08               [12] 1356 	inc	r0
+      00010E E6               [12] 1357 	mov	a,@r0
+      00010F C0 E0            [24] 1358 	push	acc
+      000111 8A 82            [24] 1359 	mov	dpl,r2
+      000113 8B 83            [24] 1360 	mov	dph,r3
+      000115 8F F0            [24] 1361 	mov	b,r7
+      000117 D0 02            [24] 1362 	pop	ar2
+      000119 D0 01            [24] 1363 	pop	ar1
+      00011B D0 00            [24] 1364 	pop	ar0
+      00011D 12r00r00         [24] 1365 	lcall	__sdcc_banked_call
+      000120 D0 04            [24] 1366 	pop	ar4
+                                   1367 ;	../../core/lib/ccm-star.c:79: for(i = 0; (pos + i < m_len) && (i < AES_128_BLOCK_SIZE); i++) {
+      000122 A8 81            [24] 1368 	mov	r0,sp
+      000124 76 00            [12] 1369 	mov	@r0,#0x00
+      000126                       1370 00104$:
+      000126 C0 04            [24] 1371 	push	ar4
+      000128 E5 81            [12] 1372 	mov	a,sp
+      00012A 24 E5            [12] 1373 	add	a,#0xe5
+      00012C F8               [12] 1374 	mov	r0,a
+      00012D 86 05            [24] 1375 	mov	ar5,@r0
+      00012F 7E 00            [12] 1376 	mov	r6,#0x00
+      000131 A8 81            [24] 1377 	mov	r0,sp
+      000133 18               [12] 1378 	dec	r0
+      000134 86 02            [24] 1379 	mov	ar2,@r0
+      000136 7B 00            [12] 1380 	mov	r3,#0x00
+      000138 E5 81            [12] 1381 	mov	a,sp
+      00013A 24 EC            [12] 1382 	add	a,#0xec
+      00013C F8               [12] 1383 	mov	r0,a
+      00013D EA               [12] 1384 	mov	a,r2
+      00013E 2D               [12] 1385 	add	a,r5
+      00013F F6               [12] 1386 	mov	@r0,a
+      000140 EB               [12] 1387 	mov	a,r3
+      000141 3E               [12] 1388 	addc	a,r6
+      000142 08               [12] 1389 	inc	r0
+      000143 F6               [12] 1390 	mov	@r0,a
+      000144 E5 81            [12] 1391 	mov	a,sp
+      000146 24 E1            [12] 1392 	add	a,#0xe1
+      000148 F8               [12] 1393 	mov	r0,a
+      000149 86 04            [24] 1394 	mov	ar4,@r0
+      00014B 7F 00            [12] 1395 	mov	r7,#0x00
+      00014D E5 81            [12] 1396 	mov	a,sp
+      00014F 24 EC            [12] 1397 	add	a,#0xec
+      000151 F8               [12] 1398 	mov	r0,a
+      000152 C3               [12] 1399 	clr	c
+      000153 E6               [12] 1400 	mov	a,@r0
+      000154 9C               [12] 1401 	subb	a,r4
+      000155 08               [12] 1402 	inc	r0
+      000156 E6               [12] 1403 	mov	a,@r0
+      000157 64 80            [12] 1404 	xrl	a,#0x80
+      000159 8F F0            [24] 1405 	mov	b,r7
+      00015B 63 F0 80         [24] 1406 	xrl	b,#0x80
+      00015E 95 F0            [12] 1407 	subb	a,b
+      000160 D0 04            [24] 1408 	pop	ar4
+      000162 50 3E            [24] 1409 	jnc	00106$
+      000164 A8 81            [24] 1410 	mov	r0,sp
+      000166 B6 10 00         [24] 1411 	cjne	@r0,#0x10,00119$
+      000169                       1412 00119$:
+      000169 50 37            [24] 1413 	jnc	00106$
+                                   1414 ;	../../core/lib/ccm-star.c:80: m_and_result[pos + i] ^= a[i];
+      00016B EA               [12] 1415 	mov	a,r2
+      00016C 2D               [12] 1416 	add	a,r5
+      00016D FD               [12] 1417 	mov	r5,a
+      00016E EB               [12] 1418 	mov	a,r3
+      00016F 3E               [12] 1419 	addc	a,r6
+      000170 FE               [12] 1420 	mov	r6,a
+      000171 E5 81            [12] 1421 	mov	a,sp
+      000173 24 E3            [12] 1422 	add	a,#0xe3
+      000175 F8               [12] 1423 	mov	r0,a
+      000176 ED               [12] 1424 	mov	a,r5
+      000177 26               [12] 1425 	add	a,@r0
+      000178 FD               [12] 1426 	mov	r5,a
+      000179 EE               [12] 1427 	mov	a,r6
+      00017A 08               [12] 1428 	inc	r0
+      00017B 36               [12] 1429 	addc	a,@r0
+      00017C FE               [12] 1430 	mov	r6,a
+      00017D 08               [12] 1431 	inc	r0
+      00017E 86 07            [24] 1432 	mov	ar7,@r0
+      000180 8D 82            [24] 1433 	mov	dpl,r5
+      000182 8E 83            [24] 1434 	mov	dph,r6
+      000184 8F F0            [24] 1435 	mov	b,r7
+      000186 12r00r00         [24] 1436 	lcall	__gptrget
+      000189 FB               [12] 1437 	mov	r3,a
+      00018A A8 81            [24] 1438 	mov	r0,sp
+      00018C E6               [12] 1439 	mov	a,@r0
+      00018D 2C               [12] 1440 	add	a,r4
+      00018E F9               [12] 1441 	mov	r1,a
+      00018F E7               [12] 1442 	mov	a,@r1
+      000190 FA               [12] 1443 	mov	r2,a
+      000191 62 03            [12] 1444 	xrl	ar3,a
+      000193 8D 82            [24] 1445 	mov	dpl,r5
+      000195 8E 83            [24] 1446 	mov	dph,r6
+      000197 8F F0            [24] 1447 	mov	b,r7
+      000199 EB               [12] 1448 	mov	a,r3
+      00019A 12r00r00         [24] 1449 	lcall	__gptrput
+                                   1450 ;	../../core/lib/ccm-star.c:79: for(i = 0; (pos + i < m_len) && (i < AES_128_BLOCK_SIZE); i++) {
+      00019D A8 81            [24] 1451 	mov	r0,sp
+      00019F 06               [12] 1452 	inc	@r0
+      0001A0 80 84            [24] 1453 	sjmp	00104$
+      0001A2                       1454 00106$:
+      0001A2 E5 81            [12] 1455 	mov	a,sp
+      0001A4 24 E9            [12] 1456 	add	a,#0xE9
+      0001A6 F5 81            [12] 1457 	mov	sp,a
+      0001A8 02r00r00         [24] 1458 	ljmp	__sdcc_banked_ret
+                                   1459 ;------------------------------------------------------------
+                                   1460 ;Allocation info for local variables in function 'mic'
+                                   1461 ;------------------------------------------------------------
+                                   1462 ;m_len                     Allocated to stack - sp -31
+                                   1463 ;nonce                     Allocated to stack - sp -34
+                                   1464 ;a                         Allocated to stack - sp -37
+                                   1465 ;a_len                     Allocated to stack - sp -38
+                                   1466 ;result                    Allocated to stack - sp -41
+                                   1467 ;mic_len                   Allocated to stack - sp -42
+                                   1468 ;m                         Allocated to stack - sp -27
+                                   1469 ;x                         Allocated to stack - sp -16
+                                   1470 ;pos                       Allocated to stack - sp -17
+                                   1471 ;i                         Allocated to stack - sp +0
+                                   1472 ;sloc0                     Allocated to stack - sp -24
+                                   1473 ;sloc1                     Allocated to stack - sp -23
+                                   1474 ;sloc2                     Allocated to stack - sp -4
+                                   1475 ;sloc3                     Allocated to stack - sp -22
+                                   1476 ;sloc4                     Allocated to stack - sp -20
+                                   1477 ;sloc5                     Allocated to stack - sp -18
+                                   1478 ;------------------------------------------------------------
+                                   1479 ;	../../core/lib/ccm-star.c:85: mic(const uint8_t *m,  uint8_t m_len,
+                                   1480 ;	-----------------------------------------
+                                   1481 ;	 function mic
+                                   1482 ;	-----------------------------------------
+      0001AB                       1483 _mic:
+      0001AB C0 82            [24] 1484 	push	dpl
+      0001AD C0 83            [24] 1485 	push	dph
+      0001AF C0 F0            [24] 1486 	push	b
+      0001B1 E5 81            [12] 1487 	mov	a,sp
+      0001B3 24 19            [12] 1488 	add	a,#0x19
+                                   1489 ;	../../core/lib/ccm-star.c:95: set_nonce(x, CCM_STAR_AUTH_FLAGS(a_len, mic_len), nonce, m_len);
+      0001B5 F5 81            [12] 1490 	mov	sp,a
+      0001B7 24 DA            [12] 1491 	add	a,#0xda
+      0001B9 F8               [12] 1492 	mov	r0,a
+      0001BA E6               [12] 1493 	mov	a,@r0
+      0001BB 60 04            [24] 1494 	jz	00128$
+      0001BD 7C 40            [12] 1495 	mov	r4,#0x40
+      0001BF 80 02            [24] 1496 	sjmp	00129$
+      0001C1                       1497 00128$:
+      0001C1 7C 00            [12] 1498 	mov	r4,#0x00
+      0001C3                       1499 00129$:
+      0001C3 E5 81            [12] 1500 	mov	a,sp
+      0001C5 24 D6            [12] 1501 	add	a,#0xd6
+      0001C7 F8               [12] 1502 	mov	r0,a
+      0001C8 86 02            [24] 1503 	mov	ar2,@r0
+      0001CA 7B 00            [12] 1504 	mov	r3,#0x00
+      0001CC EA               [12] 1505 	mov	a,r2
+      0001CD 24 FE            [12] 1506 	add	a,#0xFE
+      0001CF FA               [12] 1507 	mov	r2,a
+      0001D0 EB               [12] 1508 	mov	a,r3
+      0001D1 34 FF            [12] 1509 	addc	a,#0xFF
+      0001D3 C3               [12] 1510 	clr	c
+      0001D4 13               [12] 1511 	rrc	a
+      0001D5 CA               [12] 1512 	xch	a,r2
+      0001D6 13               [12] 1513 	rrc	a
+      0001D7 CA               [12] 1514 	xch	a,r2
+      0001D8 EA               [12] 1515 	mov	a,r2
+      0001D9 C4               [12] 1516 	swap	a
+      0001DA 03               [12] 1517 	rr	a
+      0001DB 54 F8            [12] 1518 	anl	a,#0xF8
+      0001DD 42 04            [12] 1519 	orl	ar4,a
+      0001DF 43 04 01         [24] 1520 	orl	ar4,#0x01
+      0001E2 8C 07            [24] 1521 	mov	ar7,r4
+      0001E4 E5 81            [12] 1522 	mov	a,sp
+      0001E6 24 E9            [12] 1523 	add	a,#0xe9
+      0001E8 F8               [12] 1524 	mov	r0,a
+      0001E9 E5 81            [12] 1525 	mov	a,sp
+      0001EB 24 F0            [12] 1526 	add	a,#0xF0
+      0001ED F6               [12] 1527 	mov	@r0,a
+      0001EE E5 81            [12] 1528 	mov	a,sp
+      0001F0 24 E9            [12] 1529 	add	a,#0xe9
+      0001F2 F8               [12] 1530 	mov	r0,a
+      0001F3 86 02            [24] 1531 	mov	ar2,@r0
+      0001F5 7B 00            [12] 1532 	mov	r3,#0x00
+      0001F7 7C 40            [12] 1533 	mov	r4,#0x40
+      0001F9 E5 81            [12] 1534 	mov	a,sp
+      0001FB 24 E1            [12] 1535 	add	a,#0xe1
+      0001FD F8               [12] 1536 	mov	r0,a
+      0001FE E6               [12] 1537 	mov	a,@r0
+      0001FF C0 E0            [24] 1538 	push	acc
+      000201 E5 81            [12] 1539 	mov	a,sp
+      000203 24 DD            [12] 1540 	add	a,#0xdd
+      000205 F8               [12] 1541 	mov	r0,a
+      000206 E6               [12] 1542 	mov	a,@r0
+      000207 C0 E0            [24] 1543 	push	acc
+      000209 08               [12] 1544 	inc	r0
+      00020A E6               [12] 1545 	mov	a,@r0
+      00020B C0 E0            [24] 1546 	push	acc
+      00020D 08               [12] 1547 	inc	r0
+      00020E E6               [12] 1548 	mov	a,@r0
+      00020F C0 E0            [24] 1549 	push	acc
+      000211 C0 07            [24] 1550 	push	ar7
+      000213 8A 82            [24] 1551 	mov	dpl,r2
+      000215 8B 83            [24] 1552 	mov	dph,r3
+      000217 8C F0            [24] 1553 	mov	b,r4
+      000219 78r00            [12] 1554 	mov	r0,#_set_nonce
+      00021B 79s00            [12] 1555 	mov	r1,#(_set_nonce >> 8)
+      00021D 7As00            [12] 1556 	mov	r2,#(_set_nonce >> 16)
+      00021F 12r00r00         [24] 1557 	lcall	__sdcc_banked_call
+      000222 E5 81            [12] 1558 	mov	a,sp
+      000224 24 FB            [12] 1559 	add	a,#0xfb
+      000226 F5 81            [12] 1560 	mov	sp,a
+                                   1561 ;	../../core/lib/ccm-star.c:96: AES_128.encrypt(x);
+      000228 90r00r03         [24] 1562 	mov	dptr,#(_aes_128_driver + 0x0003)
+      00022B E4               [12] 1563 	clr	a
+      00022C 93               [24] 1564 	movc	a,@a+dptr
+      00022D FF               [12] 1565 	mov	r7,a
+      00022E A3               [24] 1566 	inc	dptr
+      00022F E4               [12] 1567 	clr	a
+      000230 93               [24] 1568 	movc	a,@a+dptr
+      000231 FE               [12] 1569 	mov	r6,a
+      000232 A3               [24] 1570 	inc	dptr
+      000233 E4               [12] 1571 	clr	a
+      000234 93               [24] 1572 	movc	a,@a+dptr
+      000235 FD               [12] 1573 	mov	r5,a
+      000236 E5 81            [12] 1574 	mov	a,sp
+      000238 24 E9            [12] 1575 	add	a,#0xe9
+      00023A F8               [12] 1576 	mov	r0,a
+      00023B 86 04            [24] 1577 	mov	ar4,@r0
+      00023D 7B 00            [12] 1578 	mov	r3,#0x00
+      00023F 7A 40            [12] 1579 	mov	r2,#0x40
+      000241 C0 07            [24] 1580 	push	ar7
+      000243 C0 06            [24] 1581 	push	ar6
+      000245 C0 05            [24] 1582 	push	ar5
+      000247 C0 07            [24] 1583 	push	ar7
+      000249 C0 06            [24] 1584 	push	ar6
+      00024B C0 05            [24] 1585 	push	ar5
+      00024D 8C 82            [24] 1586 	mov	dpl,r4
+      00024F 8B 83            [24] 1587 	mov	dph,r3
+      000251 8A F0            [24] 1588 	mov	b,r2
+      000253 D0 02            [24] 1589 	pop	ar2
+      000255 D0 01            [24] 1590 	pop	ar1
+      000257 D0 00            [24] 1591 	pop	ar0
+      000259 12r00r00         [24] 1592 	lcall	__sdcc_banked_call
+      00025C D0 05            [24] 1593 	pop	ar5
+      00025E D0 06            [24] 1594 	pop	ar6
+      000260 D0 07            [24] 1595 	pop	ar7
+                                   1596 ;	../../core/lib/ccm-star.c:98: if(a_len > 0) {
+      000262 E5 81            [12] 1597 	mov	a,sp
+      000264 24 DA            [12] 1598 	add	a,#0xda
+      000266 F8               [12] 1599 	mov	r0,a
+      000267 E6               [12] 1600 	mov	a,@r0
+      000268 70 03            [24] 1601 	jnz	00184$
+      00026A 02r04r07         [24] 1602 	ljmp	00107$
+      00026D                       1603 00184$:
+                                   1604 ;	../../core/lib/ccm-star.c:99: x[1] = x[1] ^ a_len;
+      00026D E5 81            [12] 1605 	mov	a,sp
+      00026F 24 E9            [12] 1606 	add	a,#0xe9
+      000271 F8               [12] 1607 	mov	r0,a
+      000272 E6               [12] 1608 	mov	a,@r0
+      000273 04               [12] 1609 	inc	a
+      000274 F9               [12] 1610 	mov	r1,a
+      000275 87 04            [24] 1611 	mov	ar4,@r1
+      000277 E5 81            [12] 1612 	mov	a,sp
+      000279 24 DA            [12] 1613 	add	a,#0xda
+      00027B F8               [12] 1614 	mov	r0,a
+      00027C E6               [12] 1615 	mov	a,@r0
+      00027D 6C               [12] 1616 	xrl	a,r4
+      00027E F7               [12] 1617 	mov	@r1,a
+                                   1618 ;	../../core/lib/ccm-star.c:100: for(i = 2; (i - 2 < a_len) && (i < AES_128_BLOCK_SIZE); i++) {
+      00027F A8 81            [24] 1619 	mov	r0,sp
+      000281 76 02            [12] 1620 	mov	@r0,#0x02
+      000283                       1621 00116$:
+      000283 A8 81            [24] 1622 	mov	r0,sp
+      000285 86 07            [24] 1623 	mov	ar7,@r0
+      000287 7E 00            [12] 1624 	mov	r6,#0x00
+      000289 EF               [12] 1625 	mov	a,r7
+      00028A 24 FE            [12] 1626 	add	a,#0xFE
+      00028C FB               [12] 1627 	mov	r3,a
+      00028D EE               [12] 1628 	mov	a,r6
+      00028E 34 FF            [12] 1629 	addc	a,#0xFF
+      000290 FC               [12] 1630 	mov	r4,a
+      000291 E5 81            [12] 1631 	mov	a,sp
+      000293 24 DA            [12] 1632 	add	a,#0xda
+      000295 F8               [12] 1633 	mov	r0,a
+      000296 E5 81            [12] 1634 	mov	a,sp
+      000298 24 EA            [12] 1635 	add	a,#0xea
+      00029A F9               [12] 1636 	mov	r1,a
+      00029B E6               [12] 1637 	mov	a,@r0
+      00029C F7               [12] 1638 	mov	@r1,a
+      00029D 09               [12] 1639 	inc	r1
+      00029E 77 00            [12] 1640 	mov	@r1,#0x00
+      0002A0 E5 81            [12] 1641 	mov	a,sp
+      0002A2 24 EA            [12] 1642 	add	a,#0xea
+      0002A4 F8               [12] 1643 	mov	r0,a
+      0002A5 C3               [12] 1644 	clr	c
+      0002A6 EB               [12] 1645 	mov	a,r3
+      0002A7 96               [12] 1646 	subb	a,@r0
+      0002A8 EC               [12] 1647 	mov	a,r4
+      0002A9 64 80            [12] 1648 	xrl	a,#0x80
+      0002AB 08               [12] 1649 	inc	r0
+      0002AC 86 F0            [24] 1650 	mov	b,@r0
+      0002AE 63 F0 80         [24] 1651 	xrl	b,#0x80
+      0002B1 95 F0            [12] 1652 	subb	a,b
+      0002B3 50 3B            [24] 1653 	jnc	00101$
+      0002B5 A8 81            [24] 1654 	mov	r0,sp
+      0002B7 B6 10 00         [24] 1655 	cjne	@r0,#0x10,00186$
+      0002BA                       1656 00186$:
+      0002BA 50 34            [24] 1657 	jnc	00101$
+                                   1658 ;	../../core/lib/ccm-star.c:101: x[i] ^= a[i - 2];
+      0002BC E5 81            [12] 1659 	mov	a,sp
+      0002BE 24 E9            [12] 1660 	add	a,#0xe9
+      0002C0 F8               [12] 1661 	mov	r0,a
+      0002C1 A9 81            [24] 1662 	mov	r1,sp
+      0002C3 E7               [12] 1663 	mov	a,@r1
+      0002C4 26               [12] 1664 	add	a,@r0
+      0002C5 F9               [12] 1665 	mov	r1,a
+      0002C6 87 05            [24] 1666 	mov	ar5,@r1
+      0002C8 EF               [12] 1667 	mov	a,r7
+      0002C9 24 FE            [12] 1668 	add	a,#0xFE
+      0002CB FA               [12] 1669 	mov	r2,a
+      0002CC EE               [12] 1670 	mov	a,r6
+      0002CD 34 FF            [12] 1671 	addc	a,#0xFF
+      0002CF FC               [12] 1672 	mov	r4,a
+      0002D0 E5 81            [12] 1673 	mov	a,sp
+      0002D2 24 DB            [12] 1674 	add	a,#0xdb
+      0002D4 F8               [12] 1675 	mov	r0,a
+      0002D5 EA               [12] 1676 	mov	a,r2
+      0002D6 26               [12] 1677 	add	a,@r0
+      0002D7 FA               [12] 1678 	mov	r2,a
+      0002D8 EC               [12] 1679 	mov	a,r4
+      0002D9 08               [12] 1680 	inc	r0
+      0002DA 36               [12] 1681 	addc	a,@r0
+      0002DB FB               [12] 1682 	mov	r3,a
+      0002DC 08               [12] 1683 	inc	r0
+      0002DD 86 04            [24] 1684 	mov	ar4,@r0
+      0002DF 8A 82            [24] 1685 	mov	dpl,r2
+      0002E1 8B 83            [24] 1686 	mov	dph,r3
+      0002E3 8C F0            [24] 1687 	mov	b,r4
+      0002E5 12r00r00         [24] 1688 	lcall	__gptrget
+      0002E8 FA               [12] 1689 	mov	r2,a
+      0002E9 6D               [12] 1690 	xrl	a,r5
+      0002EA F7               [12] 1691 	mov	@r1,a
+                                   1692 ;	../../core/lib/ccm-star.c:100: for(i = 2; (i - 2 < a_len) && (i < AES_128_BLOCK_SIZE); i++) {
+      0002EB A8 81            [24] 1693 	mov	r0,sp
+      0002ED 06               [12] 1694 	inc	@r0
+      0002EE 80 93            [24] 1695 	sjmp	00116$
+      0002F0                       1696 00101$:
+                                   1697 ;	../../core/lib/ccm-star.c:104: AES_128.encrypt(x);
+      0002F0 90r00r03         [24] 1698 	mov	dptr,#(_aes_128_driver + 0x0003)
+      0002F3 E4               [12] 1699 	clr	a
+      0002F4 93               [24] 1700 	movc	a,@a+dptr
+      0002F5 FF               [12] 1701 	mov	r7,a
+      0002F6 A3               [24] 1702 	inc	dptr
+      0002F7 E4               [12] 1703 	clr	a
+      0002F8 93               [24] 1704 	movc	a,@a+dptr
+      0002F9 FE               [12] 1705 	mov	r6,a
+      0002FA A3               [24] 1706 	inc	dptr
+      0002FB E4               [12] 1707 	clr	a
+      0002FC 93               [24] 1708 	movc	a,@a+dptr
+      0002FD FD               [12] 1709 	mov	r5,a
+      0002FE E5 81            [12] 1710 	mov	a,sp
+      000300 24 E9            [12] 1711 	add	a,#0xe9
+      000302 F8               [12] 1712 	mov	r0,a
+      000303 86 04            [24] 1713 	mov	ar4,@r0
+      000305 7B 00            [12] 1714 	mov	r3,#0x00
+      000307 7A 40            [12] 1715 	mov	r2,#0x40
+      000309 C0 07            [24] 1716 	push	ar7
+      00030B C0 06            [24] 1717 	push	ar6
+      00030D C0 05            [24] 1718 	push	ar5
+      00030F C0 07            [24] 1719 	push	ar7
+      000311 C0 06            [24] 1720 	push	ar6
+      000313 C0 05            [24] 1721 	push	ar5
+      000315 8C 82            [24] 1722 	mov	dpl,r4
+      000317 8B 83            [24] 1723 	mov	dph,r3
+      000319 8A F0            [24] 1724 	mov	b,r2
+      00031B D0 02            [24] 1725 	pop	ar2
+      00031D D0 01            [24] 1726 	pop	ar1
+      00031F D0 00            [24] 1727 	pop	ar0
+      000321 12r00r00         [24] 1728 	lcall	__sdcc_banked_call
+      000324 D0 05            [24] 1729 	pop	ar5
+      000326 D0 06            [24] 1730 	pop	ar6
+      000328 D0 07            [24] 1731 	pop	ar7
+                                   1732 ;	../../core/lib/ccm-star.c:107: while(pos < a_len) {
+      00032A E5 81            [12] 1733 	mov	a,sp
+      00032C 24 E9            [12] 1734 	add	a,#0xe9
+      00032E F8               [12] 1735 	mov	r0,a
+      00032F E5 81            [12] 1736 	mov	a,sp
+      000331 24 EE            [12] 1737 	add	a,#0xee
+      000333 F9               [12] 1738 	mov	r1,a
+      000334 E6               [12] 1739 	mov	a,@r0
+      000335 F7               [12] 1740 	mov	@r1,a
+      000336 E5 81            [12] 1741 	mov	a,sp
+      000338 24 EF            [12] 1742 	add	a,#0xef
+      00033A F8               [12] 1743 	mov	r0,a
+      00033B 76 0E            [12] 1744 	mov	@r0,#0x0E
+      00033D                       1745 00103$:
+      00033D E5 81            [12] 1746 	mov	a,sp
+      00033F 24 EF            [12] 1747 	add	a,#0xef
+      000341 F8               [12] 1748 	mov	r0,a
+      000342 E5 81            [12] 1749 	mov	a,sp
+      000344 24 DA            [12] 1750 	add	a,#0xda
+      000346 F9               [12] 1751 	mov	r1,a
+      000347 C3               [12] 1752 	clr	c
+      000348 E6               [12] 1753 	mov	a,@r0
+      000349 97               [12] 1754 	subb	a,@r1
+      00034A 40 03            [24] 1755 	jc	00188$
+      00034C 02r04r07         [24] 1756 	ljmp	00107$
+      00034F                       1757 00188$:
+                                   1758 ;	../../core/lib/ccm-star.c:108: for(i = 0; (pos + i < a_len) && (i < AES_128_BLOCK_SIZE); i++) {
+      00034F A8 81            [24] 1759 	mov	r0,sp
+      000351 76 00            [12] 1760 	mov	@r0,#0x00
+      000353                       1761 00120$:
+      000353 E5 81            [12] 1762 	mov	a,sp
+      000355 24 EF            [12] 1763 	add	a,#0xef
+      000357 F8               [12] 1764 	mov	r0,a
+      000358 86 07            [24] 1765 	mov	ar7,@r0
+      00035A 7E 00            [12] 1766 	mov	r6,#0x00
+      00035C A8 81            [24] 1767 	mov	r0,sp
+      00035E 86 02            [24] 1768 	mov	ar2,@r0
+      000360 7D 00            [12] 1769 	mov	r5,#0x00
+      000362 EA               [12] 1770 	mov	a,r2
+      000363 2F               [12] 1771 	add	a,r7
+      000364 FB               [12] 1772 	mov	r3,a
+      000365 ED               [12] 1773 	mov	a,r5
+      000366 3E               [12] 1774 	addc	a,r6
+      000367 FC               [12] 1775 	mov	r4,a
+      000368 E5 81            [12] 1776 	mov	a,sp
+      00036A 24 EA            [12] 1777 	add	a,#0xea
+      00036C F8               [12] 1778 	mov	r0,a
+      00036D C3               [12] 1779 	clr	c
+      00036E EB               [12] 1780 	mov	a,r3
+      00036F 96               [12] 1781 	subb	a,@r0
+      000370 EC               [12] 1782 	mov	a,r4
+      000371 64 80            [12] 1783 	xrl	a,#0x80
+      000373 08               [12] 1784 	inc	r0
+      000374 86 F0            [24] 1785 	mov	b,@r0
+      000376 63 F0 80         [24] 1786 	xrl	b,#0x80
+      000379 95 F0            [12] 1787 	subb	a,b
+      00037B 50 44            [24] 1788 	jnc	00102$
+      00037D A8 81            [24] 1789 	mov	r0,sp
+      00037F B6 10 00         [24] 1790 	cjne	@r0,#0x10,00190$
+      000382                       1791 00190$:
+      000382 50 3D            [24] 1792 	jnc	00102$
+                                   1793 ;	../../core/lib/ccm-star.c:109: x[i] ^= a[pos + i];
+      000384 E5 81            [12] 1794 	mov	a,sp
+      000386 24 E9            [12] 1795 	add	a,#0xe9
+      000388 F8               [12] 1796 	mov	r0,a
+      000389 A9 81            [24] 1797 	mov	r1,sp
+      00038B E7               [12] 1798 	mov	a,@r1
+      00038C 26               [12] 1799 	add	a,@r0
+      00038D F9               [12] 1800 	mov	r1,a
+      00038E E5 81            [12] 1801 	mov	a,sp
+      000390 24 E8            [12] 1802 	add	a,#0xe8
+      000392 F8               [12] 1803 	mov	r0,a
+      000393 E7               [12] 1804 	mov	a,@r1
+      000394 F6               [12] 1805 	mov	@r0,a
+      000395 EA               [12] 1806 	mov	a,r2
+      000396 2F               [12] 1807 	add	a,r7
+      000397 FA               [12] 1808 	mov	r2,a
+      000398 ED               [12] 1809 	mov	a,r5
+      000399 3E               [12] 1810 	addc	a,r6
+      00039A FC               [12] 1811 	mov	r4,a
+      00039B E5 81            [12] 1812 	mov	a,sp
+      00039D 24 DB            [12] 1813 	add	a,#0xdb
+      00039F F8               [12] 1814 	mov	r0,a
+      0003A0 EA               [12] 1815 	mov	a,r2
+      0003A1 26               [12] 1816 	add	a,@r0
+      0003A2 FA               [12] 1817 	mov	r2,a
+      0003A3 EC               [12] 1818 	mov	a,r4
+      0003A4 08               [12] 1819 	inc	r0
+      0003A5 36               [12] 1820 	addc	a,@r0
+      0003A6 FB               [12] 1821 	mov	r3,a
+      0003A7 08               [12] 1822 	inc	r0
+      0003A8 86 04            [24] 1823 	mov	ar4,@r0
+      0003AA 8A 82            [24] 1824 	mov	dpl,r2
+      0003AC 8B 83            [24] 1825 	mov	dph,r3
+      0003AE 8C F0            [24] 1826 	mov	b,r4
+      0003B0 12r00r00         [24] 1827 	lcall	__gptrget
+      0003B3 FA               [12] 1828 	mov	r2,a
+      0003B4 E5 81            [12] 1829 	mov	a,sp
+      0003B6 24 E8            [12] 1830 	add	a,#0xe8
+      0003B8 F8               [12] 1831 	mov	r0,a
+      0003B9 EA               [12] 1832 	mov	a,r2
+      0003BA 66               [12] 1833 	xrl	a,@r0
+      0003BB F7               [12] 1834 	mov	@r1,a
+                                   1835 ;	../../core/lib/ccm-star.c:108: for(i = 0; (pos + i < a_len) && (i < AES_128_BLOCK_SIZE); i++) {
+      0003BC A8 81            [24] 1836 	mov	r0,sp
+      0003BE 06               [12] 1837 	inc	@r0
+      0003BF 80 92            [24] 1838 	sjmp	00120$
+      0003C1                       1839 00102$:
+                                   1840 ;	../../core/lib/ccm-star.c:111: pos += AES_128_BLOCK_SIZE;
+      0003C1 E5 81            [12] 1841 	mov	a,sp
+      0003C3 24 EF            [12] 1842 	add	a,#0xef
+      0003C5 F8               [12] 1843 	mov	r0,a
+      0003C6 74 10            [12] 1844 	mov	a,#0x10
+      0003C8 26               [12] 1845 	add	a,@r0
+      0003C9 F6               [12] 1846 	mov	@r0,a
+                                   1847 ;	../../core/lib/ccm-star.c:112: AES_128.encrypt(x);
+      0003CA 90r00r03         [24] 1848 	mov	dptr,#(_aes_128_driver + 0x0003)
+      0003CD E4               [12] 1849 	clr	a
+      0003CE 93               [24] 1850 	movc	a,@a+dptr
+      0003CF FF               [12] 1851 	mov	r7,a
+      0003D0 A3               [24] 1852 	inc	dptr
+      0003D1 E4               [12] 1853 	clr	a
+      0003D2 93               [24] 1854 	movc	a,@a+dptr
+      0003D3 FE               [12] 1855 	mov	r6,a
+      0003D4 A3               [24] 1856 	inc	dptr
+      0003D5 E4               [12] 1857 	clr	a
+      0003D6 93               [24] 1858 	movc	a,@a+dptr
+      0003D7 FD               [12] 1859 	mov	r5,a
+      0003D8 E5 81            [12] 1860 	mov	a,sp
+      0003DA 24 EE            [12] 1861 	add	a,#0xee
+      0003DC F8               [12] 1862 	mov	r0,a
+      0003DD 86 02            [24] 1863 	mov	ar2,@r0
+      0003DF 7B 00            [12] 1864 	mov	r3,#0x00
+      0003E1 7C 40            [12] 1865 	mov	r4,#0x40
+      0003E3 C0 07            [24] 1866 	push	ar7
+      0003E5 C0 06            [24] 1867 	push	ar6
+      0003E7 C0 05            [24] 1868 	push	ar5
+      0003E9 C0 07            [24] 1869 	push	ar7
+      0003EB C0 06            [24] 1870 	push	ar6
+      0003ED C0 05            [24] 1871 	push	ar5
+      0003EF 8A 82            [24] 1872 	mov	dpl,r2
+      0003F1 8B 83            [24] 1873 	mov	dph,r3
+      0003F3 8C F0            [24] 1874 	mov	b,r4
+      0003F5 D0 02            [24] 1875 	pop	ar2
+      0003F7 D0 01            [24] 1876 	pop	ar1
+      0003F9 D0 00            [24] 1877 	pop	ar0
+      0003FB 12r00r00         [24] 1878 	lcall	__sdcc_banked_call
+      0003FE D0 05            [24] 1879 	pop	ar5
+      000400 D0 06            [24] 1880 	pop	ar6
+      000402 D0 07            [24] 1881 	pop	ar7
+      000404 02r03r3D         [24] 1882 	ljmp	00103$
+      000407                       1883 00107$:
+                                   1884 ;	../../core/lib/ccm-star.c:116: if(m_len > 0) {
+      000407 E5 81            [12] 1885 	mov	a,sp
+      000409 24 E1            [12] 1886 	add	a,#0xe1
+      00040B F8               [12] 1887 	mov	r0,a
+      00040C E6               [12] 1888 	mov	a,@r0
+      00040D 70 03            [24] 1889 	jnz	00192$
+      00040F 02r05r2D         [24] 1890 	ljmp	00113$
+      000412                       1891 00192$:
+                                   1892 ;	../../core/lib/ccm-star.c:117: m = a + a_len;
+      000412 E5 81            [12] 1893 	mov	a,sp
+      000414 24 DB            [12] 1894 	add	a,#0xdb
+      000416 F8               [12] 1895 	mov	r0,a
+      000417 E5 81            [12] 1896 	mov	a,sp
+      000419 24 DA            [12] 1897 	add	a,#0xda
+      00041B F9               [12] 1898 	mov	r1,a
+      00041C E7               [12] 1899 	mov	a,@r1
+      00041D 26               [12] 1900 	add	a,@r0
+      00041E C0 E0            [24] 1901 	push	acc
+      000420 E4               [12] 1902 	clr	a
+      000421 08               [12] 1903 	inc	r0
+      000422 36               [12] 1904 	addc	a,@r0
+      000423 C0 E0            [24] 1905 	push	acc
+      000425 08               [12] 1906 	inc	r0
+      000426 E6               [12] 1907 	mov	a,@r0
+      000427 C0 E0            [24] 1908 	push	acc
+      000429 E5 81            [12] 1909 	mov	a,sp
+      00042B 24 E4            [12] 1910 	add	a,#0xe4
+      00042D F8               [12] 1911 	mov	r0,a
+      00042E D0 E0            [24] 1912 	pop	acc
+      000430 F6               [12] 1913 	mov	@r0,a
+      000431 18               [12] 1914 	dec	r0
+      000432 D0 E0            [24] 1915 	pop	acc
+      000434 F6               [12] 1916 	mov	@r0,a
+      000435 18               [12] 1917 	dec	r0
+      000436 D0 E0            [24] 1918 	pop	acc
+      000438 F6               [12] 1919 	mov	@r0,a
+                                   1920 ;	../../core/lib/ccm-star.c:119: while(pos < m_len) {
+      000439 E5 81            [12] 1921 	mov	a,sp
+      00043B 24 E9            [12] 1922 	add	a,#0xe9
+      00043D F8               [12] 1923 	mov	r0,a
+      00043E E5 81            [12] 1924 	mov	a,sp
+      000440 24 EE            [12] 1925 	add	a,#0xee
+      000442 F9               [12] 1926 	mov	r1,a
+      000443 E6               [12] 1927 	mov	a,@r0
+      000444 F7               [12] 1928 	mov	@r1,a
+      000445 E5 81            [12] 1929 	mov	a,sp
+      000447 24 EF            [12] 1930 	add	a,#0xef
+      000449 F8               [12] 1931 	mov	r0,a
+      00044A 76 00            [12] 1932 	mov	@r0,#0x00
+      00044C                       1933 00109$:
+      00044C E5 81            [12] 1934 	mov	a,sp
+      00044E 24 EF            [12] 1935 	add	a,#0xef
+      000450 F8               [12] 1936 	mov	r0,a
+      000451 E5 81            [12] 1937 	mov	a,sp
+      000453 24 E1            [12] 1938 	add	a,#0xe1
+      000455 F9               [12] 1939 	mov	r1,a
+      000456 C3               [12] 1940 	clr	c
+      000457 E6               [12] 1941 	mov	a,@r0
+      000458 97               [12] 1942 	subb	a,@r1
+      000459 40 03            [24] 1943 	jc	00193$
+      00045B 02r05r2D         [24] 1944 	ljmp	00113$
+      00045E                       1945 00193$:
+                                   1946 ;	../../core/lib/ccm-star.c:120: for(i = 0; (pos + i < m_len) && (i < AES_128_BLOCK_SIZE); i++) {
+      00045E 7A 00            [12] 1947 	mov	r2,#0x00
+      000460                       1948 00124$:
+      000460 E5 81            [12] 1949 	mov	a,sp
+      000462 24 EF            [12] 1950 	add	a,#0xef
+      000464 F8               [12] 1951 	mov	r0,a
+      000465 E5 81            [12] 1952 	mov	a,sp
+      000467 24 EC            [12] 1953 	add	a,#0xec
+      000469 F9               [12] 1954 	mov	r1,a
+      00046A E6               [12] 1955 	mov	a,@r0
+      00046B F7               [12] 1956 	mov	@r1,a
+      00046C 09               [12] 1957 	inc	r1
+      00046D 77 00            [12] 1958 	mov	@r1,#0x00
+      00046F E5 81            [12] 1959 	mov	a,sp
+      000471 24 EA            [12] 1960 	add	a,#0xea
+      000473 F8               [12] 1961 	mov	r0,a
+      000474 A6 02            [24] 1962 	mov	@r0,ar2
+      000476 08               [12] 1963 	inc	r0
+      000477 76 00            [12] 1964 	mov	@r0,#0x00
+      000479 E5 81            [12] 1965 	mov	a,sp
+      00047B 24 EC            [12] 1966 	add	a,#0xec
+      00047D F8               [12] 1967 	mov	r0,a
+      00047E E5 81            [12] 1968 	mov	a,sp
+      000480 24 EA            [12] 1969 	add	a,#0xea
+      000482 F9               [12] 1970 	mov	r1,a
+      000483 E7               [12] 1971 	mov	a,@r1
+      000484 26               [12] 1972 	add	a,@r0
+      000485 FC               [12] 1973 	mov	r4,a
+      000486 09               [12] 1974 	inc	r1
+      000487 E7               [12] 1975 	mov	a,@r1
+      000488 08               [12] 1976 	inc	r0
+      000489 36               [12] 1977 	addc	a,@r0
+      00048A FF               [12] 1978 	mov	r7,a
+      00048B E5 81            [12] 1979 	mov	a,sp
+      00048D 24 E1            [12] 1980 	add	a,#0xe1
+      00048F F8               [12] 1981 	mov	r0,a
+      000490 86 05            [24] 1982 	mov	ar5,@r0
+      000492 7E 00            [12] 1983 	mov	r6,#0x00
+      000494 C3               [12] 1984 	clr	c
+      000495 EC               [12] 1985 	mov	a,r4
+      000496 9D               [12] 1986 	subb	a,r5
+      000497 EF               [12] 1987 	mov	a,r7
+      000498 64 80            [12] 1988 	xrl	a,#0x80
+      00049A 8E F0            [24] 1989 	mov	b,r6
+      00049C 63 F0 80         [24] 1990 	xrl	b,#0x80
+      00049F 95 F0            [12] 1991 	subb	a,b
+      0004A1 50 44            [24] 1992 	jnc	00108$
+      0004A3 BA 10 00         [24] 1993 	cjne	r2,#0x10,00195$
+      0004A6                       1994 00195$:
+      0004A6 50 3F            [24] 1995 	jnc	00108$
+                                   1996 ;	../../core/lib/ccm-star.c:121: x[i] ^= m[pos + i];
+      0004A8 E5 81            [12] 1997 	mov	a,sp
+      0004AA 24 E9            [12] 1998 	add	a,#0xe9
+      0004AC F8               [12] 1999 	mov	r0,a
+      0004AD EA               [12] 2000 	mov	a,r2
+      0004AE 26               [12] 2001 	add	a,@r0
+      0004AF F9               [12] 2002 	mov	r1,a
+      0004B0 87 07            [24] 2003 	mov	ar7,@r1
+      0004B2 E5 81            [12] 2004 	mov	a,sp
+      0004B4 24 EC            [12] 2005 	add	a,#0xec
+      0004B6 F8               [12] 2006 	mov	r0,a
+      0004B7 C0 01            [24] 2007 	push	ar1
+      0004B9 E5 81            [12] 2008 	mov	a,sp
+      0004BB 24 E9            [12] 2009 	add	a,#0xe9
+      0004BD F9               [12] 2010 	mov	r1,a
+      0004BE E7               [12] 2011 	mov	a,@r1
+      0004BF 26               [12] 2012 	add	a,@r0
+      0004C0 FD               [12] 2013 	mov	r5,a
+      0004C1 09               [12] 2014 	inc	r1
+      0004C2 E7               [12] 2015 	mov	a,@r1
+      0004C3 08               [12] 2016 	inc	r0
+      0004C4 36               [12] 2017 	addc	a,@r0
+      0004C5 FE               [12] 2018 	mov	r6,a
+      0004C6 D0 01            [24] 2019 	pop	ar1
+      0004C8 E5 81            [12] 2020 	mov	a,sp
+      0004CA 24 E5            [12] 2021 	add	a,#0xe5
+      0004CC F8               [12] 2022 	mov	r0,a
+      0004CD ED               [12] 2023 	mov	a,r5
+      0004CE 26               [12] 2024 	add	a,@r0
+      0004CF FD               [12] 2025 	mov	r5,a
+      0004D0 EE               [12] 2026 	mov	a,r6
+      0004D1 08               [12] 2027 	inc	r0
+      0004D2 36               [12] 2028 	addc	a,@r0
+      0004D3 FC               [12] 2029 	mov	r4,a
+      0004D4 08               [12] 2030 	inc	r0
+      0004D5 86 06            [24] 2031 	mov	ar6,@r0
+      0004D7 8D 82            [24] 2032 	mov	dpl,r5
+      0004D9 8C 83            [24] 2033 	mov	dph,r4
+      0004DB 8E F0            [24] 2034 	mov	b,r6
+      0004DD 12r00r00         [24] 2035 	lcall	__gptrget
+      0004E0 FD               [12] 2036 	mov	r5,a
+      0004E1 6F               [12] 2037 	xrl	a,r7
+      0004E2 F7               [12] 2038 	mov	@r1,a
+                                   2039 ;	../../core/lib/ccm-star.c:120: for(i = 0; (pos + i < m_len) && (i < AES_128_BLOCK_SIZE); i++) {
+      0004E3 0A               [12] 2040 	inc	r2
+      0004E4 02r04r60         [24] 2041 	ljmp	00124$
+      0004E7                       2042 00108$:
+                                   2043 ;	../../core/lib/ccm-star.c:123: pos += AES_128_BLOCK_SIZE;
+      0004E7 E5 81            [12] 2044 	mov	a,sp
+      0004E9 24 EF            [12] 2045 	add	a,#0xef
+      0004EB F8               [12] 2046 	mov	r0,a
+      0004EC 74 10            [12] 2047 	mov	a,#0x10
+      0004EE 26               [12] 2048 	add	a,@r0
+      0004EF F6               [12] 2049 	mov	@r0,a
+                                   2050 ;	../../core/lib/ccm-star.c:124: AES_128.encrypt(x);
+      0004F0 90r00r03         [24] 2051 	mov	dptr,#(_aes_128_driver + 0x0003)
+      0004F3 E4               [12] 2052 	clr	a
+      0004F4 93               [24] 2053 	movc	a,@a+dptr
+      0004F5 FD               [12] 2054 	mov	r5,a
+      0004F6 A3               [24] 2055 	inc	dptr
+      0004F7 E4               [12] 2056 	clr	a
+      0004F8 93               [24] 2057 	movc	a,@a+dptr
+      0004F9 FE               [12] 2058 	mov	r6,a
+      0004FA A3               [24] 2059 	inc	dptr
+      0004FB E4               [12] 2060 	clr	a
+      0004FC 93               [24] 2061 	movc	a,@a+dptr
+      0004FD FF               [12] 2062 	mov	r7,a
+      0004FE E5 81            [12] 2063 	mov	a,sp
+      000500 24 EE            [12] 2064 	add	a,#0xee
+      000502 F8               [12] 2065 	mov	r0,a
+      000503 86 02            [24] 2066 	mov	ar2,@r0
+      000505 7B 00            [12] 2067 	mov	r3,#0x00
+      000507 7C 40            [12] 2068 	mov	r4,#0x40
+      000509 C0 07            [24] 2069 	push	ar7
+      00050B C0 06            [24] 2070 	push	ar6
+      00050D C0 05            [24] 2071 	push	ar5
+      00050F C0 05            [24] 2072 	push	ar5
+      000511 C0 06            [24] 2073 	push	ar6
+      000513 C0 07            [24] 2074 	push	ar7
+      000515 8A 82            [24] 2075 	mov	dpl,r2
+      000517 8B 83            [24] 2076 	mov	dph,r3
+      000519 8C F0            [24] 2077 	mov	b,r4
+      00051B D0 02            [24] 2078 	pop	ar2
+      00051D D0 01            [24] 2079 	pop	ar1
+      00051F D0 00            [24] 2080 	pop	ar0
+      000521 12r00r00         [24] 2081 	lcall	__sdcc_banked_call
+      000524 D0 05            [24] 2082 	pop	ar5
+      000526 D0 06            [24] 2083 	pop	ar6
+      000528 D0 07            [24] 2084 	pop	ar7
+      00052A 02r04r4C         [24] 2085 	ljmp	00109$
+      00052D                       2086 00113$:
+                                   2087 ;	../../core/lib/ccm-star.c:128: ctr_step(nonce, 0, x, AES_128_BLOCK_SIZE, 0);
+      00052D E5 81            [12] 2088 	mov	a,sp
+      00052F 24 E9            [12] 2089 	add	a,#0xe9
+      000531 F8               [12] 2090 	mov	r0,a
+      000532 86 07            [24] 2091 	mov	ar7,@r0
+      000534 7E 00            [12] 2092 	mov	r6,#0x00
+      000536 7D 40            [12] 2093 	mov	r5,#0x40
+      000538 E4               [12] 2094 	clr	a
+      000539 C0 E0            [24] 2095 	push	acc
+      00053B 74 10            [12] 2096 	mov	a,#0x10
+      00053D C0 E0            [24] 2097 	push	acc
+      00053F C0 07            [24] 2098 	push	ar7
+      000541 C0 06            [24] 2099 	push	ar6
+      000543 C0 05            [24] 2100 	push	ar5
+      000545 E4               [12] 2101 	clr	a
+      000546 C0 E0            [24] 2102 	push	acc
+      000548 E5 81            [12] 2103 	mov	a,sp
+      00054A 24 D8            [12] 2104 	add	a,#0xd8
+      00054C F8               [12] 2105 	mov	r0,a
+      00054D 86 82            [24] 2106 	mov	dpl,@r0
+      00054F 08               [12] 2107 	inc	r0
+      000550 86 83            [24] 2108 	mov	dph,@r0
+      000552 08               [12] 2109 	inc	r0
+      000553 86 F0            [24] 2110 	mov	b,@r0
+      000555 78r99            [12] 2111 	mov	r0,#_ctr_step
+      000557 79s00            [12] 2112 	mov	r1,#(_ctr_step >> 8)
+      000559 7As00            [12] 2113 	mov	r2,#(_ctr_step >> 16)
+      00055B 12r00r00         [24] 2114 	lcall	__sdcc_banked_call
+      00055E E5 81            [12] 2115 	mov	a,sp
+      000560 24 FA            [12] 2116 	add	a,#0xfa
+                                   2117 ;	../../core/lib/ccm-star.c:130: memcpy(result, x, mic_len);
+      000562 F5 81            [12] 2118 	mov	sp,a
+      000564 24 D6            [12] 2119 	add	a,#0xd6
+      000566 F8               [12] 2120 	mov	r0,a
+      000567 E5 81            [12] 2121 	mov	a,sp
+      000569 24 EC            [12] 2122 	add	a,#0xec
+      00056B F9               [12] 2123 	mov	r1,a
+      00056C E6               [12] 2124 	mov	a,@r0
+      00056D F7               [12] 2125 	mov	@r1,a
+      00056E 09               [12] 2126 	inc	r1
+      00056F 77 00            [12] 2127 	mov	@r1,#0x00
+      000571 E5 81            [12] 2128 	mov	a,sp
+      000573 24 E9            [12] 2129 	add	a,#0xe9
+      000575 F8               [12] 2130 	mov	r0,a
+      000576 86 05            [24] 2131 	mov	ar5,@r0
+      000578 7C 00            [12] 2132 	mov	r4,#0x00
+      00057A 7B 40            [12] 2133 	mov	r3,#0x40
+      00057C E5 81            [12] 2134 	mov	a,sp
+      00057E 24 D7            [12] 2135 	add	a,#0xd7
+      000580 F8               [12] 2136 	mov	r0,a
+      000581 86 02            [24] 2137 	mov	ar2,@r0
+      000583 08               [12] 2138 	inc	r0
+      000584 86 06            [24] 2139 	mov	ar6,@r0
+      000586 08               [12] 2140 	inc	r0
+      000587 86 07            [24] 2141 	mov	ar7,@r0
+      000589 E5 81            [12] 2142 	mov	a,sp
+      00058B 24 EC            [12] 2143 	add	a,#0xec
+      00058D F8               [12] 2144 	mov	r0,a
+      00058E E6               [12] 2145 	mov	a,@r0
+      00058F C0 E0            [24] 2146 	push	acc
+      000591 08               [12] 2147 	inc	r0
+      000592 E6               [12] 2148 	mov	a,@r0
+      000593 C0 E0            [24] 2149 	push	acc
+      000595 C0 05            [24] 2150 	push	ar5
+      000597 C0 04            [24] 2151 	push	ar4
+      000599 C0 03            [24] 2152 	push	ar3
+      00059B 8A 82            [24] 2153 	mov	dpl,r2
+      00059D 8E 83            [24] 2154 	mov	dph,r6
+      00059F 8F F0            [24] 2155 	mov	b,r7
+      0005A1 78r00            [12] 2156 	mov	r0,#_memcpy
+      0005A3 79s00            [12] 2157 	mov	r1,#(_memcpy >> 8)
+      0005A5 7As00            [12] 2158 	mov	r2,#(_memcpy >> 16)
+      0005A7 12r00r00         [24] 2159 	lcall	__sdcc_banked_call
+      0005AA E5 81            [12] 2160 	mov	a,sp
+      0005AC 24 FB            [12] 2161 	add	a,#0xfb
+      0005AE F5 81            [12] 2162 	mov	sp,a
+      0005B0 E5 81            [12] 2163 	mov	a,sp
+      0005B2 24 E4            [12] 2164 	add	a,#0xE4
+      0005B4 F5 81            [12] 2165 	mov	sp,a
+      0005B6 02r00r00         [24] 2166 	ljmp	__sdcc_banked_ret
+                                   2167 ;------------------------------------------------------------
+                                   2168 ;Allocation info for local variables in function 'ctr'
+                                   2169 ;------------------------------------------------------------
+                                   2170 ;m_len                     Allocated to stack - sp -3
+                                   2171 ;nonce                     Allocated to stack - sp -6
+                                   2172 ;m                         Allocated to registers r5 r6 r7 
+                                   2173 ;pos                       Allocated to registers r3 
+                                   2174 ;counter                   Allocated to registers r4 
+                                   2175 ;------------------------------------------------------------
+                                   2176 ;	../../core/lib/ccm-star.c:134: ctr(uint8_t *m, uint8_t m_len, const uint8_t* nonce)
+                                   2177 ;	-----------------------------------------
+                                   2178 ;	 function ctr
+                                   2179 ;	-----------------------------------------
+      0005B9                       2180 _ctr:
+      0005B9 AD 82            [24] 2181 	mov	r5,dpl
+      0005BB AE 83            [24] 2182 	mov	r6,dph
+      0005BD AF F0            [24] 2183 	mov	r7,b
+                                   2184 ;	../../core/lib/ccm-star.c:141: while(pos < m_len) {
+      0005BF 7C 01            [12] 2185 	mov	r4,#0x01
+      0005C1 7B 00            [12] 2186 	mov	r3,#0x00
+      0005C3                       2187 00101$:
+      0005C3 E5 81            [12] 2188 	mov	a,sp
+      0005C5 24 FD            [12] 2189 	add	a,#0xfd
+      0005C7 F8               [12] 2190 	mov	r0,a
+      0005C8 C3               [12] 2191 	clr	c
+      0005C9 EB               [12] 2192 	mov	a,r3
+      0005CA 96               [12] 2193 	subb	a,@r0
+      0005CB 50 4B            [24] 2194 	jnc	00104$
+                                   2195 ;	../../core/lib/ccm-star.c:142: ctr_step(nonce, pos, m, m_len, counter++);
+      0005CD 8C 02            [24] 2196 	mov	ar2,r4
+      0005CF 0C               [12] 2197 	inc	r4
+      0005D0 C0 07            [24] 2198 	push	ar7
+      0005D2 C0 06            [24] 2199 	push	ar6
+      0005D4 C0 05            [24] 2200 	push	ar5
+      0005D6 C0 04            [24] 2201 	push	ar4
+      0005D8 C0 03            [24] 2202 	push	ar3
+      0005DA C0 02            [24] 2203 	push	ar2
+      0005DC E5 81            [12] 2204 	mov	a,sp
+      0005DE 24 F7            [12] 2205 	add	a,#0xf7
+      0005E0 F8               [12] 2206 	mov	r0,a
+      0005E1 E6               [12] 2207 	mov	a,@r0
+      0005E2 C0 E0            [24] 2208 	push	acc
+      0005E4 C0 05            [24] 2209 	push	ar5
+      0005E6 C0 06            [24] 2210 	push	ar6
+      0005E8 C0 07            [24] 2211 	push	ar7
+      0005EA C0 03            [24] 2212 	push	ar3
+      0005EC E5 81            [12] 2213 	mov	a,sp
+      0005EE 24 EF            [12] 2214 	add	a,#0xef
+      0005F0 F8               [12] 2215 	mov	r0,a
+      0005F1 86 82            [24] 2216 	mov	dpl,@r0
+      0005F3 08               [12] 2217 	inc	r0
+      0005F4 86 83            [24] 2218 	mov	dph,@r0
+      0005F6 08               [12] 2219 	inc	r0
+      0005F7 86 F0            [24] 2220 	mov	b,@r0
+      0005F9 78r99            [12] 2221 	mov	r0,#_ctr_step
+      0005FB 79s00            [12] 2222 	mov	r1,#(_ctr_step >> 8)
+      0005FD 7As00            [12] 2223 	mov	r2,#(_ctr_step >> 16)
+      0005FF 12r00r00         [24] 2224 	lcall	__sdcc_banked_call
+      000602 E5 81            [12] 2225 	mov	a,sp
+      000604 24 FA            [12] 2226 	add	a,#0xfa
+      000606 F5 81            [12] 2227 	mov	sp,a
+      000608 D0 03            [24] 2228 	pop	ar3
+      00060A D0 04            [24] 2229 	pop	ar4
+      00060C D0 05            [24] 2230 	pop	ar5
+      00060E D0 06            [24] 2231 	pop	ar6
+      000610 D0 07            [24] 2232 	pop	ar7
+                                   2233 ;	../../core/lib/ccm-star.c:143: pos += AES_128_BLOCK_SIZE;
+      000612 74 10            [12] 2234 	mov	a,#0x10
+      000614 2B               [12] 2235 	add	a,r3
+      000615 FB               [12] 2236 	mov	r3,a
+      000616 80 AB            [24] 2237 	sjmp	00101$
+      000618                       2238 00104$:
+      000618 02r00r00         [24] 2239 	ljmp	__sdcc_banked_ret
+                                   2240 ;------------------------------------------------------------
+                                   2241 ;Allocation info for local variables in function 'set_key'
+                                   2242 ;------------------------------------------------------------
+                                   2243 ;key                       Allocated to registers r5 r6 r7 
+                                   2244 ;------------------------------------------------------------
+                                   2245 ;	../../core/lib/ccm-star.c:147: static void set_key(const uint8_t *key) {
+                                   2246 ;	-----------------------------------------
+                                   2247 ;	 function set_key
+                                   2248 ;	-----------------------------------------
+      00061B                       2249 _set_key:
+      00061B AD 82            [24] 2250 	mov	r5,dpl
+      00061D AE 83            [24] 2251 	mov	r6,dph
+      00061F AF F0            [24] 2252 	mov	r7,b
+                                   2253 ;	../../core/lib/ccm-star.c:148: AES_128.set_key((uint8_t*)key);
+      000621 90r00r00         [24] 2254 	mov	dptr,#_aes_128_driver
+      000624 E4               [12] 2255 	clr	a
+      000625 93               [24] 2256 	movc	a,@a+dptr
+      000626 FA               [12] 2257 	mov	r2,a
+      000627 A3               [24] 2258 	inc	dptr
+      000628 E4               [12] 2259 	clr	a
+      000629 93               [24] 2260 	movc	a,@a+dptr
+      00062A FB               [12] 2261 	mov	r3,a
+      00062B A3               [24] 2262 	inc	dptr
+      00062C E4               [12] 2263 	clr	a
+      00062D 93               [24] 2264 	movc	a,@a+dptr
+      00062E FC               [12] 2265 	mov	r4,a
+      00062F C0 04            [24] 2266 	push	ar4
+      000631 C0 03            [24] 2267 	push	ar3
+      000633 C0 02            [24] 2268 	push	ar2
+      000635 C0 02            [24] 2269 	push	ar2
+      000637 C0 03            [24] 2270 	push	ar3
+      000639 C0 04            [24] 2271 	push	ar4
+      00063B 8D 82            [24] 2272 	mov	dpl,r5
+      00063D 8E 83            [24] 2273 	mov	dph,r6
+      00063F 8F F0            [24] 2274 	mov	b,r7
+      000641 D0 02            [24] 2275 	pop	ar2
+      000643 D0 01            [24] 2276 	pop	ar1
+      000645 D0 00            [24] 2277 	pop	ar0
+      000647 12r00r00         [24] 2278 	lcall	__sdcc_banked_call
+      00064A D0 02            [24] 2279 	pop	ar2
+      00064C D0 03            [24] 2280 	pop	ar3
+      00064E D0 04            [24] 2281 	pop	ar4
+      000650 02r00r00         [24] 2282 	ljmp	__sdcc_banked_ret
+                                   2283 	.area CSEG    (CODE)
+                                   2284 	.area CONST   (CODE)
+      000000                       2285 _ccm_star_driver:
+      000000rABs01s00              2286 	.byte _mic,(_mic >> 8),(_mic >> 16)
+      000003rB9s05s00              2287 	.byte _ctr,(_ctr >> 8),(_ctr >> 16)
+      000006r1Bs06s00              2288 	.byte _set_key,(_set_key >> 8),(_set_key >> 16)
+                                   2289 	.area XINIT   (CODE)
+                                   2290 	.area CABS    (ABS,CODE)
